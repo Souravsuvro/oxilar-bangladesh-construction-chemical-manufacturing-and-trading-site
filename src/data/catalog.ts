@@ -103,9 +103,7 @@ export const products: Product[] = [
       { en: "Add with the final mixing water after cement and aggregates are wet.", bn: "সিমেন্ট ও অ্যাগ্রিগেট ভেজার পর শেষ মিক্সিং ওয়াটারের সাথে যোগ করুন।" },
       { en: "Do not combine with another plasticizer without a compatibility trial.", bn: "কম্প্যাটিবিলিটি ট্রায়াল ছাড়া অন্য প্লাস্টিসাইজারের সাথে মেশাবেন না।" },
     ],
-    safety: [
-      { en: "Chloride-free. Will not promote corrosion of reinforcement.", bn: "ক্লোরাইড-মুক্ত। রিইনফোর্সমেন্টের ক্ষয় বাড়ায় না।" },
-    ],
+    safety: [{ en: "Chloride-free. Will not promote corrosion of reinforcement.", bn: "ক্লোরাইড-মুক্ত। রিইনফোর্সমেন্টের ক্ষয় বাড়ায় না।" }],
     specs: [
       { label: { en: "Base", bn: "বেস" }, value: { en: "Sulphonated polymer", bn: "সালফোনেটেড পলিমার" } },
       { label: { en: "Water reduction", bn: "পানি হ্রাস" }, value: { en: "Up to 25%", bn: "২৫% পর্যন্ত" } },
@@ -133,12 +131,8 @@ export const products: Product[] = [
       bn: "প্রতি ৫০ কেজি সিমেন্টে ১৫০–৩৫০ মিলি। বেশি ডোজে সেট দ্রুত হয়; স্ট্রাকচারাল ব্যবহারে আগে ট্রায়াল করুন।",
     },
     mlPerBag: 250,
-    method: [
-      { en: "Dispense into mixing water. Never dose dry onto cement.", bn: "মিক্সিং ওয়াটারে দিন। সিমেন্টের উপর শুকনো অবস্থায় দেবেন না।" },
-    ],
-    safety: [
-      { en: "Not a freeze-protection system below 5°C without thermal curing.", bn: "৫°সে-এর নিচে থার্মাল কিউরিং ছাড়া ফ্রিজ-প্রোটেকশন নয়।" },
-    ],
+    method: [{ en: "Dispense into mixing water. Never dose dry onto cement.", bn: "মিক্সিং ওয়াটারে দিন। সিমেন্টের উপর শুকনো অবস্থায় দেবেন না।" }],
+    safety: [{ en: "Not a freeze-protection system below 5°C without thermal curing.", bn: "৫°সে-এর নিচে থার্মাল কিউরিং ছাড়া ফ্রিজ-প্রোটেকশন নয়।" }],
     specs: [
       { label: { en: "Chloride", bn: "ক্লোরাইড" }, value: { en: "Nil", bn: "নেই" } },
       { label: { en: "Effect", bn: "প্রভাব" }, value: { en: "Accelerated set", bn: "ত্বরান্বিত সেট" } },
@@ -164,15 +158,9 @@ export const products: Product[] = [
       bn: "প্রয়োজনীয় বিলম্ব অনুযায়ী প্রতি ৫০ কেজি সিমেন্টে ২০০–৫০০ মিলি।",
     },
     mlPerBag: 350,
-    method: [
-      { en: "Dose at the plant. Re-temper only with technical approval.", bn: "প্ল্যান্টে ডোজ দিন। রি-টেম্পার শুধু টেকনিক্যাল অনুমোদনে।" },
-    ],
-    safety: [
-      { en: "Extended set means longer curing protection from sun and wind.", bn: "বর্ধিত সেট মানে রোদ ও বাতাস থেকে দীর্ঘ কিউরিং সুরক্ষা।" },
-    ],
-    specs: [
-      { label: { en: "Standard", bn: "স্ট্যান্ডার্ড" }, value: { en: "ASTM C494 Type D", bn: "ASTM C494 Type D" } },
-    ],
+    method: [{ en: "Dose at the plant. Re-temper only with technical approval.", bn: "প্ল্যান্টে ডোজ দিন। রি-টেম্পার শুধু টেকনিক্যাল অনুমোদনে।" }],
+    safety: [{ en: "Extended set means longer curing protection from sun and wind.", bn: "বর্ধিত সেট মানে রোদ ও বাতাস থেকে দীর্ঘ কিউরিং সুরক্ষা।" }],
+    specs: [{ label: { en: "Standard", bn: "স্ট্যান্ডার্ড" }, value: { en: "ASTM C494 Type D", bn: "ASTM C494 Type D" } }],
   },
   {
     slug: "oxilar-floor-epx",
@@ -199,9 +187,7 @@ export const products: Product[] = [
       { en: "Mix resin and hardener to a uniform color. Do not thin.", bn: "রেজিন ও হার্ডেনার সমান রং পর্যন্ত মেশান। পাতলা করবেন না।" },
       { en: "Spike-roll within the open time. Keep traffic off for 24 hours.", bn: "ওপেন টাইমের মধ্যে স্পাইক-রোল করুন। ২৪ ঘণ্টা ট্রাফিক বন্ধ রাখুন।" },
     ],
-    safety: [
-      { en: "Ventilate. Hardener is sensitising — gloves, goggles, organic vapour protection.", bn: "বাতাস চলাচল নিশ্চিত করুন। হার্ডেনার সেন্সিটাইজিং — গ্লাভস, গগলস, অর্গানিক ভেপার সুরক্ষা।" },
-    ],
+    safety: [{ en: "Ventilate. Hardener is sensitising — gloves, goggles, organic vapour protection.", bn: "বাতাস চলাচল নিশ্চিত করুন। হার্ডেনার সেন্সিটাইজিং — গ্লাভস, গগলস, অর্গানিক ভেপার সুরক্ষা।" }],
     specs: [
       { label: { en: "System", bn: "সিস্টেম" }, value: { en: "Epoxy, 2K", bn: "ইপক্সি, ২কে" } },
       { label: { en: "Finish", bn: "ফিনিশ" }, value: { en: "Self-leveling", bn: "সেলফ-লেভেলিং" } },
@@ -227,15 +213,9 @@ export const products: Product[] = [
       bn: "প্যাকে উল্লেখিত পানি (সাধারণত ২৫ কেজি সমতুল্যে ৩.৫–৪.০ লিটার)। রিটেম্পার করবেন না।",
     },
     mlPerBag: 0,
-    method: [
-      { en: "Saturate the pocket, remove standing water, pour from one side.", bn: "পকেট স্যাচুরেট করুন, দাঁড়ানো পানি সরান, এক পাশ থেকে ঢালুন।" },
-    ],
-    safety: [
-      { en: "Cementitious alkaline dust — mask when opening bags or drums.", bn: "সিমেন্টিশাস ক্ষারীয় ধুলা — ড্রাম খোলার সময় মাস্ক ব্যবহার করুন।" },
-    ],
-    specs: [
-      { label: { en: "Shrinkage", bn: "সংকোচন" }, value: { en: "Non-shrink", bn: "নন-শ্রিঙ্ক" } },
-    ],
+    method: [{ en: "Saturate the pocket, remove standing water, pour from one side.", bn: "পকেট স্যাচুরেট করুন, দাঁড়ানো পানি সরান, এক পাশ থেকে ঢালুন।" }],
+    safety: [{ en: "Cementitious alkaline dust — mask when opening bags or drums.", bn: "সিমেন্টিশাস ক্ষারীয় ধুলা — ড্রাম খোলার সময় মাস্ক ব্যবহার করুন।" }],
+    specs: [{ label: { en: "Shrinkage", bn: "সংকোচন" }, value: { en: "Non-shrink", bn: "নন-শ্রিঙ্ক" } }],
   },
   {
     slug: "oxilar-shield-af",
@@ -257,15 +237,9 @@ export const products: Product[] = [
       bn: "দুই কোট। ভালো প্লাস্টারে প্রতি কোটে প্রতি লিটারে প্রায় ৫–৬ বর্গমিটার।",
     },
     mlPerBag: 0,
-    method: [
-      { en: "Stop active leaks first. Apply on dry, sound plaster.", bn: "সক্রিয় লিক আগে বন্ধ করুন। শুকনো, সুস্থ প্লাস্টারে লাগান।" },
-    ],
-    safety: [
-      { en: "Keep from eyes. Wash tools with water before film forms.", bn: "চোখ থেকে দূরে রাখুন। ফিল্ম হওয়ার আগে টুল পানি দিয়ে ধুয়ে নিন।" },
-    ],
-    specs: [
-      { label: { en: "Focus", bn: "ফোকাস" }, value: { en: "Damp & algae", bn: "ড্যাম্প ও শেওলা" } },
-    ],
+    method: [{ en: "Stop active leaks first. Apply on dry, sound plaster.", bn: "সক্রিয় লিক আগে বন্ধ করুন। শুকনো, সুস্থ প্লাস্টারে লাগান।" }],
+    safety: [{ en: "Keep from eyes. Wash tools with water before film forms.", bn: "চোখ থেকে দূরে রাখুন। ফিল্ম হওয়ার আগে টুল পানি দিয়ে ধুয়ে নিন।" }],
+    specs: [{ label: { en: "Focus", bn: "ফোকাস" }, value: { en: "Damp & algae", bn: "ড্যাম্প ও শেওলা" } }],
   },
   {
     slug: "oxilar-anchor-ch",
@@ -287,15 +261,9 @@ export const products: Product[] = [
       bn: "কার্টিজ লেবেলের হোল ডায়ামিটার ও গভীরতা অনুসরণ করুন। ইনজেকশনের আগে ধুলা পরিষ্কার করুন।",
     },
     mlPerBag: 0,
-    method: [
-      { en: "Drill, brush, blow out dust, inject from the bottom of the hole.", bn: "ড্রিল, ব্রাশ, ধুলা ফুঁ দিয়ে সরান, হোলের তলা থেকে ইনজেক্ট করুন।" },
-    ],
-    safety: [
-      { en: "Resin system — gloves and eye protection required.", bn: "রেজিন সিস্টেম — গ্লাভস ও চোখের সুরক্ষা বাধ্যতামূলক।" },
-    ],
-    specs: [
-      { label: { en: "System", bn: "সিস্টেম" }, value: { en: "Chemical anchor", bn: "কেমিক্যাল অ্যাঙ্কর" } },
-    ],
+    method: [{ en: "Drill, brush, blow out dust, inject from the bottom of the hole.", bn: "ড্রিল, ব্রাশ, ধুলা ফুঁ দিয়ে সরান, হোলের তলা থেকে ইনজেক্ট করুন।" }],
+    safety: [{ en: "Resin system — gloves and eye protection required.", bn: "রেজিন সিস্টেম — গ্লাভস ও চোখের সুরক্ষা বাধ্যতামূলক।" }],
+    specs: [{ label: { en: "System", bn: "সিস্টেম" }, value: { en: "Chemical anchor", bn: "কেমিক্যাল অ্যাঙ্কর" } }],
   },
 ];
 
@@ -318,15 +286,18 @@ export const sourcing = [
 ];
 
 export const leaders = [
-  { name: { en: "Technical leadership", bn: "টেকনিক্যাল নেতৃত্ব" }, role: { en: "Formulation & quality", bn: "ফর্মুলেশন ও মান" }, bio: { en: "Oversees blend consistency and lab coordination.", bn: "ব্লেন্ড সামঞ্জস্য ও ল্যাব সমন্বয় তদারকি করে।" } },
-  { name: { en: "Commercial team", bn: "কমার্শিয়াল টিম" }, role: { en: "Dealers & projects", bn: "ডিলার ও প্রকল্প" }, bio: { en: "Supports stockists and mega-project procurement.", bn: "স্টকিস্ট ও মেগা-প্রকল্প প্রকিউরমেন্ট সাপোর্ট করে।" } },
-  { name: { en: "Plant operations", bn: "প্ল্যান্ট অপারেশন" }, role: { en: "Kalampur blending", bn: "কালামপুর ব্লেন্ডিং" }, bio: { en: "Runs day-to-day production and pack filling.", bn: "দৈনন্দিন উৎপাদন ও প্যাক ফিলিং চালায়।" } },
+  { name: { en: "Technical leadership", bn: "টেকনিক্যাল নেতৃত্ব" }, role: { en: "Formulation & quality", bn: "ফর্মুলেশন ও মান" }, bio: { en: "Oversees blend consistency and lab coordination with BUET, CUET and BCSIR reference programmes.", bn: "ব্লেন্ড সামঞ্জস্য ও BUET, CUET, BCSIR ল্যাব সমন্বয় তদারকি করে।" } },
+  { name: { en: "Commercial team", bn: "কমার্শিয়াল টিম" }, role: { en: "Dealers & projects", bn: "ডিলার ও প্রকল্প" }, bio: { en: "Supports hardware stockists, ready-mix plants and mega-project procurement nationwide.", bn: "সারা দেশে হার্ডওয়্যার স্টকিস্ট, রেডি-মিক্স ও মেগা-প্রকল্প প্রকিউরমেন্ট সাপোর্ট করে।" } },
+  { name: { en: "Plant operations", bn: "প্ল্যান্ট অপারেশন" }, role: { en: "Kalampur blending", bn: "কালামপুর ব্লেন্ডিং" }, bio: { en: "Runs day-to-day production, QC sampling and pack filling at the Dhamrai plant.", bn: "ধামরাই প্ল্যান্টে দৈনন্দিন উৎপাদন, QC স্যাম্পলিং ও প্যাক ফিলিং চালায়।" } },
 ];
 
 export const projects = [
-  { title: { en: "Roof waterproofing — Dhaka", bn: "ছাদ ওয়াটারপ্রুফিং — ঢাকা" }, sector: { en: "Residential", bn: "আবাসিক" }, product: "oxilar-super-100", summary: { en: "Slurry system on sunken toilets and roof slab.", bn: "সানকেন টয়লেট ও ছাদের স্ল্যাবে স্লারি সিস্টেম।" } },
-  { title: { en: "Ready-mix dosing — Gazipur", bn: "রেডি-মিক্স ডোজিং — গাজীপুর" }, sector: { en: "Infrastructure", bn: "অবকাঠামো" }, product: "oxilar-plast-sp", summary: { en: "SP-220 for pumped structural concrete.", bn: "পাম্পড স্ট্রাকচারাল কংক্রিটের জন্য SP-220।" } },
-  { title: { en: "Factory floor — Savar", bn: "ফ্যাক্টরি ফ্লোর — সাভার" }, sector: { en: "Industrial", bn: "শিল্প" }, product: "oxilar-floor-epx", summary: { en: "Self-leveling epoxy in garment unit.", bn: "গার্মেন্টস ইউনিটে সেলফ-লেভেলিং ইপক্সি।" } },
+  { id: "roof-dhaka", sector: "Residential", image: "/media/pail.jpg", place: { en: "Mohammadpur, Dhaka", bn: "মোহাম্মদপুর, ঢাকা" }, title: { en: "Roof & sunken toilet waterproofing", bn: "ছাদ ও সানকেন টয়লেট ওয়াটারপ্রুফিং" }, summary: { en: "Super-100 slurry system on roof slab and wet areas for a multi-storey residence before tile finish.", bn: "টাইলের আগে মাল্টি-স্টোরি বাসায় ছাদ ও ভেজা এলাকায় সুপার-১০০ স্লারি সিস্টেম।" } },
+  { id: "rmc-gazipur", sector: "Infrastructure", image: "/media/drum.jpg", place: { en: "Gazipur industrial belt", bn: "গাজীপুর শিল্প এলাকা" }, title: { en: "Ready-mix plant dosing", bn: "রেডি-মিক্স প্ল্যান্ট ডোজিং" }, summary: { en: "Plast SP-220 supplied in drums for pumped structural columns and long-span slabs.", bn: "পাম্পড কলাম ও লং-স্প্যান স্ল্যাবের জন্য ড্রামে প্লাস্ট SP-220 সরবরাহ।" } },
+  { id: "floor-savar", sector: "Industrial", image: "/media/stack.jpg", place: { en: "Savar, Dhaka", bn: "সাভার, ঢাকা" }, title: { en: "Garment factory epoxy floor", bn: "গার্মেন্টস ফ্যাক্টরি ইপক্সি ফ্লোর" }, summary: { en: "Floor EP-400 self-leveling system after shot-blast prep in a production hall.", bn: "প্রোডাকশন হলে শট-ব্লাস্টের পর ফ্লোর EP-400 সেলফ-লেভেলিং সিস্টেম।" } },
+  { id: "basement-uttara", sector: "Residential", image: "/media/pail.jpg", place: { en: "Uttara, Dhaka", bn: "উত্তরা, ঢাকা" }, title: { en: "Basement damp-proofing", bn: "বেজমেন্ট ড্যাম্প-প্রুফিং" }, summary: { en: "Integral Super-100 in retaining wall concrete plus slurry coat on the negative side.", bn: "রিটেইনিং ওয়াল কংক্রিটে ইন্টিগ্রাল সুপার-১০০ ও নেগেটিভ সাইডে স্লারি কোট।" } },
+  { id: "tank-ctg", sector: "Infrastructure", image: "/media/drum.jpg", place: { en: "Chattogram coastal site", bn: "চট্টগ্রাম উপকূলীয় সাইট" }, title: { en: "Overhead tank waterproofing", bn: "ওভারহেড ট্যাংক ওয়াটারপ্রুফিং" }, summary: { en: "Super-100 slurry for potable water tank internals under salinity exposure.", bn: "লবণাক্ততার মধ্যে পানযোগ্য ট্যাংকের ভিতরে সুপার-১০০ স্লারি।" } },
+  { id: "grout-ng", sector: "Industrial", image: "/media/stack.jpg", place: { en: "Narayanganj plant", bn: "নারায়ণগঞ্জ প্ল্যান্ট" }, title: { en: "Machine base plate grouting", bn: "মেশিন বেস প্লেট গ্রাউটিং" }, summary: { en: "Non-shrink Grout NS-50 under heavy equipment bases after alignment.", bn: "অ্যালাইনমেন্টের পর ভারী যন্ত্রের বেসে নন-শ্রিঙ্ক গ্রাউট NS-50।" } },
 ];
 
 export const projectSectors = [
@@ -337,19 +308,23 @@ export const projectSectors = [
 ];
 
 export const quotes = [
-  { text: { en: "Reliable dosage guidance and on-time drums for our pours.", bn: "আমাদের পোরের জন্য নির্ভরযোগ্য ডোজ গাইড ও সময়মতো ড্রাম।" }, by: { en: "Site engineer, Dhaka", bn: "সাইট ইঞ্জিনিয়ার, ঢাকা" } },
+  { quote: { en: "Reliable dosage guidance and on-time drums for our pours.", bn: "আমাদের পোরের জন্য নির্ভরযোগ্য ডোজ গাইড ও সময়মতো ড্রাম।" }, who: { en: "Site engineer, Dhaka", bn: "সাইট ইঞ্জিনিয়ার, ঢাকা" } },
+  { quote: { en: "Super-100 slurry held through a full monsoon on our roof package.", bn: "আমাদের ছাদ প্যাকেজে পুরো বর্ষাজুড়ে সুপার-১০০ স্লারি টিকেছে।" }, who: { en: "Contractor, Mohammadpur", bn: "ঠিকাদার, মোহাম্মদপুর" } },
+  { quote: { en: "Clear TDS and plant support made the ready-mix trial straightforward.", bn: "স্পষ্ট টিডিএস ও প্ল্যান্ট সাপোর্টে রেডি-মিক্স ট্রায়াল সহজ হয়েছে।" }, who: { en: "RMC plant manager, Gazipur", bn: "আরএমসি প্ল্যান্ট ম্যানেজার, গাজীপুর" } },
 ];
 
 export const sheets = [
-  { product: "Oxilar Super-100", type: "TDS", href: "/documents/super-100-tds.html" },
-  { product: "Oxilar Plast SP-220", type: "TDS", href: "/documents/sp-220-tds.html" },
-  { product: "Oxilar Floor EP-400", type: "TDS", href: "/documents/ep-400-tds.html" },
+  { id: "tds-100", kind: "TDS", product: "Oxilar Super-100", file: "/documents/tds-super-100.html" },
+  { id: "sds-100", kind: "SDS", product: "Oxilar Super-100", file: "/documents/sds-super-100.html" },
+  { id: "tds-sp", kind: "TDS", product: "Oxilar Plast SP-220", file: "/documents/tds-sp-220.html" },
+  { id: "tds-ep", kind: "TDS", product: "Oxilar Floor EP-400", file: "/documents/tds-ep-400.html" },
+  { id: "manual-roof", kind: "Manual", product: "Roof slurry guide", file: "/documents/guide-roof.html" },
 ];
 
 export const labs = [
-  { name: "BUET", note: { en: "Referenced strength and permeability summaries", bn: "স্ট্রেংথ ও পারমিয়েবিলিটি সারাংশ" } },
-  { name: "CUET", note: { en: "Batch chemistry checks", bn: "ব্যাচ কেমিস্ট্রি চেক" } },
-  { name: "BCSIR", note: { en: "Material characterisation support", bn: "ম্যাটেরিয়াল ক্যারেক্টারাইজেশন সাপোর্ট" } },
+  { id: "buet", body: "BUET", title: { en: "Strength & permeability", bn: "স্ট্রেংথ ও পারমিয়েবিলিটি" }, note: { en: "Referenced summaries for structural and waterproofing systems.", bn: "স্ট্রাকচারাল ও ওয়াটারপ্রুফিং সিস্টেমের রেফারেন্স সারাংশ।" }, file: "/documents/lab-buet.html" },
+  { id: "cuet", body: "CUET", title: { en: "Batch chemistry", bn: "ব্যাচ কেমিস্ট্রি" }, note: { en: "Chloride and composition checks before critical pours.", bn: "গুরুত্বপূর্ণ পোরের আগে ক্লোরাইড ও কম্পোজিশন চেক।" }, file: "/documents/lab-cuet.html" },
+  { id: "bcsir", body: "BCSIR", title: { en: "Material characterisation", bn: "ম্যাটেরিয়াল ক্যারেক্টারাইজেশন" }, note: { en: "Support testing for formulation consistency.", bn: "ফর্মুলেশন সামঞ্জস্যের জন্য সাপোর্ট টেস্টিং।" }, file: "/documents/lab-bcsir.html" },
 ];
 
 export const strengthSeries = [
@@ -357,6 +332,27 @@ export const strengthSeries = [
   { day: "7d", control: 18, dosed: 23 },
   { day: "14d", control: 24, dosed: 29 },
   { day: "28d", control: 32, dosed: 38 },
+];
+
+export const gallery = [
+  { src: "/media/pail.jpg", caption: { en: "Super-100 pails ready for site delivery", bn: "সাইট ডেলিভারির জন্য সুপার-১০০ পেইল" } },
+  { src: "/media/drum.jpg", caption: { en: "Industrial drums for ready-mix dosing", bn: "রেডি-মিক্স ডোজিংয়ের হেভি-ডিউটি ড্রাম" } },
+  { src: "/media/stack.jpg", caption: { en: "Stacked packs at Kalampur blending plant", bn: "কালামপুর ব্লেন্ডিং প্ল্যান্টে স্ট্যাকড প্যাক" } },
+  { src: "/media/logo.jpg", caption: { en: "Oxilar Bangladesh brand mark", bn: "অক্সিলার বাংলাদেশ ব্র্যান্ড মার্ক" } },
+];
+
+export const processSteps = [
+  { step: "01", title: { en: "Specify", bn: "স্পেসিফাই" }, body: { en: "Match product and dosage to the substrate, climate and pour schedule.", bn: "সাবস্ট্রেট, জলবায়ু ও পোর শিডিউল অনুযায়ী পণ্য ও ডোজ মেলান।" } },
+  { step: "02", title: { en: "Trial mix", bn: "ট্রায়াল মিক্স" }, body: { en: "Confirm workability and set with a site or plant trial before full volume.", bn: "পূর্ণ ভলিউমের আগে সাইট বা প্ল্যান্ট ট্রায়ালে ওয়ার্ক্যাবিলিটি ও সেট নিশ্চিত করুন।" } },
+  { step: "03", title: { en: "Apply & cure", bn: "অ্যাপ্লাই ও কিউর" }, body: { en: "Follow method statements, protect from sun and wind, document batch numbers.", bn: "মেথড স্টেটমেন্ট মেনে চলুন, রোদ-বাতাস থেকে রক্ষা করুন, ব্যাচ নম্বর নথিভুক্ত করুন।" } },
+  { step: "04", title: { en: "Support", bn: "সাপোর্ট" }, body: { en: "Call technical line for TDS, site visits and dealer replenishment.", bn: "টিডিএস, সাইট ভিজিট ও ডিলার রিপ্লেনিশমেন্টের জন্য টেকনিক্যাল লাইনে কল করুন।" } },
+];
+
+export const stats = [
+  { value: "2019", label: { en: "Established", bn: "প্রতিষ্ঠিত" } },
+  { value: "8+", label: { en: "Core systems", bn: "কোর সিস্টেম" } },
+  { value: "6", label: { en: "Sourcing hubs", bn: "সোর্সিং হাব" } },
+  { value: "3", label: { en: "Lab partners", bn: "ল্যাব পার্টনার" } },
 ];
 
 export const companyProfile = {
@@ -386,50 +382,17 @@ export const companyProfile = {
 };
 
 export const faqs: { q: Copy; a: Copy }[] = [
-  {
-    q: { en: "How much Oxilar Super-100 per bag of cement?", bn: "প্রতি ব্যাগ সিমেন্টে কত অক্সিলার সুপার-১০০?" },
-    a: { en: "A practical starting point is 300 ml per 50 kg bag for integral waterproofing. Roof slurry is mixed separately: 1 litre with 10–12 litres water and 12.5 kg cement.", bn: "ইন্টিগ্রাল ওয়াটারপ্রুফিংয়ের ব্যবহারিক শুরু প্রতি ৫০ কেজি ব্যাগে ৩০০ মিলি। ছাদের স্লারি আলাদা: ১ লিটারের সাথে ১০–১২ লিটার পানি ও ১২.৫ কেজি সিমেন্ট।" },
-  },
-  {
-    q: { en: "Are the admixtures chloride-free?", bn: "অ্যাডমিক্সচার কি ক্লোরাইড-মুক্ত?" },
-    a: { en: "Super-100, Plast SP-220 and Set-Fast are specified chloride-free. Ask for the batch CUET or BCSIR sheet before a prestressed pour.", bn: "সুপার-১০০, প্লাস্ট SP-220 ও সেট-ফাস্ট ক্লোরাইড-মুক্ত হিসেবে উল্লেখিত। প্রিস্ট্রেসড পোরের আগে ব্যাচের CUET বা BCSIR শিট চান।" },
-  },
-  {
-    q: { en: "Where is the factory?", bn: "কারখানা কোথায়?" },
-    a: { en: "Blending is at Kalampur, Dhamrai, Dhaka. The corporate office is 31/1 Babar Road, Mohammadpur, Dhanmondi, Dhaka.", bn: "ব্লেন্ডিং কালামপুর, ধামরাই, ঢাকায়। কর্পোরেট অফিস ৩১/১ বাবর রোড, মোহাম্মদপুর, ধানমন্ডি, ঢাকা।" },
-  },
-  {
-    q: { en: "When was Oxilar Bangladesh established?", bn: "অক্সিলার বাংলাদেশ কবে প্রতিষ্ঠিত?" },
-    a: { en: "Oxilar Bangladesh was established on 6 September 2019 and has grown as a progressive construction chemical manufacturer serving projects nationwide.", bn: "অক্সিলার বাংলাদেশ ৬ সেপ্টেম্বর ২০১৯-এ প্রতিষ্ঠিত হয় এবং সারা দেশের প্রকল্পে কনস্ট্রাকশন কেমিক্যাল সরবরাহ করে বাড়ছে।" },
-  },
-  {
-    q: { en: "What packaging sizes are available?", bn: "কোন কোন প্যাকেজিং সাইজ আছে?" },
-    a: { en: "Most systems ship in 4 L pails, 20 L pails, and heavy-duty industrial drums for ready-mix plants and large sites.", bn: "অধিকাংশ সিস্টেম ৪ লিটার পেইল, ২০ লিটার পেইল এবং রেডি-মিক্স ও বড় সাইটের জন্য হেভি-ডিউটি ড্রামে পাওয়া যায়।" },
-  },
-  {
-    q: { en: "Can I use Super-100 on roofs and basements?", bn: "সুপার-১০০ ছাদ ও বেজমেন্টে ব্যবহার করা যায়?" },
-    a: { en: "Yes. Super-100 is formulated for roof slabs, sunken toilets, basements, retaining walls, and water tanks under Bangladesh monsoon and salinity conditions.", bn: "হ্যাঁ। সুপার-১০০ ছাদের স্ল্যাব, সানকেন টয়লেট, বেজমেন্ট, রিটেইনিং ওয়াল ও পানির ট্যাংকের জন্য বর্ষা ও লবণাক্ততার শর্তে তৈরি।" },
-  },
-  {
-    q: { en: "Do you supply ready-mix plants?", bn: "রেডি-মিক্স প্ল্যান্টে সাপ্লাই করেন?" },
-    a: { en: "Yes. Plast SP-220 and related admixtures are supplied in 20 L and drums for plant dosing. Use the B2B portal for bulk quotations.", bn: "হ্যাঁ। প্লাস্ট SP-220 ও সম্পর্কিত অ্যাডমিক্সচার ২০ লিটার ও ড্রামে প্ল্যান্ট ডোজিংয়ের জন্য সরবরাহ হয়। বাল্ক কোটেশনের জন্য বিটুবি পোর্টাল ব্যবহার করুন।" },
-  },
-  {
-    q: { en: "How do I request a technical data sheet (TDS)?", bn: "টিডিএস কীভাবে পাব?" },
-    a: { en: "Open the TDS / Lab page for Super-100, SP-220, EP-400 and application manuals, or call +88 0196-0198313 for a signed batch sheet.", bn: "টিডিএস / ল্যাব পেজে সুপার-১০০, SP-220, EP-400 ও অ্যাপ্লিকেশন ম্যানুয়াল খুলুন, অথবা স্বাক্ষরিত ব্যাচ শিটের জন্য +৮৮ ০১৯৬-০১৯৮৩১৩-এ কল করুন।" },
-  },
-  {
-    q: { en: "Is Oxilar suitable for coastal salinity and damp walls?", bn: "উপকূলীয় লবণাক্ততা ও ড্যাম্প দেয়ালে উপযোগী?" },
-    a: { en: "Yes. Super-100 and Shield AF target damp, salts, algae and fungi common on north-facing and coastal walls in Bangladesh.", bn: "হ্যাঁ। সুপার-১০০ ও শিল্ড এএফ বাংলাদেশের উত্তরমুখী ও উপকূলীয় দেয়ালের ড্যাম্প, লবণ, শেওলা ও ছত্রাক লক্ষ্য করে।" },
-  },
-  {
-    q: { en: "How do site dosage calculators work?", bn: "সাইট ডোজ ক্যালকুলেটর কীভাবে কাজ করে?" },
-    a: { en: "The Site estimate tool converts slab volume, cement bags, or epoxy area into litres and pack counts. Always confirm with a trial mix and the current TDS before pouring.", bn: "সাইট অনুমান টুল স্ল্যাব ভলিউম, সিমেন্ট ব্যাগ বা ইপক্সি এলাকাকে লিটার ও প্যাক সংখ্যায় রূপান্তর করে। পোরের আগে ট্রায়াল মিক্স ও বর্তমান টিডিএস দিয়ে নিশ্চিত করুন।" },
-  },
-  {
-    q: { en: "How can dealers or contractors partner with Oxilar?", bn: "ডিলার বা ঠিকাদার কীভাবে অংশীদার হবেন?" },
-    a: { en: "Use the B2B portal for dealership applications and project bulk RFQs. Wholesale tiers, site support, and sales kits are available for approved partners.", bn: "ডিলারশিপ আবেদন ও প্রকল্প বাল্ক আরএফকিউর জন্য বিটুবি পোর্টাল ব্যবহার করুন। অনুমোদিত অংশীদারদের জন্য পাইকারি টায়ার, সাইট সাপোর্ট ও সেলস কিট আছে।" },
-  },
+  { q: { en: "How much Oxilar Super-100 per bag of cement?", bn: "প্রতি ব্যাগ সিমেন্টে কত অক্সিলার সুপার-১০০?" }, a: { en: "A practical starting point is 300 ml per 50 kg bag for integral waterproofing. Roof slurry is mixed separately: 1 litre with 10–12 litres water and 12.5 kg cement.", bn: "ইন্টিগ্রাল ওয়াটারপ্রুফিংয়ের ব্যবহারিক শুরু প্রতি ৫০ কেজি ব্যাগে ৩০০ মিলি। ছাদের স্লারি আলাদা: ১ লিটারের সাথে ১০–১২ লিটার পানি ও ১২.৫ কেজি সিমেন্ট।" } },
+  { q: { en: "Are the admixtures chloride-free?", bn: "অ্যাডমিক্সচার কি ক্লোরাইড-মুক্ত?" }, a: { en: "Super-100, Plast SP-220 and Set-Fast are specified chloride-free. Ask for the batch CUET or BCSIR sheet before a prestressed pour.", bn: "সুপার-১০০, প্লাস্ট SP-220 ও সেট-ফাস্ট ক্লোরাইড-মুক্ত হিসেবে উল্লেখিত। প্রিস্ট্রেসড পোরের আগে ব্যাচের CUET বা BCSIR শিট চান।" } },
+  { q: { en: "Where is the factory?", bn: "কারখানা কোথায়?" }, a: { en: "Blending is at Kalampur, Dhamrai, Dhaka. The corporate office is 31/1 Babar Road, Mohammadpur, Dhanmondi, Dhaka.", bn: "ব্লেন্ডিং কালামপুর, ধামরাই, ঢাকায়। কর্পোরেট অফিস ৩১/১ বাবর রোড, মোহাম্মদপুর, ধানমন্ডি, ঢাকা।" } },
+  { q: { en: "When was Oxilar Bangladesh established?", bn: "অক্সিলার বাংলাদেশ কবে প্রতিষ্ঠিত?" }, a: { en: "Oxilar Bangladesh was established on 6 September 2019 and has grown as a progressive construction chemical manufacturer serving projects nationwide.", bn: "অক্সিলার বাংলাদেশ ৬ সেপ্টেম্বর ২০১৯-এ প্রতিষ্ঠিত হয় এবং সারা দেশের প্রকল্পে কনস্ট্রাকশন কেমিক্যাল সরবরাহ করে বাড়ছে।" } },
+  { q: { en: "What packaging sizes are available?", bn: "কোন কোন প্যাকেজিং সাইজ আছে?" }, a: { en: "Most systems ship in 4 L pails, 20 L pails, and heavy-duty industrial drums for ready-mix plants and large sites.", bn: "অধিকাংশ সিস্টেম ৪ লিটার পেইল, ২০ লিটার পেইল এবং রেডি-মিক্স ও বড় সাইটের জন্য হেভি-ডিউটি ড্রামে পাওয়া যায়।" } },
+  { q: { en: "Can I use Super-100 on roofs and basements?", bn: "সুপার-১০০ ছাদ ও বেজমেন্টে ব্যবহার করা যায়?" }, a: { en: "Yes. Super-100 is formulated for roof slabs, sunken toilets, basements, retaining walls, and water tanks under Bangladesh monsoon and salinity conditions.", bn: "হ্যাঁ। সুপার-১০০ ছাদের স্ল্যাব, সানকেন টয়লেট, বেজমেন্ট, রিটেইনিং ওয়াল ও পানির ট্যাংকের জন্য বর্ষা ও লবণাক্ততার শর্তে তৈরি।" } },
+  { q: { en: "Do you supply ready-mix plants?", bn: "রেডি-মিক্স প্ল্যান্টে সাপ্লাই করেন?" }, a: { en: "Yes. Plast SP-220 and related admixtures are supplied in 20 L and drums for plant dosing. Use the B2B portal for bulk quotations.", bn: "হ্যাঁ। প্লাস্ট SP-220 ও সম্পর্কিত অ্যাডমিক্সচার ২০ লিটার ও ড্রামে প্ল্যান্ট ডোজিংয়ের জন্য সরবরাহ হয়। বাল্ক কোটেশনের জন্য বিটুবি পোর্টাল ব্যবহার করুন।" } },
+  { q: { en: "How do I request a technical data sheet (TDS)?", bn: "টিডিএস কীভাবে পাব?" }, a: { en: "Open the TDS / Lab page for Super-100, SP-220, EP-400 and application manuals, or call +88 0196-0198313 for a signed batch sheet.", bn: "টিডিএস / ল্যাব পেজে সুপার-১০০, SP-220, EP-400 ও অ্যাপ্লিকেশন ম্যানুয়াল খুলুন, অথবা স্বাক্ষরিত ব্যাচ শিটের জন্য +৮৮ ০১৯৬-০১৯৮৩১৩-এ কল করুন।" } },
+  { q: { en: "Is Oxilar suitable for coastal salinity and damp walls?", bn: "উপকূলীয় লবণাক্ততা ও ড্যাম্প দেয়ালে উপযোগী?" }, a: { en: "Yes. Super-100 and Shield AF target damp, salts, algae and fungi common on north-facing and coastal walls in Bangladesh.", bn: "হ্যাঁ। সুপার-১০০ ও শিল্ড এএফ বাংলাদেশের উত্তরমুখী ও উপকূলীয় দেয়ালের ড্যাম্প, লবণ, শেওলা ও ছত্রাক লক্ষ্য করে।" } },
+  { q: { en: "How do site dosage calculators work?", bn: "সাইট ডোজ ক্যালকুলেটর কীভাবে কাজ করে?" }, a: { en: "The Site estimate tool converts slab volume, cement bags, or epoxy area into litres and pack counts. Always confirm with a trial mix and the current TDS before pouring.", bn: "সাইট অনুমান টুল স্ল্যাব ভলিউম, সিমেন্ট ব্যাগ বা ইপক্সি এলাকাকে লিটার ও প্যাক সংখ্যায় রূপান্তর করে। পোরের আগে ট্রায়াল মিক্স ও বর্তমান টিডিএস দিয়ে নিশ্চিত করুন।" } },
+  { q: { en: "How can dealers or contractors partner with Oxilar?", bn: "ডিলার বা ঠিকাদার কীভাবে অংশীদার হবেন?" }, a: { en: "Use the B2B portal for dealership applications and project bulk RFQs. Wholesale tiers, site support, and sales kits are available for approved partners.", bn: "ডিলারশিপ আবেদন ও প্রকল্প বাল্ক আরএফকিউর জন্য বিটুবি পোর্টাল ব্যবহার করুন। অনুমোদিত অংশীদারদের জন্য পাইকারি টায়ার, সাইট সাপোর্ট ও সেলস কিট আছে।" } },
 ];
 
 export const videos = [
