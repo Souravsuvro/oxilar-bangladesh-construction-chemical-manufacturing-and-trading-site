@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Oxilar Bangladesh | Construction Chemical Manufacturer & Global Raw Material Importer",
+      "hasCanvas": false,
+      "bodyTextLen": 3738,
+      "bodyTextHash": "14c74ca8cc031d1a3a605136cb951b1dc6b9fca5a3ed098e628e9f49e3e900bc",
+      "bodyTextPrefix": "+88 0196-0198313 oxilarbangladesh@gmail.com Office · Mohammadpur",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Oxilar Bangladesh | Construction Chemical Manufacturer & Global Raw Material Importer",
+      "hasCanvas": false,
+      "bodyTextLen": 3671,
+      "bodyTextHash": "f306cd5146a8d773df8a06127ac7cc252d237da7889628422063f3b58b6c4ef8",
+      "bodyTextPrefix": "+88 0196-0198313 oxilarbangladesh@gmail.com EN বাংলা Oxilar BANG",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+}
