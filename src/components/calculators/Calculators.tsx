@@ -71,7 +71,7 @@ export function CalculatorSuite() {
   const label = lang === "bn";
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[220px_1fr]">
+    <div className="grid gap-6 text-ink lg:grid-cols-[220px_1fr]">
       <div className="flex gap-2 overflow-auto lg:flex-col">
         {(
           [
@@ -93,7 +93,7 @@ export function CalculatorSuite() {
           </button>
         ))}
       </div>
-      <div className="rounded-xl bg-card p-4 ring-1 ring-line sm:p-6">
+      <div className="rounded-xl bg-card p-4 text-ink ring-1 ring-line sm:p-6">
         <div className="grid gap-4 sm:grid-cols-2">
           {mode === "volume" && (
             <>
@@ -162,7 +162,7 @@ function Field({
   step?: number;
 }) {
   return (
-    <label className="block text-sm font-medium">
+    <label className="block text-sm font-semibold text-ink">
       {label}
       <input
         type="number"
@@ -170,7 +170,7 @@ function Field({
         min={0}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="mt-1 h-12 w-full rounded-md border border-line bg-paper px-3 text-base"
+        className="mt-1 h-12 w-full rounded-md border border-line bg-paper px-3 text-base font-medium text-ink"
       />
     </label>
   );
