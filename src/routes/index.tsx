@@ -108,7 +108,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="border-b border-line bg-card">
+      <section className="border-b border-line bg-card" aria-label="Company stats">
         <div className="container-site grid grid-cols-2 gap-4 py-8 sm:grid-cols-4">
           {stats.map((s) => (
             <div key={s.value} className="text-center">
@@ -119,7 +119,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="container-site py-14">
+      <section className="container-site py-14" aria-label="Packs and plant gallery">
         <h2 className="text-3xl font-semibold">{lang === "bn" ? "প্যাক ও প্ল্যান্ট" : "Packs and plant"}</h2>
         <p className="mt-2 max-w-2xl text-muted">
           {lang === "bn"
@@ -129,7 +129,7 @@ function Home() {
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {gallery.map((g) => (
             <figure key={g.src} className="overflow-hidden rounded-xl bg-card ring-1 ring-line">
-              <img src={g.src} alt="" className="h-44 w-full object-cover" />
+              <img src={g.src} alt={tx(g.caption)} className="h-44 w-full object-cover" loading="lazy" />
               <figcaption className="p-3 text-sm text-muted">{tx(g.caption)}</figcaption>
             </figure>
           ))}
@@ -168,7 +168,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="container-site py-14">
+      <section className="container-site py-14" aria-label="How we work">
         <h2 className="text-3xl font-semibold">{lang === "bn" ? "কীভাবে কাজ করি" : "How we work"}</h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {processSteps.map((s) => (
@@ -178,6 +178,28 @@ function Home() {
               <p className="mt-2 text-sm text-muted">{tx(s.body)}</p>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="border-y border-line bg-mist/40 py-10">
+        <div className="container-site">
+          <h2 className="text-2xl font-semibold">{lang === "bn" ? "সারা দেশে সাপ্লাই" : "Nationwide supply"}</h2>
+          <p className="mt-2 max-w-3xl text-sm text-muted">
+            {lang === "bn"
+              ? "ঢাকা, চট্টগ্রাম, সিলেট, রাজশাহী, খুলনা ও অন্যান্য বিভাগে ডিলার ও প্রকল্প সাপ্লাই। রেডি-মিক্স প্ল্যান্ট ও মেগা-প্রকল্পের জন্য ড্রাম ডেলিভারি।"
+              : "Dealer and project supply across Dhaka, Chattogram, Sylhet, Rajshahi, Khulna and other divisions. Drum delivery for ready-mix plants and mega-projects."}
+          </p>
+          <ul className="mt-4 flex flex-wrap gap-2 text-xs font-semibold">
+            {(
+              lang === "bn"
+                ? ["ঢাকা", "চট্টগ্রাম", "সিলেট", "রাজশাহী", "খুলনা", "রংপুর", "বরিশাল", "ময়মনসিংহ"]
+                : ["Dhaka", "Chattogram", "Sylhet", "Rajshahi", "Khulna", "Rangpur", "Barishal", "Mymensingh"]
+            ).map((d) => (
+              <li key={d} className="rounded-full bg-card px-3 py-1.5 ring-1 ring-line">
+                {d}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -195,7 +217,7 @@ function Home() {
         <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {shown.slice(0, 6).map((p) => (
             <Link key={p.slug} to="/products/$slug" params={{ slug: p.slug }} className="overflow-hidden rounded-xl bg-card ring-1 ring-line">
-              <img src={p.image} alt="" className="h-44 w-full object-cover" />
+              <img src={p.image} alt="" className="h-44 w-full object-cover" loading="lazy" />
               <div className="p-4">
                 <p className="text-xs font-semibold text-sky">{p.sku}</p>
                 <h3 className="text-lg font-semibold">{tx(p.name)}</h3>
