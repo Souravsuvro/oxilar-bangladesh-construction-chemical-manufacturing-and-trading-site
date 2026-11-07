@@ -8,7 +8,7 @@ import appCss from "../styles.css?url";
 const TITLE =
   "Oxilar Bangladesh | Construction Chemical Manufacturer & Global Raw Material Importer";
 const DESC =
-  "Oxilar Bangladesh (A Sister Concern of Filament Group) produces BUET-tested construction chemicals, concrete admixtures, roof waterproofing, and epoxy flooring in Bangladesh. Factory: Dhamrai, Dhaka.";
+  "Oxilar Bangladesh (A Sister Concern of Filament Group) produces BUET-tested construction chemicals, concrete admixtures, roof waterproofing, and epoxy flooring in Bangladesh. Factory: Dhamrai, Dhaka. Established 6 September 2019.";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -21,8 +21,17 @@ export const Route = createRootRoute({
       {
         name: "keywords",
         content:
-          "Construction chemical company in Bangladesh, Best roof waterproofing chemical BD, Concrete admixture manufacturer Dhaka, Epoxy flooring supplier Bangladesh, BUET certified waterproofing chemical, Salinity & damp proofing chemical, Oxilar Super-100 dosage per bag of cement",
+          "Construction chemical company in Bangladesh, Best roof waterproofing chemical BD, Concrete admixture manufacturer Dhaka, Epoxy flooring supplier Bangladesh, BUET certified waterproofing chemical, Salinity & damp proofing chemical, Oxilar Super-100 dosage per bag of cement, Oxilar Bangladesh Kalampur",
       },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESC },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "/og.jpg" },
+      { property: "og:locale", content: "en_BD" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: TITLE },
+      { name: "twitter:description", content: DESC },
+      { name: "twitter:image", content: "/og.jpg" },
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
@@ -34,6 +43,7 @@ export const Route = createRootRoute({
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;600;700&family=Sora:wght@500;600;700&display=swap",
       },
+      { rel: "sitemap", type: "application/xml", href: "/sitemap.xml" },
     ],
   }),
   component: () => (
