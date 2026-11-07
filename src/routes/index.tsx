@@ -6,6 +6,33 @@ import { useI18n } from "@/lib/i18n";
 import { CalculatorSuite } from "@/components/calculators/Calculators";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      {
+        title:
+          "Oxilar Bangladesh | Construction Chemical Manufacturer & Global Raw Material Importer",
+      },
+      {
+        name: "description",
+        content:
+          "Oxilar Bangladesh (established 6 September 2019) manufactures BUET-referenced construction chemicals, roof waterproofing, concrete admixtures and epoxy flooring. Factory: Kalampur, Dhamrai, Dhaka.",
+      },
+      {
+        name: "keywords",
+        content:
+          "Construction chemical company in Bangladesh, Best roof waterproofing chemical BD, Concrete admixture manufacturer Dhaka, Epoxy flooring supplier Bangladesh, BUET certified waterproofing chemical, Salinity damp proofing chemical, Oxilar Super-100 dosage per bag of cement, Oxilar Bangladesh Dhamrai",
+      },
+      { property: "og:title", content: "Oxilar Bangladesh | Construction Chemicals" },
+      {
+        property: "og:description",
+        content:
+          "BUET-referenced waterproofing, admixtures and epoxy systems. Factory Kalampur, Dhamrai. Sister concern of Filament Group.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "/og.jpg" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Home,
 });
 
@@ -19,6 +46,7 @@ const schema = {
       email: "oxilarbangladesh@gmail.com",
       telephone: "+8801960198313",
       parentOrganization: "Filament Group",
+      foundingDate: "2019-09-06",
       address: {
         "@type": "PostalAddress",
         streetAddress: "31/1 Babar Road, Mohammadpur",
@@ -61,10 +89,19 @@ function Home() {
                 {t("launchCalc")}
               </Link>
             </div>
+            <div className="mt-6 flex flex-wrap gap-3 text-sm">
+              <a href="tel:+8801960198313" className="inline-flex min-h-11 items-center rounded-full bg-white/10 px-4 font-semibold text-paper hover:bg-white/15">
+                +88 0196-0198313
+              </a>
+              <a href="https://wa.me/8801960198313" target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center rounded-full bg-sky px-4 font-semibold text-paper">
+                WhatsApp
+              </a>
+            </div>
             <ul className="mt-8 flex flex-wrap gap-2 text-xs font-semibold">
               {["BUET", "CUET", "BCSIR"].map((b) => (
                 <li key={b} className="rounded-full bg-white/10 px-3 py-2">{b}</li>
               ))}
+              <li className="rounded-full bg-white/10 px-3 py-2">Est. 2019</li>
             </ul>
           </div>
           <img src="/media/pail.jpg" alt="Oxilar Super-100 pail" className="aspect-[4/5] w-full rounded-xl object-cover sm:aspect-[5/4]" />
@@ -75,8 +112,8 @@ function Home() {
         <h2 className="text-3xl font-semibold">{lang === "bn" ? "কাঁচামালের উৎস" : "Raw material origins"}</h2>
         <p className="mt-2 max-w-2xl text-muted">
           {lang === "bn"
-            ? "ইপক্সি, হার্ডেনার, সলভেন্ট ও অ্যাডমিক্সচার ছয়টি ট্রেড হাব থেকে আসে। কার্ডে চাপুন।"
-            : "Epoxy, hardener, solvents and admixture bases arrive from six trade hubs. Select a card."}
+            ? "ইপক্সি, হার্ডেনার, সলভেন্ট ও অ্যাডমিক্সচার ছয়টি ট্রেড হাব থেকে আসে।"
+            : "Epoxy, hardener, solvents and admixture bases arrive from six trade hubs."}
         </p>
         <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {sourcing.map((s) => (
@@ -126,13 +163,20 @@ function Home() {
             </Link>
           ))}
         </div>
+        <div className="mt-6">
+          <Link to="/products" className="inline-flex min-h-12 items-center justify-center rounded-full bg-ink px-6 font-semibold text-paper">
+            {lang === "bn" ? "সব পণ্য দেখুন" : "View all products"}
+          </Link>
+        </div>
       </section>
 
       <section className="bg-ink py-14 text-paper">
         <div className="container-site">
           <h2 className="text-3xl font-semibold text-paper">{lang === "bn" ? "সাইট অনুমান" : "Site estimate"}</h2>
           <p className="mt-2 mb-6 max-w-2xl text-paper/70">
-            {lang === "bn" ? "স্ল্যাব, ব্যাগ বা ইপক্সি — ফলাফল প্রিন্ট করুন বা আরএফকিউতে নিন।" : "Slab, bags or epoxy — print the result or drop it into the RFQ."}
+            {lang === "bn"
+              ? "স্ল্যাব, ব্যাগ বা ইপক্সি — ফলাফল প্রিন্ট করুন বা আরএফকিউতে নিন। ট্রায়াল মিক্স ও টিডিএস দিয়ে নিশ্চিত করুন।"
+              : "Slab, bags or epoxy — print the result or drop it into the RFQ. Always confirm with a trial mix and the current TDS."}
           </p>
           <CalculatorSuite />
         </div>
