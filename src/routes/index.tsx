@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { benefits, faqs, products, sourcing, strengthSeries } from "@/data/catalog";
+import { benefits, faqs, gallery, processSteps, products, sourcing, stats, strengthSeries } from "@/data/catalog";
 import { useI18n } from "@/lib/i18n";
 import { CalculatorSuite } from "@/components/calculators/Calculators";
 
@@ -108,6 +108,34 @@ function Home() {
         </div>
       </section>
 
+      <section className="border-b border-line bg-card">
+        <div className="container-site grid grid-cols-2 gap-4 py-8 sm:grid-cols-4">
+          {stats.map((s) => (
+            <div key={s.value} className="text-center">
+              <p className="text-2xl font-semibold text-brand sm:text-3xl">{s.value}</p>
+              <p className="mt-1 text-sm text-muted">{tx(s.label)}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="container-site py-14">
+        <h2 className="text-3xl font-semibold">{lang === "bn" ? "প্যাক ও প্ল্যান্ট" : "Packs and plant"}</h2>
+        <p className="mt-2 max-w-2xl text-muted">
+          {lang === "bn"
+            ? "পেইল, ড্রাম ও স্ট্যাকড প্যাক — সাইট ও রেডি-মিক্স প্ল্যান্টের জন্য।"
+            : "Pails, drums and stacked packs — ready for site delivery and ready-mix plants."}
+        </p>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {gallery.map((g) => (
+            <figure key={g.src} className="overflow-hidden rounded-xl bg-card ring-1 ring-line">
+              <img src={g.src} alt="" className="h-44 w-full object-cover" />
+              <figcaption className="p-3 text-sm text-muted">{tx(g.caption)}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
       <section id="sourcing" className="container-site py-14">
         <h2 className="text-3xl font-semibold">{lang === "bn" ? "কাঁচামালের উৎস" : "Raw material origins"}</h2>
         <p className="mt-2 max-w-2xl text-muted">
@@ -137,6 +165,19 @@ function Home() {
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="container-site py-14">
+        <h2 className="text-3xl font-semibold">{lang === "bn" ? "কীভাবে কাজ করি" : "How we work"}</h2>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {processSteps.map((s) => (
+            <article key={s.step} className="rounded-xl bg-card p-5 ring-1 ring-line">
+              <p className="text-xs font-semibold tracking-widest text-brand">{s.step}</p>
+              <h3 className="mt-2 text-lg font-semibold">{tx(s.title)}</h3>
+              <p className="mt-2 text-sm text-muted">{tx(s.body)}</p>
+            </article>
+          ))}
         </div>
       </section>
 
