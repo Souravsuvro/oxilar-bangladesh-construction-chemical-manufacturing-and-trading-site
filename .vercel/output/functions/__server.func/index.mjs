@@ -13,7 +13,9 @@ var install_page_default = "<!DOCTYPE html>\n<html lang=\"en\" class=\"device-de
 //#region \0virtual:grok-og-identity
 var grokOgIdentity = { "site": {
 	"title": "Oxilar Bangladesh",
-	"color": "059669"
+	"card": "custom",
+	"color": "059669",
+	"image": "/og.jpg"
 } };
 //#endregion
 //#region scripts/grok-pwa-shared.mjs
@@ -466,11 +468,11 @@ var findRouteRules = /* @__PURE__ */ (() => {
 		return r;
 	};
 })();
-var _lazy_IO091Z = defineLazyEventHandler(() => import("./_chunks/ssr-renderer.mjs"));
+var _lazy_9ZH3da = defineLazyEventHandler(() => import("./_chunks/ssr-renderer.mjs"));
 var findRoute = /* @__PURE__ */ (() => {
 	const data = {
 		route: "/**",
-		handler: _lazy_IO091Z
+		handler: _lazy_9ZH3da
 	};
 	return ((_m, p) => {
 		return {
