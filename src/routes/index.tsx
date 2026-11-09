@@ -15,18 +15,18 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Oxilar Bangladesh (established 6 September 2019) manufactures BUET-referenced construction chemicals, roof waterproofing, concrete admixtures and epoxy flooring. Factory: Kalampur, Dhamrai, Dhaka.",
+          "Independent manufacturer (est. 6 September 2019) of BUET-referenced construction chemicals: roof waterproofing, concrete admixtures and epoxy flooring. Factory Kalampur, Dhamrai. Built for civil engineers and mega-projects in Bangladesh.",
       },
       {
         name: "keywords",
         content:
-          "Construction chemical company in Bangladesh, Best roof waterproofing chemical BD, Concrete admixture manufacturer Dhaka, Epoxy flooring supplier Bangladesh, BUET certified waterproofing chemical, Salinity damp proofing chemical, Oxilar Super-100 dosage per bag of cement, Oxilar Bangladesh Dhamrai",
+          "Construction chemical company in Bangladesh, Best roof waterproofing chemical BD, Concrete admixture manufacturer Dhaka, Epoxy flooring supplier Bangladesh, BUET tested construction chemicals, Salinity damp proofing chemical, Oxilar Super-100 dosage per bag of cement, Oxilar Bangladesh Dhamrai",
       },
       { property: "og:title", content: "Oxilar Bangladesh | Construction Chemicals" },
       {
         property: "og:description",
         content:
-          "BUET-referenced waterproofing, admixtures and epoxy systems. Factory Kalampur, Dhamrai. Sister concern of Filament Group.",
+          "Independent manufacturer of BUET-referenced waterproofing, admixtures and epoxy systems. Factory Kalampur, Dhamrai. Global direct importer.",
       },
       { property: "og:type", content: "website" },
       { property: "og:image", content: "/og.jpg" },
@@ -40,18 +40,23 @@ const schema = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Organization",
+      "@type": ["Organization", "LocalBusiness"],
       name: "Oxilar Bangladesh",
       url: "https://www.oxilarbd.com",
       email: "oxilarbangladesh@gmail.com",
       telephone: "+8801960198313",
-      parentOrganization: "Filament Group",
       foundingDate: "2019-09-06",
+      description:
+        "Independent manufacturer and global direct importer of construction chemicals, waterproofing systems and industrial raw materials in Bangladesh.",
       address: {
         "@type": "PostalAddress",
         streetAddress: "31/1 Babar Road, Mohammadpur",
         addressLocality: "Dhaka",
         addressCountry: "BD",
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "Bangladesh",
       },
     },
     {
@@ -90,10 +95,10 @@ function Home() {
               </Link>
             </div>
             <div className="mt-6 flex flex-wrap gap-3 text-sm">
-              <a href="tel:+8801960198313" className="inline-flex min-h-11 items-center rounded-full bg-white/10 px-4 font-semibold text-paper hover:bg-white/15">
+              <a href="tel:+8801960198313" className="inline-flex min-h-12 items-center rounded-full bg-white/10 px-4 font-semibold text-paper hover:bg-white/15">
                 +88 0196-0198313
               </a>
-              <a href="https://wa.me/8801960198313" target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center rounded-full bg-sky px-4 font-semibold text-paper">
+              <a href="https://wa.me/8801960198313" target="_blank" rel="noreferrer" className="inline-flex min-h-12 items-center rounded-full bg-sky px-4 font-semibold text-paper">
                 WhatsApp
               </a>
             </div>
@@ -104,7 +109,15 @@ function Home() {
               <li className="rounded-full bg-white/10 px-3 py-2">Est. 2019</li>
             </ul>
           </div>
-          <img src="/media/pail.jpg" alt="Oxilar Super-100 pail" className="aspect-[4/5] w-full rounded-xl object-cover sm:aspect-[5/4]" />
+          <img
+            src="/media/pail.jpg"
+            alt="Oxilar Super-100 pail"
+            width={800}
+            height={640}
+            className="aspect-[4/5] w-full rounded-xl object-cover sm:aspect-[5/4]"
+            decoding="async"
+            fetchPriority="high"
+          />
         </div>
       </section>
 
@@ -129,7 +142,7 @@ function Home() {
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {gallery.map((g) => (
             <figure key={g.src} className="overflow-hidden rounded-xl bg-card ring-1 ring-line">
-              <img src={g.src} alt={tx(g.caption)} className="h-44 w-full object-cover" loading="lazy" />
+              <img src={g.src} alt={tx(g.caption)} className="h-44 w-full object-cover" loading="lazy" decoding="async" />
               <figcaption className="p-3 text-sm text-muted">{tx(g.caption)}</figcaption>
             </figure>
           ))}
@@ -140,8 +153,8 @@ function Home() {
         <h2 className="text-3xl font-semibold">{lang === "bn" ? "কাঁচামালের উৎস" : "Raw material origins"}</h2>
         <p className="mt-2 max-w-2xl text-muted">
           {lang === "bn"
-            ? "ইপক্সি, হার্ডেনার, সলভেন্ট ও অ্যাডমিক্সচার ছয়টি ট্রেড হাব থেকে আসে।"
-            : "Epoxy, hardener, solvents and admixture bases arrive from six trade hubs."}
+            ? "ইপক্সি, হার্ডেনার, সলভেন্ট ও অ্যাডমিক্সচার ছয়টি ট্রেড হাব থেকে সরাসরি আমদানি।"
+            : "Epoxy, hardener, solvents and admixture bases direct-imported from six trade hubs."}
         </p>
         <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {sourcing.map((s) => (
@@ -208,7 +221,14 @@ function Home() {
           <h2 className="text-3xl font-semibold">{lang === "bn" ? "নির্বাচিত পণ্য" : "Featured products"}</h2>
           <div className="flex gap-2 overflow-auto">
             {(["all", "4L", "20L", "drum"] as const).map((p) => (
-              <button key={p} type="button" onClick={() => setPack(p)} className={`min-h-11 shrink-0 rounded-full px-4 text-sm font-semibold ${pack === p ? "bg-brand text-paper" : "bg-card ring-1 ring-line"}`}>
+              <button
+                key={p}
+                type="button"
+                onClick={() => setPack(p)}
+                className={`min-h-12 shrink-0 rounded-full px-4 text-sm font-semibold ${
+                  pack === p ? "bg-brand text-paper" : "bg-card ring-1 ring-line"
+                }`}
+              >
                 {p === "all" ? (lang === "bn" ? "সব সাইজ" : "All sizes") : p}
               </button>
             ))}
@@ -217,7 +237,7 @@ function Home() {
         <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {shown.slice(0, 6).map((p) => (
             <Link key={p.slug} to="/products/$slug" params={{ slug: p.slug }} className="overflow-hidden rounded-xl bg-card ring-1 ring-line">
-              <img src={p.image} alt="" className="h-44 w-full object-cover" loading="lazy" />
+              <img src={p.image} alt="" className="h-44 w-full object-cover" loading="lazy" decoding="async" />
               <div className="p-4">
                 <p className="text-xs font-semibold text-sky">{p.sku}</p>
                 <h3 className="text-lg font-semibold">{tx(p.name)}</h3>
@@ -265,6 +285,11 @@ function Home() {
             </ResponsiveContainer>
           )}
         </div>
+        <p className="mt-3 text-sm">
+          <Link to="/resources" className="font-semibold text-brand hover:underline">
+            {lang === "bn" ? "টিডিএস, এসডিএস ও ল্যাব শিট দেখুন →" : "View TDS, SDS and lab sheets →"}
+          </Link>
+        </p>
       </section>
 
       <section className="container-site pb-4">
