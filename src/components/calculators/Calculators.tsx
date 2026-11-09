@@ -9,10 +9,21 @@ function printSummary(title: string, lines: string[]) {
   const w = window.open("", "_blank", "noopener,noreferrer");
   if (!w) return;
   const body = lines.map((l) => `<li>${l}</li>`).join("");
-  w.document.write(`<!doctype html><html><head><title>${title}</title><style>body{font-family:sans-serif;padding:40px;color:#0f172a}h1{color:#059669;font-size:22px}</style></head><body><h1>${title}</h1><p>Oxilar Bangladesh · Filament Group · +88 0196-0198313</p><ul>${body}</ul><p>Estimates only. Confirm with a trial mix and the current TDS.</p></body></html>`);
+  w.document.write(
+    `<!doctype html><html><head><title>${title}</title><style>body{font-family:sans-serif;padding:40px;color:#0f172a}h1{color:#059669;font-size:22px}</style></head><body><h1>${title}</h1><p>Oxilar Bangladesh · Independent manufacturer · +88 0196-0198313 · www.oxilarbd.com</p><ul>${body}</ul><p>Estimates only. Confirm with a trial mix and the current TDS.</p></body></html>`,
+  );
   w.document.close();
   w.focus();
   w.print();
+}
+
+function trackEvent(name: string, params?: Record<string, string | number>) {
+  try {
+    const g = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
+    if (typeof g === "function") g("event", name, params);
+  } catch {
+    /* no-op when GA not configured */
+  }
 }
 
 export function CalculatorSuite() {
@@ -125,22 +136,26 @@ export function CalculatorSuite() {
           <button
             type="button"
             className="min-h-12 rounded-full bg-brand px-5 font-semibold text-paper"
-            onClick={() => printSummary("Oxilar calculation", result.lines)}
+            onClick={() => {
+              trackEvent("calculator_print", { mode });
+              printSummary("Oxilar calculation", result.lines);
+            }}
           >
             {label ? "পিডিএফ / প্রিন্ট" : "Print / save PDF"}
           </button>
           <button
             type="button"
             className="min-h-12 rounded-full bg-sky px-5 font-semibold text-paper"
-            onClick={() =>
+            onClick={() => {
+              trackEvent("calculator_rfq", { mode, litres: Math.round(result.litres) });
               add({
                 sku: "CALC",
                 name: mode === "epoxy" ? "Oxilar Floor EP-400" : "Oxilar Super-100 / admixture",
                 pack: result.litres > 80 ? "drum" : "20L",
                 qty: Math.max(1, Math.ceil(result.litres / (result.litres > 80 ? 200 : 20))),
                 note: result.lines.join(" · "),
-              })
-            }
+              });
+            }}
           >
             {label ? "আরএফকিউতে নিন" : "Import to RFQ"}
           </button>

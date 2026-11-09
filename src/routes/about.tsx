@@ -7,17 +7,17 @@ export const Route = createFileRoute("/about")({
     meta: [
       {
         title:
-          "About Oxilar Bangladesh | Established 6 September 2019 | Construction Chemical Manufacturer",
+          "About Oxilar Bangladesh | Independent Construction Chemical Manufacturer | Est. 2019",
       },
       {
         name: "description",
         content:
-          "Oxilar Bangladesh, established 6 September 2019, is a trusted manufacturer of high-performance construction chemicals. Vision, mission, quality policy, Kalampur plant and global sourcing from China, Korea, Taiwan, India, Thailand and Singapore.",
+          "Oxilar Bangladesh is an independent manufacturer and global direct importer of construction chemicals. Established 6 September 2019. Vision, mission, Kalampur Dhamrai plant, and sourcing from China, Korea, Taiwan, India, Thailand and Singapore.",
       },
       {
         name: "keywords",
         content:
-          "Oxilar Bangladesh about, Construction chemical manufacturer Bangladesh 2019, Oxilar vision mission, Kalampur Dhamrai factory, BUET CUET BCSIR lab referenced chemicals, Filament Group sister concern",
+          "Oxilar Bangladesh about, Construction chemical manufacturer Bangladesh 2019, Independent construction chemical company BD, Kalampur Dhamrai factory, BUET CUET BCSIR lab referenced chemicals",
       },
     ],
   }),
@@ -39,8 +39,8 @@ function AboutPage() {
         </h1>
         <p className="mt-2 text-lg text-muted">
           {lang === "bn"
-            ? "প্রতিষ্ঠিত ৬ সেপ্টেম্বর ২০১৯ · একটি শক্তিশালী ভবিষ্যৎ, একসাথে।"
-            : "Established 6 September 2019 · Building a better future, Together."}
+            ? "প্রতিষ্ঠিত ৬ সেপ্টেম্বর ২০১৯ · স্বাধীন প্রস্তুতকারক ও বৈশ্বিক সরাসরি আমদানিকারক।"
+            : "Established 6 September 2019 · Independent manufacturer & global direct importer."}
         </p>
       </header>
 
@@ -104,8 +104,8 @@ function AboutPage() {
           </h2>
           <p className="mt-2 text-sm text-muted">
             {lang === "bn"
-              ? "কাঁচামাল চীন, কোরিয়া, তাইওয়ান, ভারত, থাইল্যান্ড ও সিঙ্গাপুর থেকে।"
-              : "Raw materials sourced from China, Korea, Taiwan, India, Thailand and Singapore."}
+              ? "কাঁচামাল চীন, কোরিয়া, তাইওয়ান, ভারত, থাইল্যান্ড ও সিঙ্গাপুর থেকে সরাসরি আমদানি।"
+              : "Raw materials direct-imported from China, Korea, Taiwan, India, Thailand and Singapore."}
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             {sourcing.map((s) => (
