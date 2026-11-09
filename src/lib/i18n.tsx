@@ -24,13 +24,22 @@ const dict: Dict = {
   basket: { en: "RFQ basket", bn: "আরএফকিউ বাস্কেট" },
   addRfq: { en: "Add to RFQ", bn: "আরএফকিউতে যোগ" },
   added: { en: "Added", bn: "যোগ হয়েছে" },
-  sister: { en: "A sister concern of Filament Group", bn: "ফিলামেন্ট গ্রুপের একটি সিস্টার কনসার্ন" },
-  heroTitle: { en: "Construction chemicals built for Bangladesh’s climate.", bn: "বাংলাদেশের আবহাওয়ার জন্য তৈরি কনস্ট্রাকশন কেমিক্যাল।" },
-  heroSub: {
-    en: "Waterproofing, concrete admixtures and industrial floors. Blended in Dhamrai. Checked against BUET, CUET and BCSIR methods.",
-    bn: "ওয়াটারপ্রুফিং, কংক্রিট অ্যাডমিক্সচার ও ইন্ডাস্ট্রিয়াল ফ্লোর। ধামরাইয়ে ব্লেন্ড। BUET, CUET ও BCSIR পদ্ধতিতে যাচাই।",
+  sister: {
+    en: "Independent manufacturer & global direct importer",
+    bn: "স্বাধীন প্রস্তুতকারক ও বৈশ্বিক সরাসরি আমদানিকারক",
   },
-  slogan: { en: "For a better future. Your building safety first.", bn: "ভালো ভবিষ্যতের জন্য। আপনার ভবনের নিরাপত্তা আগে।" },
+  heroTitle: {
+    en: "Construction chemicals engineered for Bangladesh’s climate.",
+    bn: "বাংলাদেশের আবহাওয়ার জন্য প্রকৌশলকৃত কনস্ট্রাকশন কেমিক্যাল।",
+  },
+  heroSub: {
+    en: "Waterproofing, concrete admixtures and industrial floors for civil engineers, consultants and mega-projects. Blended in Dhamrai. Referenced against BUET, CUET and BCSIR methods.",
+    bn: "সিভিল ইঞ্জিনিয়ার, কনসালট্যান্ট ও মেগা-প্রকল্পের জন্য ওয়াটারপ্রুফিং, কংক্রিট অ্যাডমিক্সচার ও ইন্ডাস্ট্রিয়াল ফ্লোর। ধামরাইয়ে ব্লেন্ড। BUET, CUET ও BCSIR পদ্ধতিতে রেফারেন্সড।",
+  },
+  slogan: {
+    en: "Dose, TDS and lab sheet together — so site teams mix with confidence.",
+    bn: "ডোজ, টিডিএস ও ল্যাব শিট একসাথে — যাতে সাইট টিম আত্মবিশ্বাসে মিক্স করতে পারে।",
+  },
 };
 
 type Ctx = {

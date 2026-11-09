@@ -39,28 +39,28 @@ export function SiteChrome({ children }: { children: ReactNode }) {
       <div className="bg-ink text-paper text-sm">
         <div className="container-site flex flex-wrap items-center justify-between gap-2 py-2">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-paper/80">
-            <a className="inline-flex min-h-11 items-center gap-1.5 hover:text-paper" href="tel:+8801960198313">
+            <a className="inline-flex min-h-12 items-center gap-1.5 hover:text-paper" href="tel:+8801960198313">
               <Phone className="size-3.5" aria-hidden />
               +88 0196-0198313
             </a>
-            <a className="inline-flex min-h-11 items-center gap-1.5 hover:text-paper" href="mailto:oxilarbangladesh@gmail.com">
+            <a className="inline-flex min-h-12 items-center gap-1.5 hover:text-paper" href="mailto:oxilarbangladesh@gmail.com">
               <Mail className="size-3.5" aria-hidden />
               oxilarbangladesh@gmail.com
             </a>
             <span className="hidden lg:inline">{t("office")}</span>
             <span className="hidden xl:inline">{t("factory")}</span>
           </div>
-          <div className="inline-flex rounded-full bg-ink-soft p-1">
+          <div className="inline-flex rounded-full bg-ink-soft p-1" role="group" aria-label="Language">
             <button
               type="button"
-              className={cn("min-h-9 rounded-full px-3 text-xs font-semibold", lang === "en" ? "bg-brand text-paper" : "text-paper/70")}
+              className={cn("min-h-11 rounded-full px-3 text-xs font-semibold", lang === "en" ? "bg-brand text-paper" : "text-paper/70")}
               onClick={() => setLang("en")}
             >
               EN
             </button>
             <button
               type="button"
-              className={cn("min-h-9 rounded-full px-3 text-xs font-semibold", lang === "bn" ? "bg-brand text-paper" : "text-paper/70")}
+              className={cn("min-h-11 rounded-full px-3 text-xs font-semibold", lang === "bn" ? "bg-brand text-paper" : "text-paper/70")}
               onClick={() => setLang("bn")}
             >
               বাংলা
@@ -72,19 +72,26 @@ export function SiteChrome({ children }: { children: ReactNode }) {
       <header className="sticky top-0 z-40 border-b border-line/80 bg-card/80 backdrop-blur-md">
         <div className="container-site flex h-16 items-center gap-3 lg:h-[4.5rem]">
           <Link to="/" className="flex min-w-0 items-center gap-2">
-            <img src="/media/logo.jpg" alt="Oxilar Bangladesh" className="size-10 rounded-full object-cover ring-2 ring-brand-soft" />
+            <img
+              src="/media/logo.jpg"
+              alt="Oxilar Bangladesh"
+              width={40}
+              height={40}
+              className="size-10 rounded-full object-cover ring-2 ring-brand-soft"
+              decoding="async"
+            />
             <span className="leading-tight">
               <span className="block font-display text-base font-semibold text-ink">Oxilar</span>
               <span className="block text-xs font-medium tracking-wide text-brand">BANGLADESH</span>
             </span>
           </Link>
-          <nav className="ml-4 hidden items-center gap-0.5 lg:flex">
+          <nav className="ml-4 hidden items-center gap-0.5 lg:flex" aria-label="Primary">
             {nav.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
                 className={cn(
-                  "rounded-full px-2 py-2 text-sm font-medium text-ink-soft hover:bg-paper",
+                  "rounded-full px-2.5 py-2.5 text-sm font-medium text-ink-soft hover:bg-paper",
                   path === item.to && "bg-brand-soft text-brand-deep",
                 )}
               >
@@ -96,7 +103,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
             <button
               type="button"
               onClick={() => setRfq(true)}
-              className="hidden min-h-11 items-center gap-2 rounded-full bg-brand px-4 text-sm font-semibold text-paper hover:bg-brand-deep md:inline-flex"
+              className="hidden min-h-12 items-center gap-2 rounded-full bg-brand px-4 text-sm font-semibold text-paper hover:bg-brand-deep md:inline-flex"
             >
               <ClipboardList className="size-4" aria-hidden />
               {t("rfq")}
@@ -106,8 +113,9 @@ export function SiteChrome({ children }: { children: ReactNode }) {
             </button>
             <button
               type="button"
-              className="inline-flex size-11 items-center justify-center rounded-full border border-line lg:hidden"
+              className="inline-flex size-12 items-center justify-center rounded-full border border-line lg:hidden"
               aria-label="Menu"
+              aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
             >
               {open ? <X className="size-5" /> : <Menu className="size-5" />}
@@ -122,12 +130,19 @@ export function SiteChrome({ children }: { children: ReactNode }) {
                   {t(item.key)}
                 </Link>
               ))}
+              <button
+                type="button"
+                onClick={() => setRfq(true)}
+                className="min-h-12 rounded-lg px-3 py-3 text-left text-base font-semibold text-brand"
+              >
+                {t("rfq")} {count > 0 ? `(${count})` : ""}
+              </button>
             </div>
           </div>
         )}
       </header>
 
-      <main>{children}</main>
+      <main id="main">{children}</main>
 
       <footer className="mt-16 bg-ink text-paper">
         <div className="container-site grid gap-8 py-12 md:grid-cols-2 lg:grid-cols-4">
@@ -136,6 +151,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
             <p className="mt-2 max-w-md text-sm text-paper/75">
               {t("sister")}. {t("slogan")}
             </p>
+            <p className="mt-3 text-xs text-paper/55">Established 6 September 2019 · Kalampur plant, Dhamrai</p>
           </div>
           <div>
             <p className="text-sm font-semibold text-amber">{t("office")}</p>
@@ -144,14 +160,19 @@ export function SiteChrome({ children }: { children: ReactNode }) {
             <p className="mt-2 text-sm text-paper/75">Kalampur, Dhamrai, Dhaka</p>
           </div>
           <div className="text-sm">
-            <a className="block min-h-11 py-2 hover:text-brand-soft" href="tel:+8801960198313">+88 0196-0198313</a>
-            <a className="block min-h-11 py-2 hover:text-brand-soft" href="mailto:oxilarbangladesh@gmail.com">oxilarbangladesh@gmail.com</a>
+            <a className="block min-h-12 py-2 hover:text-brand-soft" href="tel:+8801960198313">+88 0196-0198313</a>
+            <a className="block min-h-12 py-2 hover:text-brand-soft" href="mailto:oxilarbangladesh@gmail.com">oxilarbangladesh@gmail.com</a>
             <p className="py-2 text-paper/70">www.oxilarbd.com</p>
+            <div className="mt-2 flex flex-wrap gap-2 text-xs">
+              <Link to="/products" className="rounded-full bg-white/10 px-3 py-1.5 hover:bg-white/15">{t("products")}</Link>
+              <Link to="/calculators" className="rounded-full bg-white/10 px-3 py-1.5 hover:bg-white/15">{t("calculators")}</Link>
+              <Link to="/resources" className="rounded-full bg-white/10 px-3 py-1.5 hover:bg-white/15">{t("resources")}</Link>
+            </div>
           </div>
         </div>
         <div className="border-t border-white/10">
           <div className="container-site flex flex-col gap-2 py-4 text-xs text-paper/60 sm:flex-row sm:justify-between">
-            <p>© {new Date().getFullYear()} Oxilar Bangladesh. Filament Group.</p>
+            <p>© {new Date().getFullYear()} Oxilar Bangladesh. Independent manufacturer.</p>
             <p>BUET · CUET · BCSIR referenced test programme</p>
           </div>
         </div>
