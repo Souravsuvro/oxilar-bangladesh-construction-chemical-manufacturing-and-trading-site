@@ -18,6 +18,10 @@ const nav = [
   { to: "/contact", key: "contact" as const },
 ];
 
+const WA_DEFAULT =
+  "https://wa.me/8801960198313?text=" +
+  encodeURIComponent("Hello Oxilar Bangladesh — I need product advice / RFQ for a project.");
+
 export function SiteChrome({ children }: { children: ReactNode }) {
   const { t, lang, setLang } = useI18n();
   const path = useRouterState({ select: (s) => s.location.pathname });
@@ -100,6 +104,15 @@ export function SiteChrome({ children }: { children: ReactNode }) {
             ))}
           </nav>
           <div className="ml-auto flex items-center gap-2">
+            <a
+              href={WA_DEFAULT}
+              target="_blank"
+              rel="noreferrer"
+              className="hidden min-h-12 items-center gap-1.5 rounded-full bg-sky px-3 text-sm font-semibold text-paper hover:opacity-95 lg:inline-flex"
+            >
+              <MessageCircle className="size-4" aria-hidden />
+              WhatsApp
+            </a>
             <button
               type="button"
               onClick={() => setRfq(true)}
@@ -130,6 +143,9 @@ export function SiteChrome({ children }: { children: ReactNode }) {
                   {t(item.key)}
                 </Link>
               ))}
+              <a href={WA_DEFAULT} target="_blank" rel="noreferrer" className="min-h-12 rounded-lg px-3 py-3 text-base font-semibold text-sky">
+                WhatsApp
+              </a>
               <button
                 type="button"
                 onClick={() => setRfq(true)}
@@ -152,6 +168,17 @@ export function SiteChrome({ children }: { children: ReactNode }) {
               {t("sister")}. {t("slogan")}
             </p>
             <p className="mt-3 text-xs text-paper/55">Established 6 September 2019 · Kalampur plant, Dhamrai</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <a href="tel:+8801960198313" className="inline-flex min-h-11 items-center rounded-full bg-brand px-4 text-sm font-semibold text-paper">
+                {lang === "bn" ? "কল করুন" : "Call now"}
+              </a>
+              <a href={WA_DEFAULT} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center rounded-full bg-sky px-4 text-sm font-semibold text-paper">
+                WhatsApp
+              </a>
+              <button type="button" onClick={() => setRfq(true)} className="inline-flex min-h-11 items-center rounded-full bg-white/10 px-4 text-sm font-semibold text-paper hover:bg-white/15">
+                {t("rfq")}
+              </button>
+            </div>
           </div>
           <div>
             <p className="text-sm font-semibold text-amber">{t("office")}</p>
@@ -167,6 +194,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
               <Link to="/products" className="rounded-full bg-white/10 px-3 py-1.5 hover:bg-white/15">{t("products")}</Link>
               <Link to="/calculators" className="rounded-full bg-white/10 px-3 py-1.5 hover:bg-white/15">{t("calculators")}</Link>
               <Link to="/resources" className="rounded-full bg-white/10 px-3 py-1.5 hover:bg-white/15">{t("resources")}</Link>
+              <Link to="/b2b-portal" className="rounded-full bg-white/10 px-3 py-1.5 hover:bg-white/15">{t("b2b")}</Link>
             </div>
           </div>
         </div>
@@ -185,7 +213,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
         </a>
         <a
           className="flex min-h-14 flex-col items-center justify-center gap-0.5 text-xs font-semibold text-ink"
-          href="https://wa.me/8801960198313"
+          href={WA_DEFAULT}
           target="_blank"
           rel="noreferrer"
         >

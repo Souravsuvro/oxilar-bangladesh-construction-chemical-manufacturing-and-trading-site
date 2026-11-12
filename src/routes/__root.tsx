@@ -5,10 +5,15 @@ import { LanguageProvider } from "@/lib/i18n";
 import { SiteChrome } from "@/components/layout/SiteChrome";
 import appCss from "../styles.css?url";
 
+const SITE = "https://www.oxilarbd.com";
 const TITLE =
   "Oxilar Bangladesh | Construction Chemical Manufacturer & Global Raw Material Importer";
 const DESC =
-  "Independent manufacturer of BUET-referenced construction chemicals in Bangladesh. Roof waterproofing, concrete admixtures, epoxy flooring and industrial systems. Factory: Kalampur, Dhamrai. Established 6 September 2019.";
+  "Independent manufacturer of BUET-referenced construction chemicals in Bangladesh. Roof waterproofing, concrete admixtures, epoxy flooring and industrial systems. Factory: Kalampur, Dhamrai. Established 6 September 2019. Request RFQ or WhatsApp for same-day project support.";
+
+/** Set VITE_GA_MEASUREMENT_ID in Vercel (e.g. G-XXXXXXXX). Placeholder IDs are ignored. */
+const GA_ID = (typeof import.meta !== "undefined" && import.meta.env?.VITE_GA_MEASUREMENT_ID) || "";
+const GA_ACTIVE = /^G-[A-Z0-9]+$/i.test(GA_ID) && !/X{4,}/i.test(GA_ID);
 
 export const Route = createRootRoute({
   head: () => ({
@@ -18,25 +23,32 @@ export const Route = createRootRoute({
       { title: TITLE },
       { name: "description", content: DESC },
       { name: "theme-color", content: "#059669" },
+      { name: "author", content: "Oxilar Bangladesh" },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
       {
         name: "keywords",
         content:
-          "Construction chemical company in Bangladesh, Best roof waterproofing chemical BD, Concrete admixture manufacturer Dhaka, Epoxy flooring supplier Bangladesh, BUET tested construction chemicals, Salinity damp proofing chemical, Oxilar Super-100 dosage per bag of cement, Oxilar Bangladesh Dhamrai",
+          "Construction chemical company in Bangladesh, Best roof waterproofing chemical BD, Concrete admixture manufacturer Dhaka, Epoxy flooring supplier Bangladesh, BUET tested construction chemicals, Salinity damp proofing chemical, Oxilar Super-100 dosage per bag of cement, Oxilar Bangladesh Dhamrai, RFQ construction chemicals BD",
       },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: "/og.jpg" },
+      { property: "og:url", content: SITE },
+      { property: "og:image", content: `${SITE}/og.jpg` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
       { property: "og:locale", content: "en_BD" },
+      { property: "og:locale:alternate", content: "bn_BD" },
       { property: "og:site_name", content: "Oxilar Bangladesh" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESC },
-      { name: "twitter:image", content: "/og.jpg" },
-      // Placeholder: replace with your Google Search Console verification token
+      { name: "twitter:image", content: `${SITE}/og.jpg` },
+      // Uncomment and set after Google Search Console verification:
       // { name: "google-site-verification", content: "YOUR_GSC_TOKEN" },
     ],
     links: [
+      { rel: "canonical", href: SITE },
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       { rel: "stylesheet", href: appCss },
       { rel: "manifest", href: "/__grok/manifest.webmanifest" },
@@ -49,19 +61,19 @@ export const Route = createRootRoute({
       },
       { rel: "sitemap", type: "application/xml", href: "/sitemap.xml" },
     ],
-    scripts: [
-      // GA4: set VITE_GA_MEASUREMENT_ID in Vercel env, or replace G-XXXXXXXX below
-      {
-        children: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXX',{send_page_view:true});`,
-      },
-    ],
+    scripts: GA_ACTIVE
+      ? [
+          {
+            children: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}',{send_page_view:true,anonymize_ip:true});`,
+          },
+        ]
+      : [],
   }),
   component: () => (
     <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
-        {/* GA4 loader — replace G-XXXXXXXX with your Measurement ID */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXX" />
+        {GA_ACTIVE && <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />}
       </head>
       <body>
         <PreviewHostBridge />
