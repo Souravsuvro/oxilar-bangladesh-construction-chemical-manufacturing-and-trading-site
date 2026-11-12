@@ -5,6 +5,10 @@ import { benefits, faqs, gallery, processSteps, products, sourcing, stats, stren
 import { useI18n } from "@/lib/i18n";
 import { CalculatorSuite } from "@/components/calculators/Calculators";
 
+const WA =
+  "https://wa.me/8801960198313?text=" +
+  encodeURIComponent("Hello Oxilar — I need dosage advice / RFQ for a project in Bangladesh.");
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -29,7 +33,7 @@ export const Route = createFileRoute("/")({
           "Independent manufacturer of BUET-referenced waterproofing, admixtures and epoxy systems. Factory Kalampur, Dhamrai. Global direct importer.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: "/og.jpg" },
+      { property: "og:image", content: "https://www.oxilarbd.com/og.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
@@ -40,7 +44,7 @@ const schema = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": ["Organization", "LocalBusiness"],
+      "@type": ["Organization", "LocalBusiness", "Manufacturer"],
       name: "Oxilar Bangladesh",
       url: "https://www.oxilarbd.com",
       email: "oxilarbangladesh@gmail.com",
@@ -54,10 +58,17 @@ const schema = {
         addressLocality: "Dhaka",
         addressCountry: "BD",
       },
-      areaServed: {
-        "@type": "Country",
-        name: "Bangladesh",
-      },
+      areaServed: { "@type": "Country", name: "Bangladesh" },
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          telephone: "+8801960198313",
+          contactType: "sales",
+          areaServed: "BD",
+          availableLanguage: ["en", "bn"],
+        },
+      ],
+      sameAs: ["https://www.oxilarbd.com"],
     },
     {
       "@type": "FAQPage",
@@ -98,7 +109,7 @@ function Home() {
               <a href="tel:+8801960198313" className="inline-flex min-h-12 items-center rounded-full bg-white/10 px-4 font-semibold text-paper hover:bg-white/15">
                 +88 0196-0198313
               </a>
-              <a href="https://wa.me/8801960198313" target="_blank" rel="noreferrer" className="inline-flex min-h-12 items-center rounded-full bg-sky px-4 font-semibold text-paper">
+              <a href={WA} target="_blank" rel="noreferrer" className="inline-flex min-h-12 items-center rounded-full bg-sky px-4 font-semibold text-paper">
                 WhatsApp
               </a>
             </div>
@@ -111,10 +122,10 @@ function Home() {
           </div>
           <img
             src="/media/pail.jpg"
-            alt="Oxilar Super-100 pail"
+            alt="Oxilar Super-100 construction chemical pail"
             width={800}
             height={640}
-            className="aspect-[4/5] w-full rounded-xl object-cover sm:aspect-[5/4]"
+            className="aspect-[4/5] w-full rounded-xl object-cover object-[center_20%] sm:aspect-[5/4]"
             decoding="async"
             fetchPriority="high"
           />
@@ -129,6 +140,27 @@ function Home() {
               <p className="mt-1 text-sm text-muted">{tx(s.label)}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="border-b border-line bg-mist/50" aria-label="Project support">
+        <div className="container-site flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm font-medium text-ink">
+            {lang === "bn"
+              ? "প্রকল্পের ডোজ, টিডিএস বা ড্রাম সাপ্লাই লাগবে? আজই কল বা হোয়াটসঅ্যাপ করুন।"
+              : "Need dosage, TDS or drum supply for a live site? Call or WhatsApp today."}
+          </p>
+          <div className="flex flex-wrap gap-2">
+            <a href="tel:+8801960198313" className="inline-flex min-h-11 items-center rounded-full bg-brand px-4 text-sm font-semibold text-paper">
+              {lang === "bn" ? "কল" : "Call"}
+            </a>
+            <a href={WA} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center rounded-full bg-sky px-4 text-sm font-semibold text-paper">
+              WhatsApp
+            </a>
+            <Link to="/calculators" className="inline-flex min-h-11 items-center rounded-full bg-ink px-4 text-sm font-semibold text-paper">
+              {lang === "bn" ? "ক্যালকুলেটর" : "Calculator"}
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -237,7 +269,7 @@ function Home() {
         <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {shown.slice(0, 6).map((p) => (
             <Link key={p.slug} to="/products/$slug" params={{ slug: p.slug }} className="overflow-hidden rounded-xl bg-card ring-1 ring-line">
-              <img src={p.image} alt="" className="h-44 w-full object-cover" loading="lazy" decoding="async" />
+              <img src={p.image} alt={tx(p.name)} className="h-44 w-full object-cover" loading="lazy" decoding="async" />
               <div className="p-4">
                 <p className="text-xs font-semibold text-sky">{p.sku}</p>
                 <h3 className="text-lg font-semibold">{tx(p.name)}</h3>
