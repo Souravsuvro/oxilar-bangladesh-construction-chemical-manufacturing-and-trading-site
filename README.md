@@ -62,7 +62,6 @@ This project currently ships a **committed prebuild** under `.vercel/output`.
 
 1. Codespace or local machine with repo access:
    ```bash
-   rm -rf .vercel/output node_modules
    npm install
    npm run build
    npm run preview   # verify Filament-free copy + enhanced home sections
