@@ -7,10 +7,18 @@ import { useState } from "react";
 export const Route = createFileRoute("/products/$slug")({
   head: ({ params }) => {
     const p = products.find((x) => x.slug === params.slug);
+    const title = p ? `${p.name.en} | Oxilar Bangladesh` : "Product | Oxilar Bangladesh";
+    const desc =
+      p?.short.en ??
+      "Oxilar Bangladesh construction chemical — dosage, packs and RFQ for Bangladesh projects.";
     return {
       meta: [
-        { title: p ? `${p.name.en} | Oxilar Bangladesh` : "Product | Oxilar Bangladesh" },
-        { name: "description", content: p?.short.en ?? "Oxilar product" },
+        { title },
+        { name: "description", content: desc },
+        { property: "og:title", content: title },
+        { property: "og:description", content: desc },
+        { property: "og:type", content: "product" },
+        { property: "og:image", content: p ? `https://www.oxilarbd.com${p.image}` : "https://www.oxilarbd.com/og.jpg" },
       ],
     };
   },
@@ -22,12 +30,15 @@ function ProductDetail() {
   const p = products.find((x) => x.slug === slug);
   const { tx, lang } = useI18n();
   const add = useRfq((s) => s.add);
+  const setOpen = useRfq((s) => s.setOpen);
   const [pack, setPack] = useState(p?.packs[0] ?? "20L");
   if (!p) {
     return (
       <div className="container-site py-16">
         <p>{lang === "bn" ? "পণ্য পাওয়া যায়নি।" : "Product not found."}</p>
-        <Link to="/products" className="mt-4 inline-block text-brand">←</Link>
+        <Link to="/products" className="mt-4 inline-block text-brand">
+          ← {lang === "bn" ? "পণ্য তালিকা" : "Products"}
+        </Link>
       </div>
     );
   }
@@ -37,54 +48,124 @@ function ProductDetail() {
     "@type": "Product",
     name: p.name.en,
     sku: p.sku,
-    brand: "Oxilar Bangladesh",
+    image: [`https://www.oxilarbd.com${p.image}`],
     description: p.short.en,
+    brand: {
+      "@type": "Brand",
+      name: "Oxilar Bangladesh",
+    },
+    manufacturer: {
+      "@type": "Organization",
+      name: "Oxilar Bangladesh",
+      url: "https://www.oxilarbd.com",
+    },
+    category: p.category,
+    offers: {
+      "@type": "Offer",
+      url: `https://www.oxilarbd.com/products/${p.slug}`,
+      availability: "https://schema.org/InStock",
+      priceCurrency: "BDT",
+      priceValidUntil: "2027-12-31",
+      seller: {
+        "@type": "Organization",
+        name: "Oxilar Bangladesh",
+      },
+      // B2B RFQ pricing — no public list price
+      description: "Request quotation (RFQ). Pack sizes: " + p.packs.join(", "),
+    },
+    additionalProperty: p.specs.slice(0, 6).map((s) => ({
+      "@type": "PropertyValue",
+      name: s.label.en,
+      value: s.value.en,
+    })),
   };
+
   return (
     <article className="container-site py-10">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      <Link to="/products" className="text-sm font-semibold text-brand">{lang === "bn" ? "সব পণ্য" : "All products"}</Link>
+      <Link to="/products" className="text-sm font-semibold text-brand">
+        {lang === "bn" ? "সব পণ্য" : "All products"}
+      </Link>
       <div className="mt-4 grid gap-8 lg:grid-cols-2">
-        <img src={p.image} alt={p.name.en} className="w-full rounded-xl object-cover" />
+        <img
+          src={p.image}
+          alt={tx(p.name)}
+          className="w-full rounded-xl object-cover object-[center_25%]"
+          width={800}
+          height={600}
+        />
         <div>
           <p className="text-sm font-semibold text-sky">{p.sku}</p>
           <h1 className="mt-1 text-4xl font-semibold">{tx(p.name)}</h1>
           <p className="mt-3 text-muted">{tx(p.short)}</p>
           <div className="mt-4 flex flex-wrap gap-2">
             {p.packs.map((pk) => (
-              <button key={pk} type="button" onClick={() => setPack(pk)} className={`min-h-11 rounded-full px-4 text-sm font-semibold ${pack === pk ? "bg-ink text-paper" : "bg-card ring-1 ring-line"}`}>
+              <button
+                key={pk}
+                type="button"
+                onClick={() => setPack(pk)}
+                className={`min-h-11 rounded-full px-4 text-sm font-semibold ${pack === pk ? "bg-ink text-paper" : "bg-card ring-1 ring-line"}`}
+              >
                 {pk}
               </button>
             ))}
           </div>
-          <button
-            type="button"
-            className="mt-4 min-h-12 rounded-full bg-brand px-6 font-semibold text-paper"
-            onClick={() => add({ sku: p.sku, name: p.name.en, pack, note: "" })}
-          >
-            {lang === "bn" ? "আরএফকিউতে যোগ করুন" : "Add to RFQ"}
-          </button>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <button
+              type="button"
+              className="min-h-12 rounded-full bg-brand px-6 font-semibold text-paper"
+              onClick={() => {
+                add({ sku: p.sku, name: p.name.en, pack, note: "" });
+                setOpen(true);
+              }}
+            >
+              {lang === "bn" ? "আরএফকিউতে যোগ করুন" : "Add to RFQ"}
+            </button>
+            <a
+              href={`https://wa.me/8801960198313?text=${encodeURIComponent(`Hello Oxilar — RFQ interest: ${p.name.en} (${p.sku}), pack ${pack}`)}`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex min-h-12 items-center rounded-full bg-sky px-6 font-semibold text-paper"
+            >
+              WhatsApp
+            </a>
+          </div>
           <h2 className="mt-8 text-lg font-semibold">{lang === "bn" ? "ডোজ" : "Dosage"}</h2>
           <p className="mt-1 text-sm">{tx(p.dosage)}</p>
+          <p className="mt-4 text-sm">
+            <Link to="/calculators" className="font-semibold text-brand hover:underline">
+              {lang === "bn" ? "সাইট ক্যালকুলেটর খুলুন →" : "Open site calculator →"}
+            </Link>
+            {" · "}
+            <Link to="/resources" className="font-semibold text-brand hover:underline">
+              TDS / Lab
+            </Link>
+          </p>
         </div>
       </div>
       <div className="mt-10 grid gap-6 lg:grid-cols-3">
         <section>
           <h2 className="font-semibold">{lang === "bn" ? "ব্যবহার" : "Applications"}</h2>
           <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-muted">
-            {p.applications.map((a) => <li key={a.en}>{tx(a)}</li>)}
+            {p.applications.map((a) => (
+              <li key={a.en}>{tx(a)}</li>
+            ))}
           </ul>
         </section>
         <section>
           <h2 className="font-semibold">{lang === "bn" ? "প্রয়োগ" : "Method"}</h2>
           <ol className="mt-2 list-decimal space-y-2 pl-5 text-sm text-muted">
-            {p.method.map((a) => <li key={a.en}>{tx(a)}</li>)}
+            {p.method.map((a) => (
+              <li key={a.en}>{tx(a)}</li>
+            ))}
           </ol>
         </section>
         <section>
           <h2 className="font-semibold">{lang === "bn" ? "সতর্কতা" : "Safety"}</h2>
           <ul className="mt-2 space-y-2 text-sm text-muted">
-            {p.safety.map((a) => <li key={a.en}>{tx(a)}</li>)}
+            {p.safety.map((a) => (
+              <li key={a.en}>{tx(a)}</li>
+            ))}
           </ul>
           <dl className="mt-4 space-y-2">
             {p.specs.map((s) => (
