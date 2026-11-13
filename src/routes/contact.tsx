@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { useI18n } from "@/lib/i18n";
+import { leadsConfigured, sendLead, trackLead } from "@/lib/leads";
 
 const WA =
   "https://wa.me/8801960198313?text=" +
@@ -24,21 +25,37 @@ function Page() {
   const { lang } = useI18n();
   const bn = lang === "bn";
   const [ok, setOk] = useState(false);
-  const submit = (e: FormEvent<HTMLFormElement>) => {
+  const [emailed, setEmailed] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState("");
+
+  const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setBusy(true);
+    setErr("");
     const fd = new FormData(e.currentTarget);
-    const row = Object.fromEntries(fd.entries());
-    const prev = JSON.parse(localStorage.getItem("oxilar-contact") || "[]") as unknown[];
-    localStorage.setItem("oxilar-contact", JSON.stringify([row, ...prev].slice(0, 30)));
-    setOk(true);
-    try {
-      const g = (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag;
-      g?.("event", "generate_lead", { method: "contact_form" });
-    } catch {
-      /* no-op */
+    const name = String(fd.get("name") || "");
+    const phone = String(fd.get("phone") || "");
+    const topic = String(fd.get("topic") || "");
+    const detail = String(fd.get("detail") || "");
+    const result = await sendLead({
+      type: "contact",
+      name,
+      phone,
+      topic,
+      detail,
+      at: new Date().toISOString(),
+    });
+    setBusy(false);
+    if (!result.ok && leadsConfigured()) {
+      setErr(bn ? "ইমেইল পাঠানো যায়নি — হোয়াটসঅ্যাপ বা কল ব্যবহার করুন।" : "Could not reach inbox — use WhatsApp or call.");
     }
+    setEmailed(result.emailed);
+    setOk(true);
+    trackLead("contact_form", { emailed: result.emailed });
     e.currentTarget.reset();
   };
+
   const q = encodeURIComponent("31/1 Babar Road Mohammadpur Dhaka");
   const q2 = encodeURIComponent("Kalampur Dhamrai Dhaka");
   return (
@@ -96,8 +113,21 @@ function Page() {
             </select>
           </label>
           <label className="mt-3 block text-sm font-medium">{bn ? "বিবরণ" : "Detail"}<textarea name="detail" required rows={4} className="mt-1 w-full rounded-md border border-line px-3 py-2 text-ink" /></label>
-          <button className="mt-4 min-h-12 rounded-full bg-brand px-6 font-semibold text-paper" type="submit">{bn ? "পাঠান" : "Send"}</button>
-          {ok && <p className="mt-3 text-sm text-brand-deep">{bn ? "বার্তা এই ডিভাইসে আছে। জরুরি হলে কল বা হোয়াটসঅ্যাপ করুন।" : "Message stored on this device. Call or WhatsApp if urgent."}</p>}
+          <button disabled={busy} className="mt-4 min-h-12 rounded-full bg-brand px-6 font-semibold text-paper disabled:opacity-50" type="submit">
+            {busy ? (bn ? "পাঠানো হচ্ছে…" : "Sending…") : bn ? "পাঠান" : "Send"}
+          </button>
+          {ok && (
+            <p className="mt-3 text-sm text-brand-deep">
+              {emailed
+                ? bn
+                  ? "বার্তা ইনবক্সে পাঠানো হয়েছে। জরুরি হলে কল করুন।"
+                  : "Message sent to our inbox. Call if urgent."
+                : bn
+                  ? "বার্তা এই ডিভাইসে সংরক্ষিত। ইনবক্স সংযোগ না থাকলে হোয়াটসঅ্যাপ বা কল ব্যবহার করুন।"
+                  : "Saved on this device. If inbox is not configured yet, use WhatsApp or call."}
+            </p>
+          )}
+          {err && <p className="mt-2 text-sm text-amber">{err}</p>}
         </form>
       </div>
     </div>

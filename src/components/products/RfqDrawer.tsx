@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { useRfq } from "@/lib/rfq-store";
 import { useI18n } from "@/lib/i18n";
+import { sendLead, trackLead } from "@/lib/leads";
 
 function buildWhatsAppUrl(name: string, phone: string, lines: { name: string; sku: string; pack: string; qty: number; note?: string }[]) {
   const list = lines
@@ -21,27 +22,31 @@ export function RfqDrawer() {
   const { lang } = useI18n();
   const bn = lang === "bn";
   const [sent, setSent] = useState(false);
+  const [emailed, setEmailed] = useState(false);
+  const [busy, setBusy] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [waUrl, setWaUrl] = useState("");
 
   if (!open) return null;
 
-  const submit = (e: FormEvent) => {
+  const submit = async (e: FormEvent) => {
     e.preventDefault();
-    const payload = { name, phone, lines, at: new Date().toISOString() };
-    const prev = JSON.parse(localStorage.getItem("oxilar-rfq-sent") || "[]") as unknown[];
-    localStorage.setItem("oxilar-rfq-sent", JSON.stringify([payload, ...prev].slice(0, 20)));
-    setWaUrl(buildWhatsAppUrl(name, phone, lines));
+    setBusy(true);
+    const snapshot = [...lines];
+    const result = await sendLead({
+      type: "rfq",
+      name,
+      phone,
+      lines: snapshot,
+      at: new Date().toISOString(),
+    });
+    setBusy(false);
+    setWaUrl(buildWhatsAppUrl(name, phone, snapshot));
+    setEmailed(result.emailed);
     setSent(true);
     clear();
-    // Conversion signal for GA4 when configured
-    try {
-      const g = (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag;
-      g?.("event", "generate_lead", { method: "rfq_basket", item_count: lines.length });
-    } catch {
-      /* no-op */
-    }
+    trackLead("rfq_basket", { item_count: snapshot.length, emailed: result.emailed });
   };
 
   return (
@@ -84,8 +89,16 @@ export function RfqDrawer() {
           ))}
           {sent && (
             <div className="space-y-3 rounded-lg bg-brand-soft p-4 text-sm text-brand-deep">
-              <p className="font-semibold">{bn ? "আরএফকিউ সংরক্ষিত হয়েছে" : "RFQ saved on this device"}</p>
-              <p>{bn ? "দ্রুত সাড়া পেতে হোয়াটসঅ্যাপে পাঠান — লাইনগুলো আগে থেকে ভরা থাকবে।" : "Send on WhatsApp for a faster reply — your lines will be pre-filled."}</p>
+              <p className="font-semibold">
+                {emailed
+                  ? bn
+                    ? "আরএফকিউ ইনবক্সে পাঠানো হয়েছে"
+                    : "RFQ sent to our inbox"
+                  : bn
+                    ? "আরএফকিউ সংরক্ষিত হয়েছে"
+                    : "RFQ saved on this device"}
+              </p>
+              <p>{bn ? "দ্রুত সাড়া পেতে হোয়াটসঅ্যাপেও পাঠান — লাইনগুলো আগে থেকে ভরা থাকবে।" : "Also send on WhatsApp for a faster reply — lines stay pre-filled."}</p>
               {waUrl && (
                 <a
                   href={waUrl}
@@ -106,8 +119,8 @@ export function RfqDrawer() {
           <form onSubmit={submit} className="space-y-2 border-t border-line p-4">
             <input required value={name} onChange={(e) => setName(e.target.value)} placeholder={bn ? "নাম / প্রকল্প" : "Name / project"} className="h-12 w-full rounded-md border border-line px-3 text-ink" />
             <input required value={phone} onChange={(e) => setPhone(e.target.value)} placeholder={bn ? "মোবাইল নম্বর" : "Mobile number"} className="h-12 w-full rounded-md border border-line px-3 text-ink" inputMode="tel" />
-            <button disabled={lines.length === 0} className="h-12 w-full rounded-full bg-brand font-semibold text-paper disabled:opacity-40" type="submit">
-              {bn ? "আরএফকিউ পাঠান" : "Send RFQ"}
+            <button disabled={lines.length === 0 || busy} className="h-12 w-full rounded-full bg-brand font-semibold text-paper disabled:opacity-40" type="submit">
+              {busy ? (bn ? "পাঠানো হচ্ছে…" : "Sending…") : bn ? "আরএফকিউ পাঠান" : "Send RFQ"}
             </button>
             <p className="text-center text-xs text-muted">{bn ? "পাঠানোর পর হোয়াটসঅ্যাপ অপশন পাবেন" : "After send you can forward the same list on WhatsApp"}</p>
           </form>
