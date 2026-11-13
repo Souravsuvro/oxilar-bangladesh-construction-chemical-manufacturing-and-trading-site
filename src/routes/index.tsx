@@ -1,9 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { benefits, faqs, gallery, processSteps, products, sourcing, stats, strengthSeries } from "@/data/catalog";
+import { lazy, Suspense, useEffect, useState } from "react";
+import { benefits, faqs, gallery, processSteps, products, sourcing, stats } from "@/data/catalog";
 import { useI18n } from "@/lib/i18n";
 import { CalculatorSuite } from "@/components/calculators/Calculators";
+
+const StrengthChart = lazy(() =>
+  import("@/components/home/StrengthChart").then((m) => ({ default: m.StrengthChart })),
+);
 
 const WA =
   "https://wa.me/8801960198313?text=" +
@@ -121,11 +124,11 @@ function Home() {
             </ul>
           </div>
           <img
-            src="/media/pail.jpg"
-            alt="Oxilar Super-100 construction chemical pail"
+            src="/media/stack.jpg"
+            alt="Oxilar construction chemical packs stacked for site and plant delivery"
             width={800}
             height={640}
-            className="aspect-[4/5] w-full rounded-xl object-cover object-[center_20%] sm:aspect-[5/4]"
+            className="aspect-[4/5] w-full rounded-xl object-cover object-center sm:aspect-[5/4]"
             decoding="async"
             fetchPriority="high"
           />
@@ -306,15 +309,9 @@ function Home() {
         </p>
         <div className="mt-6 h-72 rounded-xl bg-card p-3 ring-1 ring-line">
           {chart && (
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={strengthSeries}>
-                <XAxis dataKey="day" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="control" fill="var(--color-muted)" name="Control" />
-                <Bar dataKey="dosed" fill="var(--color-brand)" name="Dosed" />
-              </BarChart>
-            </ResponsiveContainer>
+            <Suspense fallback={<div className="flex h-full items-center justify-center text-sm text-muted">Loading chart…</div>}>
+              <StrengthChart />
+            </Suspense>
           )}
         </div>
         <p className="mt-3 text-sm">
