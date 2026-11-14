@@ -43,8 +43,8 @@ function ProductsPage() {
       <h1 className="text-4xl font-semibold">{lang === "bn" ? "পণ্য ও প্যাক" : "Products and packs"}</h1>
       <p className="mt-2 max-w-2xl text-muted">
         {lang === "bn"
-          ? "ক্যাটাগরি, সাইজ ও নাম দিয়ে ছাঁকুন। প্রতিটি কার্ড থেকে বিস্তারিত ও আরএফকিউ।"
-          : "Filter by category, pack size and name. Open details or add a line to the RFQ basket."}
+          ? "ক্যাটাগরি, সাইজ ও নাম দিয়ে ছাঁকুন। কার্ডে ক্লিক করে বিস্তারিত পৃষ্ঠা খুলুন।"
+          : "Filter by category, pack size and name. Open any card for the full product page."}
       </p>
       <div className="mt-6 grid gap-6 lg:grid-cols-[240px_1fr]">
         <aside className="space-y-2 lg:sticky lg:top-24 lg:self-start">
@@ -81,22 +81,37 @@ function ProductsPage() {
             ))}
           </div>
         </aside>
+
         <div className="grid gap-4 md:grid-cols-2">
           {list.map((p) => (
-            <article key={p.slug} className="flex flex-col overflow-hidden rounded-xl bg-card ring-1 ring-line">
-              <img src={p.image} alt={tx(p.name)} className="h-44 w-full object-cover object-[center_30%]" loading="lazy" />
+            <article
+              key={p.slug}
+              className="flex flex-col overflow-hidden rounded-xl bg-card ring-1 ring-line transition hover:ring-brand"
+            >
+              <Link to="/products/$slug" params={{ slug: p.slug }} className="block">
+                <img
+                  src={p.image}
+                  alt={tx(p.name)}
+                  className="h-44 w-full object-cover object-[center_30%]"
+                  loading="lazy"
+                />
+              </Link>
               <div className="flex flex-1 flex-col p-4">
                 <p className="text-xs font-semibold text-sky">{p.sku}</p>
-                <h2 className="text-xl font-semibold">{tx(p.name)}</h2>
+                <Link to="/products/$slug" params={{ slug: p.slug }} className="group">
+                  <h2 className="text-xl font-semibold group-hover:text-brand">{tx(p.name)}</h2>
+                </Link>
                 <p className="mt-1 flex-1 text-sm text-muted">{tx(p.short)}</p>
-                <p className="mt-2 text-xs text-ink-soft">{p.packs.map((pk) => tx(packLabels[pk])).join(" · ")}</p>
+                <p className="mt-2 text-xs text-ink-soft">
+                  {p.packs.map((pk) => tx(packLabels[pk])).join(" · ")}
+                </p>
                 <div className="mt-4 flex gap-2">
                   <Link
                     to="/products/$slug"
                     params={{ slug: p.slug }}
-                    className="inline-flex min-h-11 flex-1 items-center justify-center rounded-full bg-paper px-3 text-sm font-semibold ring-1 ring-line"
+                    className="inline-flex min-h-11 flex-1 items-center justify-center rounded-full bg-ink px-3 text-sm font-semibold text-paper"
                   >
-                    {lang === "bn" ? "বিস্তারিত" : "Details"}
+                    {lang === "bn" ? "বিস্তারিত পৃষ্ঠা" : "Product page"}
                   </Link>
                   <button
                     type="button"
@@ -112,9 +127,31 @@ function ProductsPage() {
               </div>
             </article>
           ))}
-          {list.length === 0 && <p className="text-muted">{lang === "bn" ? "কোনো মিল নেই।" : "No matches."}</p>}
+          {list.length === 0 && (
+            <p className="text-muted">{lang === "bn" ? "কোনো মিল নেই।" : "No matches."}</p>
+          )}
         </div>
       </div>
+
+      <section className="mt-12 rounded-xl bg-mist/50 p-6 ring-1 ring-line">
+        <h2 className="text-lg font-semibold">
+          {lang === "bn" ? "সব পণ্যের লিংক" : "All product pages"}
+        </h2>
+        <ul className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {products.map((p) => (
+            <li key={p.slug}>
+              <Link
+                to="/products/$slug"
+                params={{ slug: p.slug }}
+                className="text-sm font-semibold text-brand hover:underline"
+              >
+                {tx(p.name)}
+                <span className="ml-2 font-normal text-muted">{p.sku}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   );
 }
