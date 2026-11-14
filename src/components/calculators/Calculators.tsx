@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { useI18n } from "@/lib/i18n";
 import { useRfq } from "@/lib/rfq-store";
 import { cn } from "@/lib/utils";
+import { LiveRegion } from "@/components/a11y/LiveRegion";
 
 type Mode = "volume" | "bags" | "epoxy";
 
@@ -45,6 +46,7 @@ export function CalculatorSuite() {
       const litres = m3 * dose;
       return {
         litres,
+        summary: `Admixture ${litres.toFixed(1)} litres for ${m3.toFixed(2)} cubic metres`,
         lines: [
           `Length ${L} m × width ${W} m × thickness ${T} mm`,
           `Concrete volume ${m3.toFixed(2)} m³`,
@@ -58,6 +60,7 @@ export function CalculatorSuite() {
       const litres = (bags * ml) / 1000;
       return {
         litres,
+        summary: `${litres.toFixed(2)} litres for ${bags} bags at ${ml} ml per bag`,
         lines: [
           `${bags} bags × ${ml} ml`,
           `Total ${(bags * ml).toLocaleString()} ml`,
@@ -70,6 +73,7 @@ export function CalculatorSuite() {
     const litres = m2 * (micron / 400) * 0.4;
     return {
       litres,
+      summary: `Coating ${litres.toFixed(1)} litres for ${area} square feet at ${micron} micron`,
       lines: [
         `${area} ft² = ${m2.toFixed(1)} m²`,
         `Film ${micron} micron (basis 0.40 L/m² at 400 micron)`,
@@ -80,10 +84,26 @@ export function CalculatorSuite() {
   }, [mode, L, W, T, dose, bags, ml, area, micron]);
 
   const label = lang === "bn";
+  const modeLabel =
+    mode === "volume"
+      ? label
+        ? "স্ল্যাব ভলিউম"
+        : "Slab volume"
+      : mode === "bags"
+        ? label
+          ? "সিমেন্ট ব্যাগ"
+          : "Cement bags"
+        : label
+          ? "ইপক্সি কভারেজ"
+          : "Epoxy coverage";
 
   return (
     <div className="grid gap-6 text-ink lg:grid-cols-[220px_1fr]">
-      <div className="flex gap-2 overflow-auto lg:flex-col">
+      <LiveRegion
+        message={`${modeLabel}. ${result.summary}.`}
+        politeness="polite"
+      />
+      <div className="flex gap-2 overflow-auto lg:flex-col" role="tablist" aria-label={label ? "ক্যালকুলেটর মোড" : "Calculator mode"}>
         {(
           [
             ["volume", label ? "স্ল্যাব ভলিউম" : "Slab volume"],
@@ -94,6 +114,8 @@ export function CalculatorSuite() {
           <button
             key={id}
             type="button"
+            role="tab"
+            aria-selected={mode === id}
             onClick={() => setMode(id)}
             className={cn(
               "min-h-12 shrink-0 rounded-full px-4 text-sm font-semibold lg:rounded-xl lg:text-left",
@@ -127,9 +149,17 @@ export function CalculatorSuite() {
             </>
           )}
         </div>
-        <ul className="mt-6 space-y-2 rounded-lg bg-ink p-4 text-paper">
+        <ul
+          className="mt-6 space-y-2 rounded-lg bg-ink p-4 text-paper"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+          aria-label={label ? "হিসাবের ফল" : "Calculation result"}
+        >
           {result.lines.map((line) => (
-            <li key={line} className="text-sm sm:text-base">{line}</li>
+            <li key={line} className="text-sm sm:text-base">
+              {line}
+            </li>
           ))}
         </ul>
         <div className="mt-4 flex flex-col gap-2 sm:flex-row">
