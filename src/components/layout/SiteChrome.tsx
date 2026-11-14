@@ -1,7 +1,6 @@
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Menu, Phone, X, MessageCircle, ClipboardList, Mail } from "lucide-react";
-import { useState } from "react";
+import { ArrowUp, Menu, Phone, X, MessageCircle, ClipboardList, Mail, Check } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { useRfq } from "@/lib/rfq-store";
 import { RfqDrawer } from "@/components/products/RfqDrawer";
@@ -22,24 +21,77 @@ const WA_DEFAULT =
   "https://wa.me/8801960198313?text=" +
   encodeURIComponent("Hello Oxilar Bangladesh — I need product advice / RFQ for a project.");
 
+function navActive(path: string, to: string) {
+  if (to === "/") return path === "/";
+  return path === to || path.startsWith(`${to}/`);
+}
+
 export function SiteChrome({ children }: { children: ReactNode }) {
   const { t, lang, setLang } = useI18n();
   const path = useRouterState({ select: (s) => s.location.pathname });
   const [open, setOpen] = useState(false);
+  const [showTop, setShowTop] = useState(false);
+  const [toast, setToast] = useState<string | null>(null);
   const lines = useRfq((s) => s.lines);
   const setRfq = useRfq((s) => s.setOpen);
   const count = lines.reduce((n, l) => n + l.qty, 0);
+  const [prevCount, setPrevCount] = useState(count);
 
   useEffect(() => {
     void useRfq.persist.rehydrate();
   }, []);
 
+  // Close mobile menu + scroll to top on navigation
   useEffect(() => {
     setOpen(false);
+    window.scrollTo({ top: 0, behavior: "instant" in window ? ("instant" as ScrollBehavior) : "auto" });
   }, [path]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  // Escape closes mobile menu
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  // Back-to-top visibility
+  useEffect(() => {
+    const onScroll = () => setShowTop(window.scrollY > 480);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // RFQ add toast
+  useEffect(() => {
+    if (count > prevCount) {
+      setToast(lang === "bn" ? "আরএফকিউ বাস্কেটে যোগ হয়েছে" : "Added to RFQ basket");
+      const id = window.setTimeout(() => setToast(null), 2800);
+      setPrevCount(count);
+      return () => window.clearTimeout(id);
+    }
+    setPrevCount(count);
+  }, [count, prevCount, lang]);
 
   return (
     <div className="min-h-screen pb-24 md:pb-0">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-brand focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-paper"
+      >
+        {lang === "bn" ? "মূল কন্টেন্টে যান" : "Skip to main content"}
+      </a>
+
       <div className="bg-ink text-paper text-sm">
         <div className="container-site flex flex-wrap items-center justify-between gap-2 py-2">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-paper/80">
@@ -59,6 +111,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
               type="button"
               className={cn("min-h-11 rounded-full px-3 text-xs font-semibold", lang === "en" ? "bg-brand text-paper" : "text-paper/70")}
               onClick={() => setLang("en")}
+              aria-pressed={lang === "en"}
             >
               EN
             </button>
@@ -66,6 +119,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
               type="button"
               className={cn("min-h-11 rounded-full px-3 text-xs font-semibold", lang === "bn" ? "bg-brand text-paper" : "text-paper/70")}
               onClick={() => setLang("bn")}
+              aria-pressed={lang === "bn"}
             >
               বাংলা
             </button>
@@ -75,10 +129,10 @@ export function SiteChrome({ children }: { children: ReactNode }) {
 
       <header className="sticky top-0 z-40 border-b border-line/80 bg-card/80 backdrop-blur-md">
         <div className="container-site flex h-16 items-center gap-3 lg:h-[4.5rem]">
-          <Link to="/" className="flex min-w-0 items-center gap-2">
+          <Link to="/" className="flex min-w-0 items-center gap-2" aria-label="Oxilar Bangladesh home">
             <img
               src="/media/logo.jpg"
-              alt="Oxilar Bangladesh"
+              alt=""
               width={40}
               height={40}
               className="size-10 rounded-full object-cover ring-2 ring-brand-soft"
@@ -96,8 +150,9 @@ export function SiteChrome({ children }: { children: ReactNode }) {
                 to={item.to}
                 className={cn(
                   "rounded-full px-2.5 py-2.5 text-sm font-medium text-ink-soft hover:bg-paper",
-                  path === item.to && "bg-brand-soft text-brand-deep",
+                  navActive(path, item.to) && "bg-brand-soft text-brand-deep",
                 )}
+                aria-current={navActive(path, item.to) ? "page" : undefined}
               >
                 {t(item.key)}
               </Link>
@@ -116,7 +171,8 @@ export function SiteChrome({ children }: { children: ReactNode }) {
             <button
               type="button"
               onClick={() => setRfq(true)}
-              className="hidden min-h-12 items-center gap-2 rounded-full bg-brand px-4 text-sm font-semibold text-paper hover:bg-brand-deep md:inline-flex"
+              className="relative hidden min-h-12 items-center gap-2 rounded-full bg-brand px-4 text-sm font-semibold text-paper hover:bg-brand-deep md:inline-flex"
+              aria-label={count > 0 ? `RFQ basket, ${count} items` : "Open RFQ basket"}
             >
               <ClipboardList className="size-4" aria-hidden />
               {t("rfq")}
@@ -127,8 +183,9 @@ export function SiteChrome({ children }: { children: ReactNode }) {
             <button
               type="button"
               className="inline-flex size-12 items-center justify-center rounded-full border border-line lg:hidden"
-              aria-label="Menu"
+              aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
+              aria-controls="mobile-nav"
               onClick={() => setOpen((v) => !v)}
             >
               {open ? <X className="size-5" /> : <Menu className="size-5" />}
@@ -136,10 +193,18 @@ export function SiteChrome({ children }: { children: ReactNode }) {
           </div>
         </div>
         {open && (
-          <div className="border-t border-line bg-card lg:hidden">
+          <div id="mobile-nav" className="border-t border-line bg-card lg:hidden" role="dialog" aria-label="Mobile menu">
             <div className="container-site grid gap-1 py-3">
               {nav.map((item) => (
-                <Link key={item.to} to={item.to} className="min-h-12 rounded-lg px-3 py-3 text-base font-medium hover:bg-paper">
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  className={cn(
+                    "min-h-12 rounded-lg px-3 py-3 text-base font-medium hover:bg-paper",
+                    navActive(path, item.to) && "bg-brand-soft text-brand-deep",
+                  )}
+                  aria-current={navActive(path, item.to) ? "page" : undefined}
+                >
                   {t(item.key)}
                 </Link>
               ))}
@@ -148,7 +213,10 @@ export function SiteChrome({ children }: { children: ReactNode }) {
               </a>
               <button
                 type="button"
-                onClick={() => setRfq(true)}
+                onClick={() => {
+                  setRfq(true);
+                  setOpen(false);
+                }}
                 className="min-h-12 rounded-lg px-3 py-3 text-left text-base font-semibold text-brand"
               >
                 {t("rfq")} {count > 0 ? `(${count})` : ""}
@@ -158,7 +226,9 @@ export function SiteChrome({ children }: { children: ReactNode }) {
         )}
       </header>
 
-      <main id="main">{children}</main>
+      <main id="main" tabIndex={-1}>
+        {children}
+      </main>
 
       <footer className="mt-16 bg-ink text-paper">
         <div className="container-site grid gap-8 py-12 md:grid-cols-2 lg:grid-cols-4">
@@ -187,14 +257,26 @@ export function SiteChrome({ children }: { children: ReactNode }) {
             <p className="mt-2 text-sm text-paper/75">Kalampur, Dhamrai, Dhaka</p>
           </div>
           <div className="text-sm">
-            <a className="block min-h-12 py-2 hover:text-brand-soft" href="tel:+8801960198313">+88 0196-0198313</a>
-            <a className="block min-h-12 py-2 hover:text-brand-soft" href="mailto:oxilarbangladesh@gmail.com">oxilarbangladesh@gmail.com</a>
+            <a className="block min-h-12 py-2 hover:text-brand-soft" href="tel:+8801960198313">
+              +88 0196-0198313
+            </a>
+            <a className="block min-h-12 py-2 hover:text-brand-soft" href="mailto:oxilarbangladesh@gmail.com">
+              oxilarbangladesh@gmail.com
+            </a>
             <p className="py-2 text-paper/70">www.oxilarbd.com</p>
             <div className="mt-2 flex flex-wrap gap-2 text-xs">
-              <Link to="/products" className="rounded-full bg-white/10 px-3 py-1.5 hover:bg-white/15">{t("products")}</Link>
-              <Link to="/calculators" className="rounded-full bg-white/10 px-3 py-1.5 hover:bg-white/15">{t("calculators")}</Link>
-              <Link to="/resources" className="rounded-full bg-white/10 px-3 py-1.5 hover:bg-white/15">{t("resources")}</Link>
-              <Link to="/b2b-portal" className="rounded-full bg-white/10 px-3 py-1.5 hover:bg-white/15">{t("b2b")}</Link>
+              <Link to="/products" className="rounded-full bg-white/10 px-3 py-1.5 hover:bg-white/15">
+                {t("products")}
+              </Link>
+              <Link to="/calculators" className="rounded-full bg-white/10 px-3 py-1.5 hover:bg-white/15">
+                {t("calculators")}
+              </Link>
+              <Link to="/resources" className="rounded-full bg-white/10 px-3 py-1.5 hover:bg-white/15">
+                {t("resources")}
+              </Link>
+              <Link to="/b2b-portal" className="rounded-full bg-white/10 px-3 py-1.5 hover:bg-white/15">
+                {t("b2b")}
+              </Link>
             </div>
           </div>
         </div>
@@ -206,6 +288,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
         </div>
       </footer>
 
+      {/* Mobile bottom bar */}
       <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-line bg-card md:hidden">
         <a className="flex min-h-14 flex-col items-center justify-center gap-0.5 text-xs font-semibold text-ink" href="tel:+8801960198313">
           <Phone className="size-4 text-brand" />
@@ -220,11 +303,39 @@ export function SiteChrome({ children }: { children: ReactNode }) {
           <MessageCircle className="size-4 text-sky" />
           {t("whatsapp")}
         </a>
-        <button type="button" className="flex min-h-14 flex-col items-center justify-center gap-0.5 text-xs font-semibold text-ink" onClick={() => setRfq(true)}>
+        <button type="button" className="relative flex min-h-14 flex-col items-center justify-center gap-0.5 text-xs font-semibold text-ink" onClick={() => setRfq(true)}>
           <ClipboardList className="size-4 text-amber" />
           {t("basket")} {count > 0 ? `(${count})` : ""}
         </button>
       </div>
+
+      {/* Back to top */}
+      {showTop && (
+        <button
+          type="button"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="fixed bottom-20 right-4 z-50 inline-flex size-12 items-center justify-center rounded-full bg-ink text-paper shadow-lg ring-1 ring-white/10 hover:bg-ink-soft md:bottom-6"
+          aria-label={lang === "bn" ? "উপরে যান" : "Back to top"}
+        >
+          <ArrowUp className="size-5" />
+        </button>
+      )}
+
+      {/* RFQ toast */}
+      {toast && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="fixed left-1/2 top-20 z-[55] flex -translate-x-1/2 items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-paper shadow-lg"
+        >
+          <Check className="size-4 text-brand-soft" aria-hidden />
+          {toast}
+          <button type="button" className="ml-2 underline decoration-white/40" onClick={() => setRfq(true)}>
+            {lang === "bn" ? "খুলুন" : "Open"}
+          </button>
+        </div>
+      )}
+
       <RfqDrawer />
     </div>
   );
