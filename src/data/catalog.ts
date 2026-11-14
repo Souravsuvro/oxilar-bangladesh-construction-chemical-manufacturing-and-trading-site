@@ -147,9 +147,7 @@ export const products: Product[] = [
       en: "High-strength powder blended with cement for fast set and strong bond to old concrete — leaks, joints and repairs.",
       bn: "উচ্চ শক্তির গুঁড়া — দ্রুত সেট ও পুরাতন কংক্রিটের সাথে শক্ত বন্ধন।",
     },
-    applications: [
-      { en: "Leak sealing and joint repairs", bn: "লিকেজ ও জয়েন্ট রিপেয়ার" },
-    ],
+    applications: [{ en: "Leak sealing and joint repairs", bn: "লিকেজ ও জয়েন্ট রিপেয়ার" }],
     dosage: { en: "Blend with cement per pack / TDS.", bn: "প্যাক/টিডিএস অনুযায়ী সিমেন্টের সাথে মিশান।" },
     mlPerBag: 0,
     method: [{ en: "Dry-blend with cement, then add clean water.", bn: "সিমেন্টের সাথে শুকনো মিশিয়ে পানি যোগ করুন।" }],
@@ -229,7 +227,7 @@ export const processSteps: { step: string; title: Copy; body: Copy }[] = [
 export const stats: { value: string; label: Copy }[] = [
   { value: "2019", label: { en: "Established", bn: "প্রতিষ্ঠা" } },
   { value: "7+", label: { en: "Core products", bn: "কোর পণ্য" } },
-  { value: "6", label: { en: "Trade hubs", bn: "ট্রেড হাব" } },
+  { value: "3", label: { en: "Trade hubs", bn: "ট্রেড হাব" } },
   { value: "3", label: { en: "Lab references", bn: "ল্যাব রেফারেন্স" } },
 ];
 
