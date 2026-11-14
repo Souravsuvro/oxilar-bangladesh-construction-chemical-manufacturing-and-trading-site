@@ -5,6 +5,8 @@ import { useRfq } from "@/lib/rfq-store";
 import { useState } from "react";
 
 export const Route = createFileRoute("/products/$slug")({
+  pendingMs: 80,
+  pendingComponent: ProductDetailSkeleton,
   head: ({ params }) => {
     const p = products.find((x) => x.slug === params.slug);
     const title = p ? `${p.name.en} | Oxilar Bangladesh` : "Product | Oxilar Bangladesh";
@@ -22,15 +24,96 @@ export const Route = createFileRoute("/products/$slug")({
           property: "og:image",
           content: p ? `https://www.oxilarbd.com${p.image}` : "https://www.oxilarbd.com/og.jpg",
         },
-        { property: "og:url", content: p ? `https://www.oxilarbd.com/products/${p.slug}` : "https://www.oxilarbd.com/products" },
+        {
+          property: "og:url",
+          content: p ? `https://www.oxilarbd.com/products/${p.slug}` : "https://www.oxilarbd.com/products",
+        },
       ],
-      links: p
-        ? [{ rel: "canonical", href: `https://www.oxilarbd.com/products/${p.slug}` }]
-        : [],
+      links: p ? [{ rel: "canonical", href: `https://www.oxilarbd.com/products/${p.slug}` }] : [],
     };
   },
   component: ProductDetail,
 });
+
+function Pulse({ className = "" }: { className?: string }) {
+  return <div className={`animate-pulse rounded-lg bg-line/70 ${className}`} aria-hidden />;
+}
+
+function ProductDetailSkeleton() {
+  return (
+    <div className="pb-10" role="status" aria-live="polite" aria-busy="true">
+      <span className="sr-only">Loading product…</span>
+      <div className="border-b border-line bg-card/60">
+        <div className="container-site flex gap-2 py-3">
+          <Pulse className="h-4 w-12" />
+          <Pulse className="h-4 w-3" />
+          <Pulse className="h-4 w-16" />
+          <Pulse className="h-4 w-3" />
+          <Pulse className="h-4 w-28" />
+        </div>
+      </div>
+      <div className="container-site py-10">
+        <div className="grid gap-8 lg:grid-cols-2">
+          <Pulse className="aspect-[4/3] w-full rounded-xl" />
+          <div className="space-y-4">
+            <Pulse className="h-4 w-24" />
+            <Pulse className="h-10 w-3/4 max-w-md" />
+            <Pulse className="h-4 w-full" />
+            <Pulse className="h-4 w-5/6" />
+            <div className="flex flex-wrap gap-2 pt-2">
+              <Pulse className="h-11 w-20 rounded-full" />
+              <Pulse className="h-11 w-24 rounded-full" />
+              <Pulse className="h-11 w-20 rounded-full" />
+            </div>
+            <div className="flex flex-wrap gap-2 pt-2">
+              <Pulse className="h-12 w-36 rounded-full" />
+              <Pulse className="h-12 w-28 rounded-full" />
+            </div>
+            <Pulse className="mt-4 h-28 w-full rounded-xl" />
+          </div>
+        </div>
+        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+          <Pulse className="h-40 rounded-xl" />
+          <Pulse className="h-40 rounded-xl" />
+          <Pulse className="h-40 rounded-xl" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ProductImage({ src, alt }: { src: string; alt: string }) {
+  const [loaded, setLoaded] = useState(false);
+  const [failed, setFailed] = useState(false);
+
+  return (
+    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-card ring-1 ring-line">
+      {!loaded && !failed && (
+        <div className="absolute inset-0 flex items-center justify-center bg-mist/40" aria-hidden>
+          <div className="h-10 w-10 animate-spin rounded-full border-2 border-line border-t-brand" />
+        </div>
+      )}
+      {failed ? (
+        <div className="flex h-full min-h-[12rem] items-center justify-center bg-mist/50 text-sm text-muted">
+          Image unavailable
+        </div>
+      ) : (
+        <img
+          src={src}
+          alt={alt}
+          width={900}
+          height={675}
+          decoding="async"
+          onLoad={() => setLoaded(true)}
+          onError={() => setFailed(true)}
+          className={`h-full w-full object-cover object-[center_25%] transition-opacity duration-300 ${
+            loaded ? "opacity-100" : "opacity-0"
+          }`}
+        />
+      )}
+    </div>
+  );
+}
 
 function ProductDetail() {
   const { slug } = Route.useParams();
@@ -39,6 +122,7 @@ function ProductDetail() {
   const add = useRfq((s) => s.add);
   const setOpen = useRfq((s) => s.setOpen);
   const [pack, setPack] = useState(p?.packs[0] ?? "20L");
+  const [rfqBusy, setRfqBusy] = useState(false);
 
   if (!p) {
     return (
@@ -49,7 +133,10 @@ function ProductDetail() {
             ? "এই স্লাগ ক্যাটালগে নেই। পণ্য তালিকা থেকে বেছে নিন।"
             : "This slug is not in the catalog. Choose a product from the list."}
         </p>
-        <Link to="/products" className="mt-6 inline-flex min-h-12 items-center rounded-full bg-brand px-6 font-semibold text-paper">
+        <Link
+          to="/products"
+          className="mt-6 inline-flex min-h-12 items-center rounded-full bg-brand px-6 font-semibold text-paper"
+        >
           {lang === "bn" ? "সব পণ্য দেখুন" : "View all products"}
         </Link>
       </div>
@@ -124,6 +211,13 @@ function ProductDetail() {
     `Hello Oxilar — RFQ interest: ${p.name.en} (${p.sku}), pack ${pack}`,
   )}`;
 
+  function handleAddRfq() {
+    setRfqBusy(true);
+    add({ sku: p.sku, name: p.name.en, pack, note: "" });
+    setOpen(true);
+    window.setTimeout(() => setRfqBusy(false), 400);
+  }
+
   return (
     <article className="pb-24 lg:pb-10">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
@@ -144,16 +238,7 @@ function ProductDetail() {
 
       <div className="container-site py-10">
         <div className="grid gap-8 lg:grid-cols-2">
-          <div className="overflow-hidden rounded-xl bg-card ring-1 ring-line">
-            <img
-              src={p.image}
-              alt={tx(p.name)}
-              className="aspect-[4/3] w-full object-cover object-[center_25%]"
-              width={900}
-              height={675}
-              decoding="async"
-            />
-          </div>
+          <ProductImage src={p.image} alt={tx(p.name)} />
 
           <div>
             <p className="text-sm font-semibold text-sky">{p.sku}</p>
@@ -181,13 +266,17 @@ function ProductDetail() {
             <div className="mt-6 flex flex-wrap gap-2">
               <button
                 type="button"
-                className="min-h-12 rounded-full bg-brand px-6 font-semibold text-paper"
-                onClick={() => {
-                  add({ sku: p.sku, name: p.name.en, pack, note: "" });
-                  setOpen(true);
-                }}
+                disabled={rfqBusy}
+                className="min-h-12 rounded-full bg-brand px-6 font-semibold text-paper disabled:opacity-70"
+                onClick={handleAddRfq}
               >
-                {lang === "bn" ? "আরএফকিউতে যোগ করুন" : "Add to RFQ"}
+                {rfqBusy
+                  ? lang === "bn"
+                    ? "যোগ হচ্ছে…"
+                    : "Adding…"
+                  : lang === "bn"
+                    ? "আরএফকিউতে যোগ করুন"
+                    : "Add to RFQ"}
               </button>
               <a
                 href={wa}
@@ -262,9 +351,7 @@ function ProductDetail() {
 
         {sameCategory.length > 0 && (
           <section className="mt-12">
-            <h2 className="text-xl font-semibold">
-              {lang === "bn" ? "একই ক্যাটাগরি" : "Same category"}
-            </h2>
+            <h2 className="text-xl font-semibold">{lang === "bn" ? "একই ক্যাটাগরি" : "Same category"}</h2>
             <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {sameCategory.map((r) => (
                 <Link
@@ -307,18 +394,15 @@ function ProductDetail() {
         </section>
       </div>
 
-      {/* Mobile sticky RFQ bar */}
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-paper/95 p-3 backdrop-blur lg:hidden">
         <div className="container-site flex gap-2">
           <button
             type="button"
-            className="min-h-12 flex-1 rounded-full bg-brand font-semibold text-paper"
-            onClick={() => {
-              add({ sku: p.sku, name: p.name.en, pack, note: "" });
-              setOpen(true);
-            }}
+            disabled={rfqBusy}
+            className="min-h-12 flex-1 rounded-full bg-brand font-semibold text-paper disabled:opacity-70"
+            onClick={handleAddRfq}
           >
-            {lang === "bn" ? "আরএফকিউ" : "Add to RFQ"}
+            {rfqBusy ? (lang === "bn" ? "…" : "…") : lang === "bn" ? "আরএফকিউ" : "Add to RFQ"}
           </button>
           <a
             href={wa}
