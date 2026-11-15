@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { companyProfile, leaders, sourcing } from "@/data/catalog";
+import { companyProfile, sourcing } from "@/data/catalog";
 import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/about")({
@@ -12,7 +12,7 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "Oxilar Bangladesh is an independent manufacturer and global direct importer of construction chemicals. Established 6 September 2019. Vision, mission, Kalampur Dhamrai plant, and sourcing from China, Korea, Taiwan, India, Thailand and Singapore.",
+          "Oxilar Bangladesh is an independent manufacturer and global direct importer of construction chemicals. Established 6 September 2019. Vision, mission, Kalampur Dhamrai plant, and sourcing from India, Malaysia and Taiwan.",
       },
       {
         name: "keywords",
@@ -47,7 +47,6 @@ function AboutPage() {
       <section className="mt-10 grid gap-8 lg:grid-cols-2">
         <div className="space-y-4 text-base leading-relaxed text-ink">
           <p>{tx(p.about)}</p>
-          <p className="text-muted">{tx(p.commitment)}</p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="rounded-xl bg-card p-5 ring-1 ring-line">
@@ -62,20 +61,6 @@ function AboutPage() {
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-ink">{tx(p.mission)}</p>
           </div>
-        </div>
-      </section>
-
-      <section className="mt-12">
-        <h2 className="text-xl font-bold text-ink">
-          {lang === "bn" ? "আমাদের প্রতিশ্রুতি" : "Our commitment"}
-        </h2>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {p.pillars.map((pillar) => (
-            <div key={pillar.title.en} className="rounded-xl bg-card p-5 ring-1 ring-line">
-              <h3 className="font-semibold text-ink">{tx(pillar.title)}</h3>
-              <p className="mt-2 text-sm text-muted">{tx(pillar.body)}</p>
-            </div>
-          ))}
         </div>
       </section>
 
@@ -104,34 +89,19 @@ function AboutPage() {
           </h2>
           <p className="mt-2 text-sm text-muted">
             {lang === "bn"
-              ? "কাঁচামাল চীন, কোরিয়া, তাইওয়ান, ভারত, থাইল্যান্ড ও সিঙ্গাপুর থেকে সরাসরি আমদানি।"
-              : "Raw materials direct-imported from China, Korea, Taiwan, India, Thailand and Singapore."}
+              ? "নির্বাচিত কাঁচামাল ভারত, মালয়েশিয়া ও তাইওয়ান থেকে সরাসরি আমদানি।"
+              : "Selected raw materials direct-imported from India, Malaysia and Taiwan."}
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             {sourcing.map((s) => (
               <span
-                key={s.country.en}
-                className="rounded-full bg-mist px-3 py-1 text-xs font-medium text-ink ring-1 ring-line"
+                key={s.code}
+                className="rounded-full bg-paper px-3 py-1 text-xs font-medium text-ink ring-1 ring-line"
               >
                 {tx(s.country)}
               </span>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="mt-12">
-        <h2 className="text-xl font-bold text-ink">
-          {lang === "bn" ? "নেতৃত্ব" : "Leadership"}
-        </h2>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {leaders.map((l) => (
-            <div key={l.name.en} className="rounded-xl bg-card p-5 ring-1 ring-line">
-              <h3 className="font-semibold text-ink">{tx(l.name)}</h3>
-              <p className="text-sm text-brand">{tx(l.role)}</p>
-              <p className="mt-2 text-sm text-muted">{tx(l.bio)}</p>
-            </div>
-          ))}
         </div>
       </section>
     </div>
