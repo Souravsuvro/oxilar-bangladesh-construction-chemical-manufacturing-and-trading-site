@@ -266,13 +266,144 @@ export const faqs: { q: Copy; a: Copy }[] = [
   },
 ];
 
-export const labs: { id: string; name: Copy; href: string }[] = [
-  { id: "buet", name: { en: "BUET referenced methods", bn: "BUET রেফারেন্সড পদ্ধতি" }, href: "/documents/lab-buet.html" },
-  { id: "cuet", name: { en: "CUET referenced methods", bn: "CUET রেফারেন্সড পদ্ধতি" }, href: "/documents/lab-cuet.html" },
-  { id: "bcsir", name: { en: "BCSIR referenced methods", bn: "BCSIR রেফারেন্সড পদ্ধতি" }, href: "/documents/lab-bcsir.html" },
+export const projectSectors: { id: string; label: Copy }[] = [
+  { id: "all", label: { en: "All sectors", bn: "সব সেক্টর" } },
+  { id: "residential", label: { en: "Residential", bn: "রেসিডেনশিয়াল" } },
+  { id: "industrial", label: { en: "Industrial", bn: "ইন্ডাস্ট্রিয়াল" } },
+  { id: "infrastructure", label: { en: "Infrastructure", bn: "অবকাঠামো" } },
 ];
 
-export const sheets: { id: string; title: Copy; href: string }[] = [
-  { id: "tds-s100", title: { en: "TDS Super-100", bn: "টিডিএস সুপার-১০০" }, href: "/documents/tds-super-100.html" },
-  { id: "tds-dg", title: { en: "TDS Damp Guard-400", bn: "টিডিএস ড্যাম্প গার্ড-৪০০" }, href: "/documents/tds-super-100.html" },
+export const projects: {
+  id: string;
+  sector: string;
+  image: string;
+  place: Copy;
+  title: Copy;
+  summary: Copy;
+}[] = [
+  {
+    id: "p1",
+    sector: "residential",
+    image: "/media/stack.jpg",
+    place: { en: "Dhaka metro", bn: "ঢাকা মেট্রো" },
+    title: { en: "Roof waterproofing package", bn: "ছাদ ওয়াটারপ্রুফিং প্যাকেজ" },
+    summary: {
+      en: "Super-100 and Damp Guard supply for multi-storey roof and tank work under monsoon planning.",
+      bn: "বহুতল ছাদ ও ট্যাংকের জন্য সুপার-১০০ ও ড্যাম্প গার্ড সাপ্লাই।",
+    },
+  },
+  {
+    id: "p2",
+    sector: "industrial",
+    image: "/media/pail.jpg",
+    place: { en: "Gazipur industrial belt", bn: "গাজীপুর ইন্ডাস্ট্রিয়াল বেল্ট" },
+    title: { en: "Plant floor and yard dust control", bn: "প্ল্যান্ট ফ্লোর ও ইয়ার্ড ডাস্ট কন্ট্রোল" },
+    summary: {
+      en: "Befit Dust and Anti Dust packs for haul roads and production floors.",
+      bn: "হল রোড ও প্রোডাকশন ফ্লোরের জন্য বেফিট ডাস্ট ও অ্যান্টি ডাস্ট।",
+    },
+  },
+  {
+    id: "p3",
+    sector: "infrastructure",
+    image: "/media/drum.jpg",
+    place: { en: "Ready-mix partner plants", bn: "রেডি-মিক্স পার্টনার প্ল্যান্ট" },
+    title: { en: "Admixture drum programme", bn: "অ্যাডমিক্সচার ড্রাম প্রোগ্রাম" },
+    summary: {
+      en: "Solid Bond and Super-100 drum logistics for continuous plant dosing.",
+      bn: "কন্টিনিউয়াস প্ল্যান্ট ডোজিংয়ের জন্য সলিড বন্ড ও সুপার-১০০ ড্রাম।",
+    },
+  },
+];
+
+export const quotes: { quote: Copy; who: Copy }[] = [
+  {
+    quote: {
+      en: "Dose and TDS in one place — our site team could trial Super-100 without waiting on a long email chain.",
+      bn: "ডোজ ও টিডিএস এক জায়গায় — সাইট টিম দীর্ঘ ইমেইল ছাড়াই সুপার-১০০ ট্রায়াল করতে পেরেছে।",
+    },
+    who: { en: "Site engineer, residential tower", bn: "সাইট ইঞ্জিনিয়ার, রেসিডেনশিয়াল টাওয়ার" },
+  },
+  {
+    quote: {
+      en: "Independent supply and clear packs made procurement simpler for our plant.",
+      bn: "স্বাধীন সাপ্লাই ও পরিষ্কার প্যাক প্ল্যান্ট প্রকিউরমেন্ট সহজ করেছে।",
+    },
+    who: { en: "Procurement, ready-mix plant", bn: "প্রকিউরমেন্ট, রেডি-মিক্স প্ল্যান্ট" },
+  },
+  {
+    quote: {
+      en: "We needed a Bangladesh-focused waterproofing story — not a foreign brochure rewrite.",
+      bn: "আমাদের বাংলাদেশ-কেন্দ্রিক ওয়াটারপ্রুফিং কথা দরকার ছিল — বিদেশি ব্রোশার নয়।",
+    },
+    who: { en: "Consultant, civil works", bn: "কনসালট্যান্ট, সিভিল ওয়ার্কস" },
+  },
+];
+
+export const labs: { id: string; body: string; title: Copy; note: Copy; file: string }[] = [
+  {
+    id: "buet",
+    body: "BUET",
+    title: { en: "BUET referenced methods", bn: "BUET রেফারেন্সড পদ্ধতি" },
+    note: {
+      en: "Strength and durability programmes referenced against BUET laboratory methods.",
+      bn: "শক্তি ও ডুরেবিলিটি প্রোগ্রাম BUET ল্যাব পদ্ধতির রেফারেন্সে।",
+    },
+    file: "/documents/lab-buet.html",
+  },
+  {
+    id: "cuet",
+    body: "CUET",
+    title: { en: "CUET referenced methods", bn: "CUET রেফারেন্সড পদ্ধতি" },
+    note: {
+      en: "Material checks aligned with CUET referenced practice for site teams.",
+      bn: "সাইট টিমের জন্য CUET রেফারেন্সড প্র্যাকটিসের সাথে মিল রেখে।",
+    },
+    file: "/documents/lab-cuet.html",
+  },
+  {
+    id: "bcsir",
+    body: "BCSIR",
+    title: { en: "BCSIR referenced methods", bn: "BCSIR রেফারেন্সড পদ্ধতি" },
+    note: {
+      en: "Chemical characterisation referenced to BCSIR-oriented reporting.",
+      bn: "কেমিক্যাল ক্যারেক্টারাইজেশন BCSIR-ভিত্তিক রিপোর্টিংয়ের রেফারেন্সে।",
+    },
+    file: "/documents/lab-bcsir.html",
+  },
+];
+
+export const sheets: { id: string; kind: string; product: string; file: string }[] = [
+  { id: "tds-100", kind: "TDS", product: "Oxilar Super-100", file: "/documents/tds-super-100.html" },
+  { id: "tds-dg", kind: "TDS", product: "Oxilar Damp Guard-400", file: "/documents/tds-super-100.html" },
+  { id: "tds-sb", kind: "TDS", product: "Oxilar Solid Bond", file: "/documents/tds-super-100.html" },
+  { id: "sds-100", kind: "SDS", product: "Oxilar Super-100", file: "/documents/tds-super-100.html" },
+  { id: "man-dose", kind: "Manual", product: "Dosage & trial mix guide", file: "/documents/tds-super-100.html" },
+];
+
+export const videos: { title: Copy; length: string; body: Copy }[] = [
+  {
+    title: { en: "Trial mix for Super-100", bn: "সুপার-১০০ ট্রায়াল মিক্স" },
+    length: "4 min",
+    body: {
+      en: "How site teams confirm dose before a full pour.",
+      bn: "পূর্ণ পোরের আগে সাইট টিম কীভাবে ডোজ নিশ্চিত করে।",
+    },
+  },
+  {
+    title: { en: "Roof damp checklist", bn: "ছাদ ড্যাম্প চেকলিস্ট" },
+    length: "3 min",
+    body: {
+      en: "Surface readiness notes for Damp Guard and Super-100 roof packages.",
+      bn: "ড্যাম্প গার্ড ও সুপার-১০০ ছাদ প্যাকেজের সারফেস প্রস্তুতি।",
+    },
+  },
+  {
+    title: { en: "Plant drum handling", bn: "প্ল্যান্ট ড্রাম হ্যান্ডলিং" },
+    length: "2 min",
+    body: {
+      en: "Safe storage and dosing tips for ready-mix yards.",
+      bn: "রেডি-মিক্স ইয়ার্ডে নিরাপদ স্টোরেজ ও ডোজিং।",
+    },
+  },
 ];
