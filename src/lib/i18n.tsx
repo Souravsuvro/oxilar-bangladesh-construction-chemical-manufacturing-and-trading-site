@@ -15,6 +15,7 @@ const dict: Dict = {
   resources: { en: "TDS / Lab", bn: "টিডিএস / ল্যাব" },
   projects: { en: "Projects", bn: "প্রকল্প" },
   b2b: { en: "Dealers", bn: "ডিলার" },
+  careers: { en: "Careers", bn: "ক্যারিয়ার" },
   contact: { en: "Contact", bn: "যোগাযোগ" },
   rfq: { en: "Request RFQ", bn: "আরএফকিউ" },
   explore: { en: "Explore products", bn: "পণ্য দেখুন" },
@@ -33,8 +34,8 @@ const dict: Dict = {
     bn: "বাংলাদেশের আবহাওয়ার জন্য প্রকৌশলকৃত কনস্ট্রাকশন কেমিক্যাল।",
   },
   heroSub: {
-    en: "Waterproofing, concrete admixtures and industrial floors for civil engineers, consultants and mega-projects. Blended in Dhamrai. Referenced against BUET, CUET and BCSIR methods.",
-    bn: "সিভিল ইঞ্জিনিয়ার, কনসালট্যান্ট ও মেগা-প্রকল্পের জন্য ওয়াটারপ্রুফিং, কংক্রিট অ্যাডমিক্সচার ও ইন্ডাস্ট্রিয়াল ফ্লোর। ধামরাইয়ে ব্লেন্ড। BUET, CUET ও BCSIR পদ্ধতিতে রেফারেন্সড।",
+    en: "Waterproofing, concrete admixtures and industrial floors for civil engineers, consultants and mega-projects. Blended in Dhamrai. Raw materials from India, Malaysia and Taiwan. Referenced against BUET, CUET and BCSIR methods.",
+    bn: "সিভিল ইঞ্জিনিয়ার, কনসালট্যান্ট ও মেগা-প্রকল্পের জন্য ওয়াটারপ্রুফিং, কংক্রিট অ্যাডমিক্সচার ও ইন্ডাস্ট্রিয়াল ফ্লোর। ধামরাইয়ে ব্লেন্ড। কাঁচামাল ভারত, মালয়েশিয়া ও তাইওয়ান থেকে। BUET, CUET ও BCSIR পদ্ধতিতে রেফারেন্সড।",
   },
   slogan: {
     en: "Dose, TDS and lab sheet together — so site teams mix with confidence.",
