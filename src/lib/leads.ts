@@ -6,14 +6,23 @@
  * 2. Set Vercel env VITE_FORMSPREE_ID to the form id (e.g. xyzabcde)
  *    OR set VITE_LEAD_ENDPOINT to a full URL (Formspree / Getform / custom webhook)
  * 3. Redeploy. Until configured, leads still save to localStorage + WhatsApp path.
+ *
+ * Anti-spam: callers should pass honeypot="" and reject client-side if bots fill it.
+ * Careers applications go to the same endpoint with type "careers".
  */
 
 export type LeadPayload = {
-  type: "contact" | "rfq";
+  type: "contact" | "rfq" | "careers";
   name: string;
   phone: string;
+  email?: string;
   topic?: string;
   detail?: string;
+  position?: string;
+  coverLetter?: string;
+  resumeName?: string;
+  /** Honeypot — must be empty. */
+  honeypot?: string;
   lines?: { name: string; sku: string; pack: string; qty: number; note?: string }[];
   at: string;
 };
@@ -33,9 +42,18 @@ export function leadsConfigured(): boolean {
 }
 
 export async function sendLead(payload: LeadPayload): Promise<{ ok: boolean; emailed: boolean; error?: string }> {
-  // Always keep a local copy for the visitor / offline recovery
+  // Silent drop for honeypot spam (looks successful to bots)
+  if (payload.honeypot && payload.honeypot.trim().length > 0) {
+    return { ok: true, emailed: true };
+  }
+
   try {
-    const key = payload.type === "rfq" ? "oxilar-rfq-sent" : "oxilar-contact";
+    const key =
+      payload.type === "rfq"
+        ? "oxilar-rfq-sent"
+        : payload.type === "careers"
+          ? "oxilar-careers"
+          : "oxilar-contact";
     const prev = JSON.parse(localStorage.getItem(key) || "[]") as unknown[];
     localStorage.setItem(key, JSON.stringify([payload, ...prev].slice(0, 30)));
   } catch {
@@ -47,15 +65,26 @@ export async function sendLead(payload: LeadPayload): Promise<{ ok: boolean; ema
     return { ok: true, emailed: false };
   }
 
+  const subject =
+    payload.type === "rfq"
+      ? `[Oxilar RFQ] ${payload.name}`
+      : payload.type === "careers"
+        ? `[Oxilar Careers] ${payload.position || "Application"} — ${payload.name}`
+        : `[Oxilar Contact] ${payload.name}`;
+
   const body: Record<string, string> = {
-    _subject: payload.type === "rfq" ? `[Oxilar RFQ] ${payload.name}` : `[Oxilar Contact] ${payload.name}`,
+    _subject: subject,
     type: payload.type,
     name: payload.name,
     phone: payload.phone,
     at: payload.at,
   };
+  if (payload.email) body.email = payload.email;
   if (payload.topic) body.topic = payload.topic;
   if (payload.detail) body.detail = payload.detail;
+  if (payload.position) body.position = payload.position;
+  if (payload.coverLetter) body.cover_letter = payload.coverLetter;
+  if (payload.resumeName) body.resume_filename = payload.resumeName;
   if (payload.lines?.length) {
     body.lines = payload.lines
       .map((l) => `${l.name} (${l.sku}) · ${l.pack} × ${l.qty}${l.note ? ` — ${l.note}` : ""}`)
