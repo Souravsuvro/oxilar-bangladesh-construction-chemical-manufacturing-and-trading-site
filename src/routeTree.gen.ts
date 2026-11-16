@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as B2bPortalRouteImport } from './routes/b2b-portal'
 import { Route as CalculatorsRouteImport } from './routes/calculators'
+import { Route as CareersRouteImport } from './routes/careers'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as ProjectsRouteImport } from './routes/projects'
@@ -37,6 +38,11 @@ const B2bPortalRoute = B2bPortalRouteImport.update({
 const CalculatorsRoute = CalculatorsRouteImport.update({
   id: '/calculators',
   path: '/calculators',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareersRoute = CareersRouteImport.update({
+  id: '/careers',
+  path: '/careers',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -70,6 +76,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/b2b-portal': typeof B2bPortalRoute
   '/calculators': typeof CalculatorsRoute
+  '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
   '/products': typeof ProductsRouteWithChildren
   '/projects': typeof ProjectsRoute
@@ -81,6 +88,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/b2b-portal': typeof B2bPortalRoute
   '/calculators': typeof CalculatorsRoute
+  '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
   '/products': typeof ProductsRouteWithChildren
   '/projects': typeof ProjectsRoute
@@ -93,6 +101,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/b2b-portal': typeof B2bPortalRoute
   '/calculators': typeof CalculatorsRoute
+  '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
   '/products': typeof ProductsRouteWithChildren
   '/projects': typeof ProjectsRoute
@@ -106,6 +115,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/b2b-portal'
     | '/calculators'
+    | '/careers'
     | '/contact'
     | '/products'
     | '/projects'
@@ -117,6 +127,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/b2b-portal'
     | '/calculators'
+    | '/careers'
     | '/contact'
     | '/products'
     | '/projects'
@@ -128,18 +139,20 @@ export interface FileRouteTypes {
     | '/about'
     | '/b2b-portal'
     | '/calculators'
+    | '/careers'
     | '/contact'
     | '/products'
     | '/projects'
     | '/resources'
     | '/products/$slug'
-  fileRoutesById: FileRoutesById
+  fileRoutesById: FileRouteTypes['fileRoutesById']
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   B2bPortalRoute: typeof B2bPortalRoute
   CalculatorsRoute: typeof CalculatorsRoute
+  CareersRoute: typeof CareersRoute
   ContactRoute: typeof ContactRoute
   ProductsRoute: typeof ProductsRouteWithChildren
   ProjectsRoute: typeof ProjectsRoute
@@ -174,6 +187,13 @@ declare module '@tanstack/react-router' {
       path: '/calculators'
       fullPath: '/calculators'
       preLoaderRoute: typeof CalculatorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/careers': {
+      id: '/careers'
+      path: '/careers'
+      fullPath: '/careers'
+      preLoaderRoute: typeof CareersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -231,6 +251,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   B2bPortalRoute: B2bPortalRoute,
   CalculatorsRoute: CalculatorsRoute,
+  CareersRoute: CareersRoute,
   ContactRoute: ContactRoute,
   ProductsRoute: ProductsRouteWithChildren,
   ProjectsRoute: ProjectsRoute,
