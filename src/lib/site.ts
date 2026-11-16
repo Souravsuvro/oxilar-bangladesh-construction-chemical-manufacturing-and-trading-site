@@ -3,9 +3,9 @@
 export const SITE = {
   brand: "Oxilar Bangladesh",
   email: "oxilarbangladesh@gmail.com",
-  /** Voice / hotline (may differ from WhatsApp business). */
-  phoneDisplay: "+88 0196-0198313",
-  phoneTel: "+8801960198313",
+  /** Voice / hotline — aligned with WhatsApp Business. */
+  phoneDisplay: "+88 0182-6736886",
+  phoneTel: "+8801826736886",
   /** WhatsApp Business account used by site CTAs. */
   whatsappDisplay: "+88 01826-736886",
   whatsappE164: "8801826736886",
