@@ -3,14 +3,14 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import { benefits, faqs, gallery, processSteps, products, sourcing, stats } from "@/data/catalog";
 import { useI18n } from "@/lib/i18n";
 import { CalculatorSuite } from "@/components/calculators/Calculators";
+import { TrustBlocks } from "@/components/home/TrustBlocks";
+import { WA_DEFAULT } from "@/lib/site";
 
 const StrengthChart = lazy(() =>
   import("@/components/home/StrengthChart").then((m) => ({ default: m.StrengthChart })),
 );
 
-const WA =
-  "https://wa.me/8801960198313?text=" +
-  encodeURIComponent("Hello Oxilar — I need dosage advice / RFQ for a project in Bangladesh.");
+const WA = WA_DEFAULT;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -71,7 +71,7 @@ const schema = {
           availableLanguage: ["en", "bn"],
         },
       ],
-      sameAs: ["https://www.oxilarbd.com"],
+      sameAs: ["https://www.oxilarbd.com", "https://www.facebook.com/share/19MbCzTKzp/"],
     },
     {
       "@type": "FAQPage",
@@ -104,8 +104,8 @@ function Home() {
               <Link to="/products" className="inline-flex min-h-12 items-center justify-center rounded-full bg-brand px-6 font-semibold text-paper">
                 {t("explore")}
               </Link>
-              <Link to="/calculators" className="inline-flex min-h-12 items-center justify-center rounded-full bg-paper px-6 font-semibold text-ink">
-                {t("launchCalc")}
+              <Link to="/solutions" className="inline-flex min-h-12 items-center justify-center rounded-full bg-paper px-6 font-semibold text-ink">
+                {lang === "bn" ? "সলিউশন" : "Solutions"}
               </Link>
             </div>
             <div className="mt-6 flex flex-wrap gap-3 text-sm">
@@ -115,6 +115,9 @@ function Home() {
               <a href={WA} target="_blank" rel="noreferrer" className="inline-flex min-h-12 items-center rounded-full bg-sky px-4 font-semibold text-paper">
                 WhatsApp
               </a>
+              <Link to="/calculators" className="inline-flex min-h-12 items-center rounded-full bg-white/10 px-4 font-semibold text-paper">
+                {t("launchCalc")}
+              </Link>
             </div>
             <ul className="mt-8 flex flex-wrap gap-2 text-xs font-semibold">
               {["BUET", "CUET", "BCSIR"].map((b) => (
@@ -167,6 +170,8 @@ function Home() {
         </div>
       </section>
 
+      <TrustBlocks />
+
       <section className="container-site py-14" aria-label="Packs and plant gallery">
         <h2 className="text-3xl font-semibold">{lang === "bn" ? "প্যাক ও প্ল্যান্ট" : "Packs and plant"}</h2>
         <p className="mt-2 max-w-2xl text-muted">
@@ -188,8 +193,8 @@ function Home() {
         <h2 className="text-3xl font-semibold">{lang === "bn" ? "কাঁচামালের উৎস" : "Raw material origins"}</h2>
         <p className="mt-2 max-w-2xl text-muted">
           {lang === "bn"
-            ? "ইপক্সি, হার্ডেনার, সলভেন্ট ও অ্যাডমিক্সচার ছয়টি ট্রেড হাব থেকে সরাসরি আমদানি।"
-            : "Epoxy, hardener, solvents and admixture bases direct-imported from six trade hubs."}
+            ? "অ্যাডমিক্সচার বেস ও ইন্টারমিডিয়েট ভারত, মালয়েশিয়া ও তাইওয়ান থেকে সরাসরি আমদানি।"
+            : "Admixture bases and intermediates direct-imported from India, Malaysia and Taiwan."}
         </p>
         <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {sourcing.map((s) => (
@@ -281,9 +286,12 @@ function Home() {
             </Link>
           ))}
         </div>
-        <div className="mt-6">
+        <div className="mt-6 flex flex-wrap gap-3">
           <Link to="/products" className="inline-flex min-h-12 items-center justify-center rounded-full bg-ink px-6 font-semibold text-paper">
             {lang === "bn" ? "সব পণ্য দেখুন" : "View all products"}
+          </Link>
+          <Link to="/solutions" className="inline-flex min-h-12 items-center justify-center rounded-full bg-brand px-6 font-semibold text-paper">
+            {lang === "bn" ? "প্রয়োগ সলিউশন" : "Application solutions"}
           </Link>
         </div>
       </section>
