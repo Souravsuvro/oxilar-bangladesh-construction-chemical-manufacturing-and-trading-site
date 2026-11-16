@@ -3,6 +3,7 @@ import { useRfq } from "@/lib/rfq-store";
 import { useI18n } from "@/lib/i18n";
 import { sendLead, trackLead } from "@/lib/leads";
 import { LiveRegion, StatusBanner } from "@/components/a11y/LiveRegion";
+import { SITE, whatsappUrl } from "@/lib/site";
 
 function buildWhatsAppUrl(
   name: string,
@@ -14,7 +15,7 @@ function buildWhatsAppUrl(
     .join("\n");
   const text =
     `Oxilar RFQ request\nName: ${name}\nPhone: ${phone}\n\nLines:\n${list || "(no lines)"}\n\nPlease share availability and delivery timeline.`;
-  return `https://wa.me/8801960198313?text=${encodeURIComponent(text)}`;
+  return whatsappUrl(text);
 }
 
 export function RfqDrawer() {
@@ -163,7 +164,7 @@ export function RfqDrawer() {
                 </a>
               )}
               <a
-                href="tel:+8801960198313"
+                href={`tel:${SITE.phoneTel}`}
                 className="mt-2 inline-flex min-h-11 w-full items-center justify-center rounded-full bg-ink font-semibold text-paper"
               >
                 {bn ? "হটলাইন কল করুন" : "Call hotline"}
