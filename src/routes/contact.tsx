@@ -2,10 +2,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { useI18n } from "@/lib/i18n";
 import { leadsConfigured, sendLead, trackLead } from "@/lib/leads";
+import { SITE, whatsappUrl } from "@/lib/site";
 
-const WA =
-  "https://wa.me/8801960198313?text=" +
-  encodeURIComponent("Hello Oxilar Bangladesh — I would like product support / a site discussion.");
+const WA = whatsappUrl(
+  "Hello Oxilar Bangladesh — I would like product support / a site discussion.",
+);
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -14,7 +15,7 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Call +88 0196-0198313, WhatsApp, or message Oxilar Bangladesh. Office: 31/1 Babar Road, Mohammadpur. Factory: Kalampur, Dhamrai. RFQ and site support for civil engineers and dealers.",
+          `Call ${SITE.phoneDisplay}, WhatsApp ${SITE.whatsappDisplay}, or email ${SITE.email}. Office: Mohammadpur. Factory: Kalampur, Dhamrai. RFQ and site support.`,
       },
     ],
   }),
@@ -34,6 +35,13 @@ function Page() {
     setBusy(true);
     setErr("");
     const fd = new FormData(e.currentTarget);
+    if (String(fd.get("company_url") || "").trim()) {
+      setBusy(false);
+      setOk(true);
+      setEmailed(true);
+      e.currentTarget.reset();
+      return;
+    }
     const name = String(fd.get("name") || "");
     const phone = String(fd.get("phone") || "");
     const topic = String(fd.get("topic") || "");
@@ -67,40 +75,48 @@ function Page() {
           : "Call, WhatsApp or use the form for project supply, dealership or site support."}
       </p>
       <div className="mt-6 flex flex-wrap gap-2">
-        <a className="inline-flex min-h-12 items-center rounded-full bg-brand px-5 font-semibold text-paper" href="tel:+8801960198313">
-          +88 0196-0198313
+        <a className="inline-flex min-h-12 items-center rounded-full bg-brand px-5 font-semibold text-paper" href={`tel:${SITE.phoneTel}`}>
+          {SITE.phoneDisplay}
         </a>
         <a className="inline-flex min-h-12 items-center rounded-full bg-sky px-5 font-semibold text-paper" href={WA} target="_blank" rel="noreferrer">
-          WhatsApp
+          WhatsApp {SITE.whatsappDisplay}
         </a>
-        <a className="inline-flex min-h-12 items-center rounded-full bg-ink px-5 font-semibold text-paper" href="mailto:oxilarbangladesh@gmail.com">
+        <a className="inline-flex min-h-12 items-center rounded-full bg-ink px-5 font-semibold text-paper" href={`mailto:${SITE.email}`}>
           Email
+        </a>
+        <a className="inline-flex min-h-12 items-center rounded-full bg-[#1877F2] px-5 font-semibold text-paper" href={SITE.facebook} target="_blank" rel="noreferrer">
+          Facebook
         </a>
       </div>
       <div className="mt-8 grid gap-4 lg:grid-cols-2">
         <section className="rounded-xl bg-card p-5 ring-1 ring-line">
           <h2 className="text-xl font-semibold">{bn ? "কর্পোরেট অফিস" : "Corporate office"}</h2>
-          <p className="mt-2 text-sm">31/1 Babar Road, Mohammadpur, Dhanmondi, Dhaka</p>
+          <p className="mt-2 text-sm">{SITE.office}</p>
           <iframe title="Office map" className="mt-3 h-56 w-full rounded-lg border-0" src={`https://maps.google.com/maps?q=${q}&z=15&output=embed`} loading="lazy" />
         </section>
         <section className="rounded-xl bg-card p-5 ring-1 ring-line">
           <h2 className="text-xl font-semibold">{bn ? "কারখানা" : "Factory"}</h2>
-          <p className="mt-2 text-sm">Kalampur, Dhamrai, Dhaka</p>
+          <p className="mt-2 text-sm">{SITE.factory}</p>
           <iframe title="Factory map" className="mt-3 h-56 w-full rounded-lg border-0" src={`https://maps.google.com/maps?q=${q2}&z=13&output=embed`} loading="lazy" />
         </section>
       </div>
       <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_1.2fr]">
         <div className="text-sm">
           <p className="font-semibold text-ink">{bn ? "দ্রুত যোগাযোগ" : "Fast contact"}</p>
-          <a className="block min-h-11 py-2 font-semibold text-brand" href="tel:+8801960198313">+88 0196-0198313</a>
-          <a className="block min-h-11 py-2 font-semibold text-brand" href="mailto:oxilarbangladesh@gmail.com">oxilarbangladesh@gmail.com</a>
+          <a className="block min-h-11 py-2 font-semibold text-brand" href={`tel:${SITE.phoneTel}`}>{SITE.phoneDisplay}</a>
+          <a className="block min-h-11 py-2 font-semibold text-brand" href={WA} target="_blank" rel="noreferrer">WhatsApp {SITE.whatsappDisplay}</a>
+          <a className="block min-h-11 py-2 font-semibold text-brand" href={`mailto:${SITE.email}`}>{SITE.email}</a>
           <p className="py-2">www.oxilarbd.com</p>
-          <a className="inline-flex min-h-12 items-center rounded-full bg-sky px-5 font-semibold text-paper" href={WA} target="_blank" rel="noreferrer">
-            {bn ? "হোয়াটসঅ্যাপে লিখুন" : "Message on WhatsApp"}
-          </a>
+          <p className="text-muted">{bn ? SITE.sourcingLine.bn : SITE.sourcingLine.en}</p>
         </div>
         <form onSubmit={submit} className="rounded-xl bg-card p-5 ring-1 ring-line">
           <h2 className="text-xl font-semibold">{bn ? "বার্তা" : "Message"}</h2>
+          <div className="absolute -left-[9999px]" aria-hidden="true">
+            <label>
+              Company URL
+              <input name="company_url" tabIndex={-1} autoComplete="off" />
+            </label>
+          </div>
           <label className="mt-3 block text-sm font-medium">{bn ? "নাম" : "Name"}<input name="name" required className="mt-1 h-12 w-full rounded-md border border-line px-3 text-ink" /></label>
           <label className="mt-3 block text-sm font-medium">{bn ? "ফোন" : "Phone"}<input name="phone" required className="mt-1 h-12 w-full rounded-md border border-line px-3 text-ink" inputMode="tel" /></label>
           <label className="mt-3 block text-sm font-medium">{bn ? "বিষয়" : "Topic"}
