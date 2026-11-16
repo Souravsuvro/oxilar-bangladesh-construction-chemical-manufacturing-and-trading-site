@@ -11,6 +11,7 @@ const dict: Dict = {
   about: { en: "About", bn: "আমাদের কথা" },
   sourcing: { en: "Sourcing", bn: "সোর্সিং" },
   products: { en: "Products", bn: "পণ্য" },
+  solutions: { en: "Solutions", bn: "সলিউশন" },
   calculators: { en: "Calculators", bn: "ক্যালকুলেটর" },
   resources: { en: "TDS / Lab", bn: "টিডিএস / ল্যাব" },
   projects: { en: "Projects", bn: "প্রকল্প" },
