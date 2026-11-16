@@ -11,6 +11,7 @@ const nav = [
   { to: "/", key: "home" as const },
   { to: "/about", key: "about" as const },
   { to: "/products", key: "products" as const },
+  { to: "/solutions", key: "solutions" as const },
   { to: "/calculators", key: "calculators" as const },
   { to: "/resources", key: "resources" as const },
   { to: "/projects", key: "projects" as const },
@@ -136,13 +137,13 @@ export function SiteChrome({ children }: { children: ReactNode }) {
               <span className="block text-xs font-medium tracking-wide text-brand">BANGLADESH</span>
             </span>
           </Link>
-          <nav className="ml-4 hidden items-center gap-0.5 lg:flex" aria-label="Primary">
+          <nav className="ml-4 hidden items-center gap-0.5 xl:flex" aria-label="Primary">
             {nav.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
                 className={cn(
-                  "rounded-full px-2.5 py-2.5 text-sm font-medium text-ink-soft hover:bg-paper",
+                  "rounded-full px-2 py-2.5 text-sm font-medium text-ink-soft hover:bg-paper",
                   navActive(path, item.to) && "bg-brand-soft text-brand-deep",
                 )}
                 aria-current={navActive(path, item.to) ? "page" : undefined}
@@ -175,7 +176,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
             </button>
             <button
               type="button"
-              className="inline-flex size-12 items-center justify-center rounded-full border border-line lg:hidden"
+              className="inline-flex size-12 items-center justify-center rounded-full border border-line xl:hidden"
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
               aria-controls="mobile-nav"
@@ -186,7 +187,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
           </div>
         </div>
         {open && (
-          <div id="mobile-nav" className="border-t border-line bg-card lg:hidden" role="dialog" aria-label="Mobile menu">
+          <div id="mobile-nav" className="border-t border-line bg-card xl:hidden" role="dialog" aria-label="Mobile menu">
             <div className="container-site grid gap-1 py-3">
               {nav.map((item) => (
                 <Link
@@ -276,6 +277,9 @@ export function SiteChrome({ children }: { children: ReactNode }) {
             <div className="mt-2 flex flex-wrap gap-2 text-xs">
               <Link to="/products" className="rounded-full bg-white/10 px-3 py-1.5 hover:bg-white/15">
                 {t("products")}
+              </Link>
+              <Link to="/solutions" className="rounded-full bg-white/10 px-3 py-1.5 hover:bg-white/15">
+                {t("solutions")}
               </Link>
               <Link to="/careers" className="rounded-full bg-white/10 px-3 py-1.5 hover:bg-white/15">
                 {t("careers")}
