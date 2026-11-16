@@ -1,10 +1,11 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { ArrowUp, Menu, Phone, X, MessageCircle, ClipboardList, Mail, Check } from "lucide-react";
+import { ArrowUp, Menu, Phone, X, MessageCircle, ClipboardList, Mail, Check, Facebook } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { useRfq } from "@/lib/rfq-store";
 import { RfqDrawer } from "@/components/products/RfqDrawer";
 import { cn } from "@/lib/utils";
+import { SITE, WA_DEFAULT } from "@/lib/site";
 
 const nav = [
   { to: "/", key: "home" as const },
@@ -14,12 +15,9 @@ const nav = [
   { to: "/resources", key: "resources" as const },
   { to: "/projects", key: "projects" as const },
   { to: "/b2b-portal", key: "b2b" as const },
+  { to: "/careers", key: "careers" as const },
   { to: "/contact", key: "contact" as const },
 ];
-
-const WA_DEFAULT =
-  "https://wa.me/8801960198313?text=" +
-  encodeURIComponent("Hello Oxilar Bangladesh — I need product advice / RFQ for a project.");
 
 function navActive(path: string, to: string) {
   if (to === "/") return path === "/";
@@ -41,13 +39,11 @@ export function SiteChrome({ children }: { children: ReactNode }) {
     void useRfq.persist.rehydrate();
   }, []);
 
-  // Close mobile menu + scroll to top on navigation
   useEffect(() => {
     setOpen(false);
     window.scrollTo({ top: 0, behavior: "instant" in window ? ("instant" as ScrollBehavior) : "auto" });
   }, [path]);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
@@ -55,7 +51,6 @@ export function SiteChrome({ children }: { children: ReactNode }) {
     };
   }, [open]);
 
-  // Escape closes mobile menu
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
@@ -64,7 +59,6 @@ export function SiteChrome({ children }: { children: ReactNode }) {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  // Back-to-top visibility
   useEffect(() => {
     const onScroll = () => setShowTop(window.scrollY > 480);
     onScroll();
@@ -72,7 +66,6 @@ export function SiteChrome({ children }: { children: ReactNode }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // RFQ add toast
   useEffect(() => {
     if (count > prevCount) {
       setToast(lang === "bn" ? "আরএফকিউ বাস্কেটে যোগ হয়েছে" : "Added to RFQ basket");
@@ -95,13 +88,13 @@ export function SiteChrome({ children }: { children: ReactNode }) {
       <div className="bg-ink text-paper text-sm">
         <div className="container-site flex flex-wrap items-center justify-between gap-2 py-2">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-paper/80">
-            <a className="inline-flex min-h-12 items-center gap-1.5 hover:text-paper" href="tel:+8801960198313">
+            <a className="inline-flex min-h-12 items-center gap-1.5 hover:text-paper" href={`tel:${SITE.phoneTel}`}>
               <Phone className="size-3.5" aria-hidden />
-              +88 0196-0198313
+              {SITE.phoneDisplay}
             </a>
-            <a className="inline-flex min-h-12 items-center gap-1.5 hover:text-paper" href="mailto:oxilarbangladesh@gmail.com">
+            <a className="inline-flex min-h-12 items-center gap-1.5 hover:text-paper" href={`mailto:${SITE.email}`}>
               <Mail className="size-3.5" aria-hidden />
-              oxilarbangladesh@gmail.com
+              {SITE.email}
             </a>
             <span className="hidden lg:inline">{t("office")}</span>
             <span className="hidden xl:inline">{t("factory")}</span>
@@ -209,7 +202,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
                 </Link>
               ))}
               <a href={WA_DEFAULT} target="_blank" rel="noreferrer" className="min-h-12 rounded-lg px-3 py-3 text-base font-semibold text-sky">
-                WhatsApp
+                WhatsApp · {SITE.whatsappDisplay}
               </a>
               <button
                 type="button"
@@ -238,12 +231,22 @@ export function SiteChrome({ children }: { children: ReactNode }) {
               {t("sister")}. {t("slogan")}
             </p>
             <p className="mt-3 text-xs text-paper/55">Established 6 September 2019 · Kalampur plant, Dhamrai</p>
+            <p className="mt-2 text-xs text-paper/55">{lang === "bn" ? SITE.sourcingLine.bn : SITE.sourcingLine.en}</p>
             <div className="mt-4 flex flex-wrap gap-2">
-              <a href="tel:+8801960198313" className="inline-flex min-h-11 items-center rounded-full bg-brand px-4 text-sm font-semibold text-paper">
+              <a href={`tel:${SITE.phoneTel}`} className="inline-flex min-h-11 items-center rounded-full bg-brand px-4 text-sm font-semibold text-paper">
                 {lang === "bn" ? "কল করুন" : "Call now"}
               </a>
               <a href={WA_DEFAULT} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center rounded-full bg-sky px-4 text-sm font-semibold text-paper">
                 WhatsApp
+              </a>
+              <a
+                href={SITE.facebook}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-[#1877F2] px-4 text-sm font-semibold text-paper"
+              >
+                <Facebook className="size-4" aria-hidden />
+                Facebook
               </a>
               <button type="button" onClick={() => setRfq(true)} className="inline-flex min-h-11 items-center rounded-full bg-white/10 px-4 text-sm font-semibold text-paper hover:bg-white/15">
                 {t("rfq")}
@@ -252,30 +255,33 @@ export function SiteChrome({ children }: { children: ReactNode }) {
           </div>
           <div>
             <p className="text-sm font-semibold text-amber">{t("office")}</p>
-            <p className="mt-2 text-sm text-paper/75">31/1 Babar Road, Mohammadpur, Dhanmondi, Dhaka</p>
+            <p className="mt-2 text-sm text-paper/75">{SITE.office}</p>
             <p className="mt-3 text-sm font-semibold text-amber">{t("factory")}</p>
-            <p className="mt-2 text-sm text-paper/75">Kalampur, Dhamrai, Dhaka</p>
+            <p className="mt-2 text-sm text-paper/75">{SITE.factory}</p>
           </div>
           <div className="text-sm">
-            <a className="block min-h-12 py-2 hover:text-brand-soft" href="tel:+8801960198313">
-              +88 0196-0198313
+            <a className="block min-h-12 py-2 hover:text-brand-soft" href={`tel:${SITE.phoneTel}`}>
+              {SITE.phoneDisplay}
             </a>
-            <a className="block min-h-12 py-2 hover:text-brand-soft" href="mailto:oxilarbangladesh@gmail.com">
-              oxilarbangladesh@gmail.com
+            <a className="block min-h-12 py-2 hover:text-brand-soft" href={WA_DEFAULT} target="_blank" rel="noreferrer">
+              WhatsApp {SITE.whatsappDisplay}
+            </a>
+            <a className="block min-h-12 py-2 hover:text-brand-soft" href={`mailto:${SITE.email}`}>
+              {SITE.email}
+            </a>
+            <a className="block min-h-12 py-2 hover:text-brand-soft" href={SITE.facebook} target="_blank" rel="noreferrer">
+              Facebook page
             </a>
             <p className="py-2 text-paper/70">www.oxilarbd.com</p>
             <div className="mt-2 flex flex-wrap gap-2 text-xs">
               <Link to="/products" className="rounded-full bg-white/10 px-3 py-1.5 hover:bg-white/15">
                 {t("products")}
               </Link>
-              <Link to="/calculators" className="rounded-full bg-white/10 px-3 py-1.5 hover:bg-white/15">
-                {t("calculators")}
+              <Link to="/careers" className="rounded-full bg-white/10 px-3 py-1.5 hover:bg-white/15">
+                {t("careers")}
               </Link>
-              <Link to="/resources" className="rounded-full bg-white/10 px-3 py-1.5 hover:bg-white/15">
-                {t("resources")}
-              </Link>
-              <Link to="/b2b-portal" className="rounded-full bg-white/10 px-3 py-1.5 hover:bg-white/15">
-                {t("b2b")}
+              <Link to="/contact" className="rounded-full bg-white/10 px-3 py-1.5 hover:bg-white/15">
+                {t("contact")}
               </Link>
             </div>
           </div>
@@ -288,9 +294,8 @@ export function SiteChrome({ children }: { children: ReactNode }) {
         </div>
       </footer>
 
-      {/* Mobile bottom bar */}
       <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-line bg-card md:hidden">
-        <a className="flex min-h-14 flex-col items-center justify-center gap-0.5 text-xs font-semibold text-ink" href="tel:+8801960198313">
+        <a className="flex min-h-14 flex-col items-center justify-center gap-0.5 text-xs font-semibold text-ink" href={`tel:${SITE.phoneTel}`}>
           <Phone className="size-4 text-brand" />
           {t("call")}
         </a>
@@ -309,7 +314,6 @@ export function SiteChrome({ children }: { children: ReactNode }) {
         </button>
       </div>
 
-      {/* Back to top */}
       {showTop && (
         <button
           type="button"
@@ -321,7 +325,6 @@ export function SiteChrome({ children }: { children: ReactNode }) {
         </button>
       )}
 
-      {/* RFQ toast */}
       {toast && (
         <div
           role="status"
