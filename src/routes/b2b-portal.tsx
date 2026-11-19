@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { useI18n } from "@/lib/i18n";
+import { sendLead, trackLead } from "@/lib/leads";
+import { whatsappUrl } from "@/lib/site";
 
 export const Route = createFileRoute("/b2b-portal")({
   head: () => ({
@@ -11,11 +13,6 @@ export const Route = createFileRoute("/b2b-portal")({
   }),
   component: Page,
 });
-
-function save(key: string, data: Record<string, string>) {
-  const prev = JSON.parse(localStorage.getItem(key) || "[]") as unknown[];
-  localStorage.setItem(key, JSON.stringify([{ ...data, at: new Date().toISOString() }, ...prev].slice(0, 30)));
-}
 
 function Page() {
   const { lang } = useI18n();
@@ -37,6 +34,7 @@ function Page() {
       </div>
       <div className="mt-8 grid gap-6 lg:grid-cols-2">
         <FormCard
+          kind="dealer"
           title={bn ? "ডিলারশিপ আবেদন" : "Dealership application"}
           fields={[
             ["company", bn ? "প্রতিষ্ঠান" : "Company"],
@@ -44,10 +42,10 @@ function Page() {
             ["phone", bn ? "ফোন" : "Phone"],
             ["store", bn ? "দোকান / গোডাউন" : "Shop or godown"],
           ]}
-          storeKey="oxilar-dealers"
           bn={bn}
         />
         <FormCard
+          kind="project"
           title={bn ? "প্রকল্প কোটেশন" : "Project quotation"}
           fields={[
             ["project", bn ? "প্রকল্পের নাম" : "Project name"],
@@ -55,7 +53,6 @@ function Page() {
             ["phone", bn ? "ফোন" : "Phone"],
             ["scope", bn ? "স্কোপ (ছাদ / আরএমসি / ফ্লোর)" : "Scope (roof / RMC / floor)"],
           ]}
-          storeKey="oxilar-projects-rfq"
           bn={bn}
         />
       </div>
@@ -66,41 +63,145 @@ function Page() {
 function FormCard({
   title,
   fields,
-  storeKey,
+  kind,
   bn,
 }: {
   title: string;
   fields: [string, string][];
-  storeKey: string;
+  kind: "dealer" | "project";
   bn: boolean;
 }) {
   const [ok, setOk] = useState(false);
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const [emailed, setEmailed] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [wa, setWa] = useState("");
+
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const fd = new FormData(e.currentTarget);
-    const data: Record<string, string> = {};
-    fields.forEach(([k]) => {
-      data[k] = String(fd.get(k) || "");
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+    if (String(fd.get("company_website") || "").trim()) {
+      setBusy(false);
+      setOk(true);
+      setEmailed(true);
+      setWa("");
+      form.reset();
+      return;
+    }
+
+    setBusy(true);
+    const phone = String(fd.get("phone") || "").trim();
+    const email = String(fd.get("email") || "").trim();
+    const at = new Date().toISOString();
+
+    let name = "";
+    let topic = "";
+    let detail = "";
+    let waText = "";
+
+    if (kind === "dealer") {
+      const company = String(fd.get("company") || "").trim();
+      const district = String(fd.get("district") || "").trim();
+      const store = String(fd.get("store") || "").trim();
+      name = company;
+      topic = district;
+      detail = [`District: ${district}`, `Shop/godown: ${store}`].join("\n");
+      waText = [
+        "Hello Oxilar Bangladesh — dealership application.",
+        `Company: ${company}`,
+        `Phone: ${phone}`,
+        email ? `Email: ${email}` : "",
+        `District: ${district}`,
+        `Shop/godown: ${store}`,
+      ]
+        .filter(Boolean)
+        .join("\n");
+    } else {
+      const project = String(fd.get("project") || "").trim();
+      const buyer = String(fd.get("buyer") || "").trim();
+      const scope = String(fd.get("scope") || "").trim();
+      name = project;
+      topic = buyer;
+      detail = [`Buyer: ${buyer}`, `Scope: ${scope}`].join("\n");
+      waText = [
+        "Hello Oxilar Bangladesh — project quotation.",
+        `Project: ${project}`,
+        `Phone: ${phone}`,
+        email ? `Email: ${email}` : "",
+        `Buyer: ${buyer}`,
+        `Scope: ${scope}`,
+      ]
+        .filter(Boolean)
+        .join("\n");
+    }
+
+    const result = await sendLead({
+      type: kind,
+      name,
+      phone,
+      email: email || undefined,
+      topic,
+      detail,
+      at,
     });
-    save(storeKey, data);
+    setBusy(false);
+    setEmailed(result.emailed);
+    setWa(result.emailed ? "" : whatsappUrl(waText));
     setOk(true);
-    e.currentTarget.reset();
+    trackLead(kind === "dealer" ? "dealer_form" : "project_form", { emailed: result.emailed });
+    form.reset();
   };
+
   return (
     <form onSubmit={onSubmit} className="rounded-xl bg-card p-5 ring-1 ring-line">
       <h2 className="text-xl font-semibold">{title}</h2>
+      <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+        <label>
+          Company website
+          <input name="company_website" tabIndex={-1} autoComplete="off" />
+        </label>
+      </div>
       <div className="mt-4 space-y-3">
         {fields.map(([k, label]) => (
           <label key={k} className="block text-sm font-medium">
             {label}
-            <input name={k} required className="mt-1 h-12 w-full rounded-md border border-line px-3" />
+            <input
+              name={k}
+              required
+              inputMode={k === "phone" ? "tel" : undefined}
+              autoComplete={k === "phone" ? "tel" : undefined}
+              className="mt-1 h-12 w-full rounded-md border border-line px-3"
+            />
           </label>
         ))}
+        <label className="block text-sm font-medium">
+          {bn ? "ইমেইল (ঐচ্ছিক)" : "Email (optional)"}
+          <input name="email" type="email" autoComplete="email" className="mt-1 h-12 w-full rounded-md border border-line px-3" />
+        </label>
       </div>
-      <button className="mt-4 min-h-12 rounded-full bg-brand px-6 font-semibold text-paper" type="submit">
-        {bn ? "জমা দিন" : "Submit"}
+      <button disabled={busy} className="mt-4 min-h-12 rounded-full bg-brand px-6 font-semibold text-paper disabled:opacity-50" type="submit">
+        {busy ? (bn ? "পাঠানো হচ্ছে…" : "Sending…") : bn ? "জমা দিন" : "Submit"}
       </button>
-      {ok && <p className="mt-3 text-sm text-brand-deep">{bn ? "এই ব্রাউজারে সেভ হয়েছে।" : "Saved in this browser."}</p>}
+      {ok && (
+        <div className="mt-3 text-sm text-brand-deep">
+          {emailed ? (
+            <p>{bn ? "টিম আপনার অনুরোধ পেয়েছে।" : "The team received your request."}</p>
+          ) : (
+            <>
+              <p>
+                {bn
+                  ? "অনুরোধ এই ডিভাইসে সংরক্ষিত হয়েছে। হোয়াটসঅ্যাপেও পাঠান।"
+                  : "Request saved on this device. Please also send it on WhatsApp."}
+              </p>
+              {wa && (
+                <a className="mt-2 inline-flex min-h-11 items-center font-semibold text-brand" href={wa} target="_blank" rel="noreferrer">
+                  {bn ? "হোয়াটসঅ্যাপে পাঠান" : "Send on WhatsApp"}
+                </a>
+              )}
+            </>
+          )}
+        </div>
+      )}
     </form>
   );
 }
