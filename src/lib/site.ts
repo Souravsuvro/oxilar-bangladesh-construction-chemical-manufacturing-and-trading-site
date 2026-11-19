@@ -3,12 +3,20 @@
 export const SITE = {
   brand: "Oxilar Bangladesh",
   email: "oxilarbangladesh@gmail.com",
-  /** Voice / hotline — aligned with WhatsApp Business. */
+  /** Primary public line / WhatsApp Business (Contact section). */
   phoneDisplay: "+88 0182-6736886",
   phoneTel: "+8801826736886",
   /** WhatsApp Business account used by site CTAs. */
   whatsappDisplay: "+88 01826-736886",
   whatsappE164: "8801826736886",
+  /**
+   * Dealership & HR voice line (per client correction).
+   * Kept separate from WhatsApp Business number.
+   */
+  dealerPhoneDisplay: "+88 0196-0198313",
+  dealerPhoneTel: "+8801960198313",
+  hrPhoneDisplay: "+88 0196-0198313",
+  hrPhoneTel: "+8801960198313",
   facebook: "https://www.facebook.com/share/19MbCzTKzp/",
   web: "https://www.oxilarbd.com",
   office: "31/1 Babar Road, Mohammadpur, Dhanmondi, Dhaka",
