@@ -4,7 +4,7 @@ import { categories, packLabels, products, type Category, type Pack } from "@/da
 import { useI18n } from "@/lib/i18n";
 import { useRfq } from "@/lib/rfq-store";
 
-const PACK_FILTERS: (Pack | "all")[] = ["all", "1L", "4L", "10L", "20L", "drum", "1kg", "25kg"];
+const PACK_FILTERS: (Pack | "all")[] = ["all", "1L", "5L", "10L", "20L", "200L", "1kg", "25kg"];
 
 export const Route = createFileRoute("/products")({
   head: () => ({
@@ -13,7 +13,7 @@ export const Route = createFileRoute("/products")({
       {
         name: "description",
         content:
-          "Super-100, Damp Guard-400, Pre Cast Premium, Solid Bond, Rapid Bland and dust-control systems. Packs from 1L to 20L, drums and kg bags. RFQ for Bangladesh projects.",
+          "Super-100, Damp Guard-400, Pre Cast Premium, Solid Bond, Rapid Bland and dust-control systems. Packs: 1, 5, 10, 20 and 200 Liter, plus kg bags. RFQ for Bangladesh projects.",
       },
     ],
   }),
