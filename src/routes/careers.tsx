@@ -72,7 +72,6 @@ function Page() {
     setErr("");
     const fd = new FormData(e.currentTarget);
 
-    // Honeypot — bots that fill hidden fields are dropped silently
     if (String(fd.get("company_url") || "").trim()) {
       setOk(true);
       setEmailed(true);
@@ -80,7 +79,6 @@ function Page() {
       return;
     }
 
-    // Minimum dwell time (anti-bot)
     if (Date.now() - started.current < 4000) {
       setErr(bn ? "একটু অপেক্ষা করে আবার পাঠান।" : "Please wait a moment and try again.");
       return;
@@ -101,7 +99,6 @@ function Page() {
       return;
     }
 
-    // Soft validation on file size (client); actual files should be emailed
     if (resume && typeof resume === "object" && "size" in resume && (resume as File).size > 2_500_000) {
       setErr(
         bn
@@ -163,6 +160,35 @@ function Page() {
         </p>
       </header>
 
+      {/* HR Department section - new requirement */}
+      <section className="mt-10 rounded-xl bg-card p-6 ring-1 ring-line">
+        <h2 className="text-2xl font-semibold text-ink">
+          {bn ? "ক্যারিয়ার সুযোগ — এইচআর বিভাগ" : "Career Opportunities – HR Department"}
+        </h2>
+        <p className="mt-3 text-sm text-muted">
+          {bn
+            ? "আমাদের টিমে যোগ দিতে আগ্রহী? আপডেটেড সিভি নিচের ইমেইলে পাঠান অথবা আরও তথ্যের জন্য যোগাযোগ করুন।"
+            : "Interested in joining our team? Please send your updated CV to the following email address or contact us for further information."}
+        </p>
+        <ul className="mt-4 space-y-2 text-sm text-ink">
+          <li>
+            <span className="font-semibold">{bn ? "ইমেইল:" : "Email:"}</span>{" "}
+            <a className="text-brand font-semibold" href="mailto:oxilarbangladesh@gmail.com">
+              oxilarbangladesh@gmail.com
+            </a>
+          </li>
+          <li>
+            <span className="font-semibold">{bn ? "যোগাযোগ:" : "Contact:"}</span>{" "}
+            <a className="text-brand font-semibold" href="tel:+8801960198313">
+              01960198313
+            </a>
+          </li>
+        </ul>
+        <p className="mt-4 text-sm font-medium text-ink">
+          {bn ? "আপনার কাছ থেকে শুনতে চাই!" : "We look forward to hearing from you!"}
+        </p>
+      </section>
+
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">{bn ? "খোলা পদ" : "Open positions"}</h2>
         <div className="mt-4 grid gap-4 md:grid-cols-2">
@@ -216,7 +242,6 @@ function Page() {
         >
           <h2 className="text-xl font-semibold">{bn ? "আবেদন ফর্ম" : "Application form"}</h2>
 
-          {/* Honeypot — not visible to users */}
           <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
             <label>
               Company website
