@@ -3,6 +3,7 @@ import { useI18n } from "@/lib/i18n";
 import { useRfq } from "@/lib/rfq-store";
 import { cn } from "@/lib/utils";
 import { LiveRegion } from "@/components/a11y/LiveRegion";
+import { SITE } from "@/lib/site";
 
 type Mode = "volume" | "bags" | "epoxy";
 
@@ -11,7 +12,7 @@ function printSummary(title: string, lines: string[]) {
   if (!w) return;
   const body = lines.map((l) => `<li>${l}</li>`).join("");
   w.document.write(
-    `<!doctype html><html><head><title>${title}</title><style>body{font-family:sans-serif;padding:40px;color:#0f172a}h1{color:#059669;font-size:22px}</style></head><body><h1>${title}</h1><p>Oxilar Bangladesh · Independent manufacturer · +88 0196-0198313 · www.oxilarbd.com</p><ul>${body}</ul><p>Estimates only. Confirm with a trial mix and the current TDS.</p></body></html>`,
+    `<!doctype html><html><head><title>${title}</title><style>body{font-family:sans-serif;padding:40px;color:#0f172a}h1{color:#059669;font-size:22px}</style></head><body><h1>${title}</h1><p>Oxilar Bangladesh · Independent manufacturer · ${SITE.phoneDisplay} · www.oxilarbd.com</p><ul>${body}</ul><p>Estimates only. Confirm with a trial mix and the current TDS.</p></body></html>`,
   );
   w.document.close();
   w.focus();

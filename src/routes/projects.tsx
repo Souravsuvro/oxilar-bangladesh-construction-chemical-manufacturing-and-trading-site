@@ -17,7 +17,7 @@ function Page() {
   const { tx, lang } = useI18n();
   const [sector, setSector] = useState("all");
   const [split, setSplit] = useState(55);
-  const list = projects.filter((p) => sector === "all" || p.sector === sector);
+  const list = projects.filter((p) => sector === "all" || p.sector.en === sector);
   const bn = lang === "bn";
   return (
     <div className="container-site py-10">
@@ -26,18 +26,21 @@ function Page() {
         {bn ? "নিচের কাজগুলো সিস্টেমের ধরন দেখায়। ছবি সাপ্লাই ও অ্যাপ্লিকেশন রেফারেন্স, একই দেয়ালের আগে-পরে নয়।" : "These jobs show system type. Photos are supply and application references, not a single wall before and after."}
       </p>
       <div className="mt-6 flex gap-2 overflow-auto">
+        <button type="button" onClick={() => setSector("all")} className={`min-h-11 shrink-0 rounded-full px-4 text-sm font-semibold ${sector === "all" ? "bg-ink text-paper" : "bg-card ring-1 ring-line"}`}>
+          {bn ? "সব" : "All"}
+        </button>
         {projectSectors.map((s) => (
-          <button key={s.id} type="button" onClick={() => setSector(s.id)} className={`min-h-11 shrink-0 rounded-full px-4 text-sm font-semibold ${sector === s.id ? "bg-ink text-paper" : "bg-card ring-1 ring-line"}`}>
-            {tx(s.label)}
+          <button key={s.en} type="button" onClick={() => setSector(s.en)} className={`min-h-11 shrink-0 rounded-full px-4 text-sm font-semibold ${sector === s.en ? "bg-ink text-paper" : "bg-card ring-1 ring-line"}`}>
+            {tx(s)}
           </button>
         ))}
       </div>
       <div className="mt-6 grid gap-4 md:grid-cols-2">
         {list.map((p) => (
-          <article key={p.id} className="overflow-hidden rounded-xl bg-card ring-1 ring-line">
-            <img src={p.image} alt="" className="h-52 w-full object-cover" />
+          <article key={p.title.en} className="overflow-hidden rounded-xl bg-card ring-1 ring-line">
+            <img src="/media/stack.jpg" alt="" className="h-52 w-full object-cover" />
             <div className="p-4">
-              <p className="text-xs font-semibold text-sky">{tx(p.place)}</p>
+              <p className="text-xs font-semibold text-sky">{tx(p.sector)}</p>
               <h2 className="text-xl font-semibold">{tx(p.title)}</h2>
               <p className="mt-2 text-sm text-muted">{tx(p.summary)}</p>
             </div>
@@ -55,9 +58,9 @@ function Page() {
       </section>
       <section className="mt-12 grid gap-4 lg:grid-cols-3">
         {quotes.map((q) => (
-          <blockquote key={q.who.en} className="rounded-xl bg-card p-5 ring-1 ring-line">
+          <blockquote key={q.by.en} className="rounded-xl bg-card p-5 ring-1 ring-line">
             <p className="text-sm">“{tx(q.quote)}”</p>
-            <footer className="mt-3 text-xs font-semibold text-muted">{tx(q.who)}</footer>
+            <footer className="mt-3 text-xs font-semibold text-muted">{tx(q.by)}</footer>
           </blockquote>
         ))}
       </section>

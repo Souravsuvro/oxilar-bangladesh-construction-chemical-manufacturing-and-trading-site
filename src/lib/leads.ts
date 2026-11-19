@@ -12,7 +12,7 @@
  */
 
 export type LeadPayload = {
-  type: "contact" | "rfq" | "careers";
+  type: "contact" | "rfq" | "careers" | "dealer" | "project";
   name: string;
   phone: string;
   email?: string;
@@ -53,7 +53,11 @@ export async function sendLead(payload: LeadPayload): Promise<{ ok: boolean; ema
         ? "oxilar-rfq-sent"
         : payload.type === "careers"
           ? "oxilar-careers"
-          : "oxilar-contact";
+          : payload.type === "dealer"
+            ? "oxilar-dealers"
+            : payload.type === "project"
+              ? "oxilar-projects-rfq"
+              : "oxilar-contact";
     const prev = JSON.parse(localStorage.getItem(key) || "[]") as unknown[];
     localStorage.setItem(key, JSON.stringify([payload, ...prev].slice(0, 30)));
   } catch {
@@ -70,7 +74,11 @@ export async function sendLead(payload: LeadPayload): Promise<{ ok: boolean; ema
       ? `[Oxilar RFQ] ${payload.name}`
       : payload.type === "careers"
         ? `[Oxilar Careers] ${payload.position || "Application"} — ${payload.name}`
-        : `[Oxilar Contact] ${payload.name}`;
+        : payload.type === "dealer"
+          ? `[Oxilar Dealer] ${payload.name}`
+          : payload.type === "project"
+            ? `[Oxilar Project] ${payload.name}`
+            : `[Oxilar Contact] ${payload.name}`;
 
   const body: Record<string, string> = {
     _subject: subject,

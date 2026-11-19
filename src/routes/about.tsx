@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { companyProfile, sourcing } from "@/data/catalog";
 import { useI18n } from "@/lib/i18n";
+import { SITE } from "@/lib/site";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -79,7 +80,7 @@ function AboutPage() {
               31/1 Babar Road, Mohammadpur, Dhanmondi, Dhaka
             </li>
             <li>
-              <span className="font-semibold">{lang === "bn" ? "ফোন:" : "Phone:"}</span> +88 0196-0198313
+              <span className="font-semibold">{lang === "bn" ? "ফোন:" : "Phone:"}</span> {SITE.phoneDisplay}
             </li>
           </ul>
         </div>

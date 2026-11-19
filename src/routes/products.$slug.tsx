@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { packLabels, products } from "@/data/catalog";
 import { useI18n } from "@/lib/i18n";
 import { useRfq } from "@/lib/rfq-store";
+import { whatsappUrl } from "@/lib/site";
 import { useState } from "react";
 
 export const Route = createFileRoute("/products/$slug")({
@@ -143,7 +144,9 @@ function ProductDetail() {
     );
   }
 
-  const related = products.filter((x) => x.slug !== p.slug).slice(0, 4);
+  const product = p;
+
+  const related = products.filter((x) => x.slug !== product.slug).slice(0, 4);
   const sameCategory = products.filter((x) => x.category === p.category && x.slug !== p.slug).slice(0, 3);
 
   const schema = {
@@ -207,13 +210,11 @@ function ProductDetail() {
     ],
   };
 
-  const wa = `https://wa.me/8801960198313?text=${encodeURIComponent(
-    `Hello Oxilar — RFQ interest: ${p.name.en} (${p.sku}), pack ${pack}`,
-  )}`;
+  const wa = whatsappUrl(`Hello Oxilar — RFQ interest: ${p.name.en} (${p.sku}), pack ${pack}`);
 
   function handleAddRfq() {
     setRfqBusy(true);
-    add({ sku: p.sku, name: p.name.en, pack, note: "" });
+    add({ sku: product.sku, name: product.name.en, pack, note: "" });
     setOpen(true);
     window.setTimeout(() => setRfqBusy(false), 400);
   }

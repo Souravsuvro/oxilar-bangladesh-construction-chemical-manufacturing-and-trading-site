@@ -460,12 +460,64 @@ export const quotes: { quote: Copy; by: Copy }[] = [
   },
 ];
 
-export const videos: { title: Copy; href: string }[] = [];
-export const sheets: { title: Copy; href: string }[] = [
-  { title: { en: "Request current TDS pack", bn: "বর্তমান টিডিএস প্যাক চান" }, href: "/contact" },
+export const videos: { title: Copy; body: Copy; length: string }[] = [
+  {
+    title: { en: "Roof slurry method", bn: "ছাদের স্লারি পদ্ধতি" },
+    body: {
+      en: "Working application note for the Super-100 roof guide: SSD the slab, two cross coats, keep rain off for 24 hours, then plaster.",
+      bn: "সুপার-১০০ ছাদ গাইডের ওয়ার্কিং অ্যাপ্লিকেশন নোট: স্ল্যাব এসএসডি, দুই আড়াআড়ি কোট, ২৪ ঘণ্টা বৃষ্টি থেকে রক্ষা, তারপর প্লাস্টার।",
+    },
+    length: "Guide",
+  },
 ];
-export const labs: { name: string; note: Copy }[] = [
-  { name: "BUET", note: { en: "Referenced test methods", bn: "রেফারেন্সড টেস্ট মেথড" } },
-  { name: "CUET", note: { en: "Referenced test methods", bn: "রেফারেন্সড টেস্ট মেথড" } },
-  { name: "BCSIR", note: { en: "Referenced test methods", bn: "রেফারেন্সড টেস্ট মেথড" } },
+
+export const sheets: { id: string; kind: "TDS" | "SDS" | "Manual"; product: string; file: string }[] = [
+  { id: "tds-super-100", kind: "TDS", product: "Oxilar Super-100", file: "/documents/tds-super-100.html" },
+  { id: "sds-super-100", kind: "SDS", product: "Oxilar Super-100", file: "/documents/sds-super-100.html" },
+  { id: "manual-roof", kind: "Manual", product: "Roof slurry guide", file: "/documents/guide-roof.html" },
+  {
+    id: "tds-sp-220-legacy",
+    kind: "TDS",
+    product: "Legacy sheet name: Plast SP-220 (not a current SKU)",
+    file: "/documents/tds-sp-220.html",
+  },
+  {
+    id: "tds-ep-400-legacy",
+    kind: "TDS",
+    product: "Legacy sheet name: Floor EP-400 (not a current SKU)",
+    file: "/documents/tds-ep-400.html",
+  },
+];
+
+export const labs: { id: string; body: string; title: Copy; note: Copy; file: string }[] = [
+  {
+    id: "buet",
+    body: "BUET",
+    title: { en: "Strength and permeability method note", bn: "স্ট্রেংথ ও পারমিয়েবিলিটি মেথড নোট" },
+    note: {
+      en: "Referenced methods on a working HTML sheet — not a signed BUET certificate.",
+      bn: "ওয়ার্কিং এইচটিএমএল শিটে রেফারেন্সড মেথড — স্বাক্ষরিত বিইউইটি সনদ নয়।",
+    },
+    file: "/documents/lab-buet.html",
+  },
+  {
+    id: "cuet",
+    body: "CUET",
+    title: { en: "Chloride screen method note", bn: "ক্লোরাইড স্ক্রিন মেথড নোট" },
+    note: {
+      en: "Referenced methods on a working HTML sheet — not a signed CUET certificate.",
+      bn: "ওয়ার্কিং এইচটিএমএল শিটে রেফারেন্সড মেথড — স্বাক্ষরিত সিইউইটি সনদ নয়।",
+    },
+    file: "/documents/lab-cuet.html",
+  },
+  {
+    id: "bcsir",
+    body: "BCSIR",
+    title: { en: "Material characterisation method note", bn: "ম্যাটেরিয়াল ক্যারেক্টারাইজেশন মেথড নোট" },
+    note: {
+      en: "Referenced methods on a working HTML sheet — not a signed BCSIR certificate.",
+      bn: "ওয়ার্কিং এইচটিএমএল শিটে রেফারেন্সড মেথড — স্বাক্ষরিত বিসিএসআইআর সনদ নয়।",
+    },
+    file: "/documents/lab-bcsir.html",
+  },
 ];
