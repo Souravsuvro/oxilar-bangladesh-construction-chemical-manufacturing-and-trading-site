@@ -20,6 +20,19 @@ function Page() {
   return (
     <div className="container-site py-10">
       <h1 className="text-4xl font-semibold">{bn ? "ডিলার ও প্রকল্প পোর্টাল" : "Dealer and project portal"}</h1>
+      <div className="mt-4 rounded-xl bg-mist/70 p-4 text-sm text-ink ring-1 ring-line">
+        <p className="font-semibold">
+          {bn
+            ? "ডিলারশিপ অনুসন্ধানের জন্য নিচের নম্বরে যোগাযোগ করুন।"
+            : "For dealership inquiries, please contact us at the following number for further details:"}
+        </p>
+        <p className="mt-2">
+          {bn ? "যোগাযোগ নম্বর:" : "Contact Number:"}{" "}
+          <a className="font-semibold text-brand" href="tel:+8801960198313">
+            01960198313
+          </a>
+        </p>
+      </div>
       <div className="mt-6 grid gap-3 md:grid-cols-3">
         {[
           [bn ? "পাইকারি মূল্য" : "Wholesale pricing", bn ? "ভলিউম অনুযায়ী টায়ার, মাসিক টার্গেট নয়।" : "Tiers follow volume, not a monthly slogan."],
