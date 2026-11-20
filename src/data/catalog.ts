@@ -1,9 +1,9 @@
 export type Lang = "en" | "bn";
 export type Copy = { en: string; bn: string };
 
-export type Pack = "1L" | "5L" | "10L" | "20L" | "200L" | "1kg" | "25kg";
+export type Pack = "1L" | "5L" | "10L" | "20L" | "200L";
 
-export type Category = "admixture" | "waterproofing" | "dust" | "flooring" | "grout";
+export type Category = "waterproofing" | "admixture";
 
 export type Product = {
   slug: string;
@@ -12,7 +12,10 @@ export type Product = {
   category: Category;
   packs: Pack[];
   image: string;
+  gallery?: string[];
+  colorTag?: Copy;
   short: Copy;
+  benefits: Copy[];
   applications: Copy[];
   dosage: Copy;
   mlPerBag: number;
@@ -23,11 +26,8 @@ export type Product = {
 
 export const categories: { id: Category | "all"; label: Copy }[] = [
   { id: "all", label: { en: "All systems", bn: "সব সিস্টেম" } },
-  { id: "admixture", label: { en: "Concrete admixtures", bn: "কংক্রিট অ্যাডমিক্সচার" } },
   { id: "waterproofing", label: { en: "Damp & waterproofing", bn: "ড্যাম্প ও ওয়াটারপ্রুফিং" } },
-  { id: "dust", label: { en: "Dust control", bn: "ডাস্ট কন্ট্রোল" } },
-  { id: "flooring", label: { en: "Industrial flooring", bn: "ইন্ডাস্ট্রিয়াল ফ্লোরিং" } },
-  { id: "grout", label: { en: "Grouts & anchors", bn: "গ্রাউট ও অ্যাঙ্কর" } },
+  { id: "admixture", label: { en: "Concrete admixtures", bn: "কংক্রিট অ্যাডমিক্সচার" } },
 ];
 
 export const packLabels: Record<Pack, Copy> = {
@@ -36,8 +36,6 @@ export const packLabels: Record<Pack, Copy> = {
   "10L": { en: "10 Liter", bn: "১০ লিটার" },
   "20L": { en: "20 Liter", bn: "২০ লিটার" },
   "200L": { en: "200 Liter", bn: "২০০ লিটার" },
-  "1kg": { en: "1 kg pack", bn: "১ কেজি প্যাক" },
-  "25kg": { en: "25 kg bag", bn: "২৫ কেজি ব্যাগ" },
 };
 
 const LIQUID: Pack[] = ["1L", "5L", "10L", "20L", "200L"];
@@ -45,182 +43,138 @@ const PACK_SPEC = { en: "1 / 5 / 10 / 20 / 200 L", bn: "১ / ৫ / ১০ / ২
 
 export const products: Product[] = [
   {
-    slug: "oxilar-super-100",
-    sku: "OX-S100",
-    name: { en: "Oxilar Super-100", bn: "অক্সিলার সুপার-১০০" },
-    category: "admixture",
-    packs: LIQUID,
-    image: "/media/oxilar-product-pails.jpg",
-    short: {
-      en: "Multipurpose polymerised concrete admixture. Protects against acid rain, reduces heat of hydration, improves workability and strength.",
-      bn: "মাল্টিপারপাস পলিমারাইজড কংক্রিট অ্যাডমিক্সচার। অ্যাসিড বৃষ্টি থেকে রক্ষা, ওয়ার্ক্যাবিলিটি ও শক্তি বৃদ্ধি।",
-    },
-    applications: [
-      { en: "Column and roof casting, overhead water tanks", bn: "কলাম ও ছাদ ঢালাই, ওভারহেড পানির ট্যাংক" },
-      { en: "Ready-mix yards and structural pours", bn: "রেডি মিক্স ইয়ার্ড ও স্ট্রাকচারাল পোর" },
-    ],
-    dosage: {
-      en: "250–300 ml per 50 kg cement bag; acid exposure 300–400 ml. Confirm with trial mix and TDS.",
-      bn: "প্রতি ৫০ কেজি সিমেন্ট ব্যাগে ২৫০–৩০০ মিলি; অ্যাসিড এক্সপোজারে ৩০০–৪০০ মিলি।",
-    },
-    mlPerBag: 275,
-    method: [
-      { en: "Add with mixing water after cement and aggregates are wet.", bn: "সিমেন্ট ও অ্যাগ্রিগেট ভেজার পর মিক্সিং ওয়াটারের সাথে যোগ করুন।" },
-    ],
-    safety: [{ en: "Store sealed, away from children, at ambient temperature.", bn: "শিশুদের নাগালের বাইরে সিল করে রাখুন।" }],
-    specs: [
-      { label: { en: "Form", bn: "ফর্ম" }, value: { en: "Polymerised liquid", bn: "পলিমারাইজড লিকুইড" } },
-      { label: { en: "Packs", bn: "প্যাক" }, value: PACK_SPEC },
-    ],
-  },
-  {
-    slug: "oxilar-damp-guard-400",
-    sku: "OX-DG400",
-    name: { en: "Oxilar Damp Guard-400", bn: "অক্সিলার ড্যাম্প গার্ড-৪০০" },
+    slug: "oxilar-damp-guard",
+    sku: "OX-DG",
+    name: { en: "Oxilar Damp Guard", bn: "অক্সিলার ড্যাম্প গার্ড" },
     category: "waterproofing",
     packs: LIQUID,
-    image: "/media/oxilar-product-pail-closeup.jpg",
+    image: "/media/damp-guard-front.jpg",
+    gallery: ["/media/damp-guard-front.jpg", "/media/damp-guard-back.jpg", "/media/damp-guard-400-20l.jpg"],
+    colorTag: { en: "Yellow Drum", bn: "হলুদ ড্রাম" },
     short: {
-      en: "Water-reducing and waterproofing liquid admixture — acid and salt resistance, higher strength, damp inactivation.",
-      bn: "ওয়াটার-রিডিউসিং ও ওয়াটারপ্রুফিং লিকুইড — অ্যাসিড ও লবণ প্রতিরোধ, উচ্চ শক্তি।",
+      en: "Water-reducing and waterproofing liquid admixture for every type of casting. Acid and salt resistance, higher strength, and lasting inactivation of damp and salts.",
+      bn: "ওয়াটার-রিডিউসিং ও ওয়াটারপ্রুফিং লিকুইড অ্যাডমিক্সচার। অ্যাসিড ও লবণ প্রতিরোধ, উচ্চ শক্তি এবং ড্যাম্প ও লবণ স্থায়ীভাবে নিষ্ক্রিয় রাখে।",
     },
+    benefits: [
+      { en: "Integral damp & waterproofing in the mix", bn: "মিক্সের সাথেই ড্যাম্প ও ওয়াটারপ্রুফিং" },
+      { en: "Resists acid rain, salts and coastal exposure", bn: "অ্যাসিড বৃষ্টি, লবণ ও উপকূলীয় এক্সপোজার প্রতিরোধ" },
+      { en: "Improves workability and compressive strength", bn: "ওয়ার্ক্যাবিলিটি ও কম্প্রেসিভ স্ট্রেংথ বাড়ায়" },
+      { en: "Available in site-ready 1L to 200L packs", bn: "সাইট-রেডি ১ লিটার থেকে ২০০ লিটার প্যাক" },
+    ],
     applications: [
       { en: "Roofs, basements, water tanks and external plaster", bn: "ছাদ, বেজমেন্ট, পানির ট্যাংক ও বাহ্যিক প্লাস্টার" },
+      { en: "All structural casting where damp and salt attack is a risk", bn: "ড্যাম্প ও লবণ ঝুঁকিযুক্ত সব স্ট্রাকচারাল ঢালাই" },
+      { en: "Ready-mix and site-batched concrete", bn: "রেডি-মিক্স ও সাইট-ব্যাচড কংক্রিট" },
     ],
     dosage: {
-      en: "Typically 250–400 ml per 50 kg cement bag. Confirm with site trial and TDS.",
-      bn: "সাধারণত প্রতি ৫০ কেজি সিমেন্ট ব্যাগে ২৫০–৪০০ মিলি।",
+      en: "Typically 250–400 ml per 50 kg cement bag. Confirm with site trial mix and current TDS for your cement brand.",
+      bn: "সাধারণত প্রতি ৫০ কেজি সিমেন্ট ব্যাগে ২৫০–৪০০ মিলি। সাইট ট্রায়াল মিক্স ও টিডিএস দিয়ে নিশ্চিত করুন।",
     },
     mlPerBag: 300,
-    method: [{ en: "Dose into mixing water; mix thoroughly.", bn: "মিক্সিং ওয়াটারে ডোজ দিয়ে মিশান।" }],
-    safety: [{ en: "Store sealed, away from children.", bn: "শিশুদের নাগালের বাইরে সিল করে রাখুন।" }],
+    method: [
+      { en: "Add with mixing water after cement and aggregates are wet.", bn: "সিমেন্ট ও অ্যাগ্রিগেট ভেজার পর মিক্সিং ওয়াটারের সাথে যোগ করুন।" },
+      { en: "Mix thoroughly until uniform. Do not overdose.", bn: "সম্পূর্ণ মিশিয়ে নিন। অতিরিক্ত ডোজ দেবেন না।" },
+      { en: "Follow trial mix results for local cement brands.", bn: "স্থানীয় সিমেন্ট ব্র্যান্ডের ট্রায়াল মিক্স অনুসরণ করুন।" },
+    ],
+    safety: [
+      { en: "Store sealed, upright, away from children, at ambient temperature.", bn: "শিশুদের নাগালের বাইরে, সোজা ও সিল করে স্বাভাবিক তাপমাত্রায় রাখুন।" },
+      { en: "Avoid contact with eyes and prolonged skin contact. Rinse with water if exposed.", bn: "চোখে বা দীর্ঘক্ষণ ত্বকে লাগবেন না। লাগলে পানি দিয়ে ধুয়ে ফেলুন।" },
+    ],
     specs: [
+      { label: { en: "Form", bn: "ফর্ম" }, value: { en: "Polymerised liquid", bn: "পলিমারাইজড লিকুইড" } },
       { label: { en: "Type", bn: "ধরন" }, value: { en: "Water reducing + waterproofing", bn: "ওয়াটার রিডিউসিং + ওয়াটারপ্রুফিং" } },
       { label: { en: "Packs", bn: "প্যাক" }, value: PACK_SPEC },
-    ],
-  },
-  {
-    slug: "oxilar-pre-cast-premium",
-    sku: "OX-PCP",
-    name: { en: "Oxilar Pre Cast Premium", bn: "অক্সিলার প্রি কাস্ট প্রিমিয়াম" },
-    category: "waterproofing",
-    packs: LIQUID,
-    image: "/media/oxilar-product-pails.jpg",
-    short: {
-      en: "Damp- and waterproof polymer admixture for precast and site concrete.",
-      bn: "প্রিকাস্ট ও সাইট কংক্রিটের জন্য ড্যাম্প ও ওয়াটারপ্রুফ পলিমার অ্যাডমিক্সচার।",
-    },
-    applications: [
-      { en: "Precast elements and water-retaining structures", bn: "প্রিকাস্ট এলিমেন্ট ও ওয়াটার-রিটেইনিং স্ট্রাকচার" },
-    ],
-    dosage: {
-      en: "250–400 ml per 50 kg cement bag per TDS; trial mix recommended.",
-      bn: "টিডিএস অনুযায়ী প্রতি ব্যাগে ২৫০–৪০০ মিলি।",
-    },
-    mlPerBag: 300,
-    method: [{ en: "Add with gauging water and mix until uniform.", bn: "গেজিং ওয়াটারের সাথে যোগ করে মিশান।" }],
-    safety: [{ en: "Store sealed, away from children.", bn: "শিশুদের নাগালের বাইরে সিল করে রাখুন।" }],
-    specs: [
-      { label: { en: "Focus", bn: "ফোকাস" }, value: { en: "Damp & waterproof", bn: "ড্যাম্প ও ওয়াটারপ্রুফ" } },
-      { label: { en: "Packs", bn: "প্যাক" }, value: PACK_SPEC },
+      { label: { en: "Colour tag", bn: "রঙের ট্যাগ" }, value: { en: "Yellow drum / pail", bn: "হলুদ ড্রাম / পেইল" } },
     ],
   },
   {
     slug: "oxilar-solid-bond",
-    sku: "OX-SB20",
+    sku: "OX-SB",
     name: { en: "Oxilar Solid Bond", bn: "অক্সিলার সলিড বন্ড" },
     category: "admixture",
     packs: LIQUID,
-    image: "/media/oxilar-product-pail-closeup.jpg",
+    image: "/media/solid-bond-front.jpg",
+    gallery: ["/media/solid-bond-front.jpg", "/media/solid-bond-back.jpg", "/media/oxilar-green-pail.jpg"],
+    colorTag: { en: "Green Drum", bn: "সবুজ ড্রাম" },
     short: {
-      en: "Water-reducing admixture in 1–200 L site packs — stronger bond and waterproof performance.",
-      bn: "১–২০০ লিটার সাইট প্যাক ওয়াটার-রিডিউসিং অ্যাডমিক্সচার — শক্তিশালী বন্ধন ও ওয়াটারপ্রুফ পারফরম্যান্স।",
+      en: "Water-reducing admixture for stronger bond and waterproof performance in structural pours. Site packs from 1 L to 200 L.",
+      bn: "স্ট্রাকচারাল পোরে শক্তিশালী বন্ধন ও ওয়াটারপ্রুফ পারফরম্যান্সের জন্য ওয়াটার-রিডিউসিং অ্যাডমিক্সচার। ১ থেকে ২০০ লিটার সাইট প্যাক।",
     },
+    benefits: [
+      { en: "Stronger concrete bond and denser matrix", bn: "শক্তিশালী কংক্রিট বন্ধন ও ঘন ম্যাট্রিক্স" },
+      { en: "Improved waterproof performance of the mix", bn: "মিক্সের ওয়াটারপ্রুফ পারফরম্যান্স উন্নত" },
+      { en: "Better workability without excess water", bn: "অতিরিক্ত পানি ছাড়াই ভালো ওয়ার্ক্যাবিলিটি" },
+      { en: "Clear green pack identification on site", bn: "সাইটে সবুজ প্যাক দিয়ে সহজে শনাক্ত" },
+    ],
     applications: [
       { en: "Structural pours and waterproof concrete mixes", bn: "স্ট্রাকচারাল পোর ও ওয়াটারপ্রুফ কংক্রিট মিক্স" },
+      { en: "Columns, slabs, rafts and water-retaining elements", bn: "কলাম, স্ল্যাব, র‍্যাফট ও ওয়াটার-রিটেইনিং এলিমেন্ট" },
+      { en: "Ready-mix and site batching yards", bn: "রেডি-মিক্স ও সাইট ব্যাচিং ইয়ার্ড" },
     ],
     dosage: {
-      en: "Per current TDS; trial mix recommended before large pours.",
-      bn: "বর্তমান টিডিএস অনুযায়ী; বড় পোরের আগে ট্রায়াল মিক্স করুন।",
+      en: "Per current TDS; typically in the 250–400 ml per 50 kg cement bag range. Trial mix recommended before large pours.",
+      bn: "বর্তমান টিডিএস অনুযায়ী; সাধারণত প্রতি ৫০ কেজি সিমেন্ট ব্যাগে ২৫০–৪০০ মিলি। বড় পোরের আগে ট্রায়াল মিক্স করুন।",
     },
     mlPerBag: 300,
-    method: [{ en: "Dispense into mixing water.", bn: "মিক্সিং ওয়াটারে দিন।" }],
-    safety: [{ en: "Store sealed and upright.", bn: "সিল করে সোজা রাখুন।" }],
+    method: [
+      { en: "Dispense into mixing water after aggregates and cement are wet.", bn: "অ্যাগ্রিগেট ও সিমেন্ট ভেজার পর মিক্সিং ওয়াটারে দিন।" },
+      { en: "Mix until the colour is uniform throughout the batch.", bn: "ব্যাচ জুড়ে রং একরকম না হওয়া পর্যন্ত মিশান।" },
+      { en: "Do not add extra water after dosing.", bn: "ডোজ দেওয়ার পর অতিরিক্ত পানি যোগ করবেন না।" },
+    ],
+    safety: [
+      { en: "Store sealed and upright on a level surface.", bn: "সমতল স্থানে সিল করে সোজা রাখুন।" },
+      { en: "Keep away from children and food areas.", bn: "শিশু ও খাবারের জায়গা থেকে দূরে রাখুন।" },
+    ],
     specs: [
-      { label: { en: "Pack", bn: "প্যাক" }, value: PACK_SPEC },
+      { label: { en: "Form", bn: "ফর্ম" }, value: { en: "Liquid admixture", bn: "লিকুইড অ্যাডমিক্সচার" } },
       { label: { en: "Type", bn: "ধরন" }, value: { en: "Water reducing admixture", bn: "ওয়াটার রিডিউসিং অ্যাডমিক্সচার" } },
+      { label: { en: "Packs", bn: "প্যাক" }, value: PACK_SPEC },
+      { label: { en: "Colour tag", bn: "রঙের ট্যাগ" }, value: { en: "Green drum / pail", bn: "সবুজ ড্রাম / পেইল" } },
     ],
   },
   {
-    slug: "oxilar-rapid-bland",
-    sku: "OX-RB",
-    name: { en: "Oxilar Rapid Bland", bn: "অক্সিলার র‍্যাপিড ব্ল্যান্ড" },
+    slug: "oxilar-sb-250",
+    sku: "OX-SB250",
+    name: { en: "Oxilar SB-250", bn: "অক্সিলার এসবি-২৫০" },
     category: "admixture",
-    packs: ["1kg", "25kg"],
-    image: "/media/stack.jpg",
+    packs: LIQUID,
+    image: "/media/oxilar-green-pail.jpg",
+    gallery: ["/media/oxilar-green-pail.jpg", "/media/damp-guard-400-20l.jpg"],
+    colorTag: { en: "Blue Barrel", bn: "নীল ব্যারেল" },
     short: {
-      en: "High-strength powder for fast set and strong bond to old concrete — leaks, joints and repairs.",
-      bn: "উচ্চ শক্তির গুঁড়া — দ্রুত সেট ও পুরাতন কংক্রিটের সাথে শক্ত বন্ধন।",
+      en: "High-performance bonding and waterproofing admixture in blue-barrel identification. Designed for structural and water-retaining concrete across 1–200 L packs.",
+      bn: "নীল ব্যারেল শনাক্তকরণসহ উচ্চ পারফরম্যান্স বন্ডিং ও ওয়াটারপ্রুফিং অ্যাডমিক্সচার। ১–২০০ লিটার প্যাকে স্ট্রাকচারাল ও ওয়াটার-রিটেইনিং কংক্রিটের জন্য।",
     },
+    benefits: [
+      { en: "Strong bonding performance in structural mixes", bn: "স্ট্রাকচারাল মিক্সে শক্তিশালী বন্ডিং" },
+      { en: "Supports waterproof and dense concrete", bn: "ওয়াটারপ্রুফ ও ঘন কংক্রিট সাপোর্ট করে" },
+      { en: "Clear blue-barrel identification on site", bn: "সাইটে নীল ব্যারেল দিয়ে সহজে শনাক্ত" },
+      { en: "Full range of site and plant pack sizes", bn: "সাইট ও প্ল্যান্টের সব প্যাক সাইজ" },
+    ],
     applications: [
-      { en: "Leak sealing, joint repairs and bonding to old concrete", bn: "লিকেজ সিলিং, জয়েন্ট রিপেয়ার ও পুরাতন কংক্রিট বন্ডিং" },
+      { en: "Structural concrete and water-retaining structures", bn: "স্ট্রাকচারাল কংক্রিট ও ওয়াটার-রিটেইনিং স্ট্রাকচার" },
+      { en: "Basements, tanks, columns and slabs", bn: "বেজমেন্ট, ট্যাংক, কলাম ও স্ল্যাব" },
+      { en: "Projects requiring clear pack colour coding", bn: "প্যাক কালার কোডিং প্রয়োজন এমন প্রকল্প" },
     ],
     dosage: {
-      en: "Blend with cement per pack instructions and current TDS.",
-      bn: "প্যাক নির্দেশনা ও টিডিএস অনুযায়ী সিমেন্টের সাথে মিশান।",
+      en: "Follow current TDS. Typical range 250–400 ml per 50 kg cement bag. Always confirm with trial mix.",
+      bn: "বর্তমান টিডিএস অনুসরণ করুন। সাধারণত প্রতি ৫০ কেজি সিমেন্ট ব্যাগে ২৫০–৪০০ মিলি। ট্রায়াল মিক্স দিয়ে নিশ্চিত করুন।",
     },
-    mlPerBag: 0,
-    method: [{ en: "Dry-blend with cement, then add clean water.", bn: "সিমেন্টের সাথে শুকনো মিশিয়ে পানি যোগ করুন।" }],
-    safety: [{ en: "Use a mask when opening bags.", bn: "ব্যাগ খোলার সময় মাস্ক ব্যবহার করুন।" }],
-    specs: [
-      { label: { en: "Form", bn: "ফর্ম" }, value: { en: "Powder", bn: "পাউডার" } },
-      { label: { en: "Packs", bn: "প্যাক" }, value: { en: "1 kg / 25 kg", bn: "১ কেজি / ২৫ কেজি" } },
+    mlPerBag: 300,
+    method: [
+      { en: "Add with gauging / mixing water after materials are wet.", bn: "মালামাল ভেজার পর গেজিং / মিক্সিং ওয়াটারের সাথে যোগ করুন।" },
+      { en: "Mix thoroughly for uniform distribution.", bn: "একরকম বিতরণের জন্য ভালোভাবে মিশান।" },
+      { en: "Do not overdose; rely on trial mix for site cement.", bn: "অতিরিক্ত ডোজ দেবেন না; সাইট সিমেন্টের ট্রায়াল মিক্স অনুসরণ করুন।" },
     ],
-  },
-  {
-    slug: "oxilar-befit-dust",
-    sku: "OX-BD",
-    name: { en: "Oxilar Befit Dust", bn: "অক্সিলার বেফিট ডাস্ট" },
-    category: "dust",
-    packs: LIQUID,
-    image: "/media/oxilar-product-drums.jpg",
-    short: {
-      en: "Liquid dust suppressant for road bases and aggregates.",
-      bn: "রাস্তার বেস ও অ্যাগ্রিগেটের জন্য লিকুইড ডাস্ট সাপ্রেসেন্ট।",
-    },
-    applications: [
-      { en: "Road sub-base, haul roads and aggregate yards", bn: "রোড সাব-বেস, হল রোড ও অ্যাগ্রিগেট ইয়ার্ড" },
+    safety: [
+      { en: "Store sealed, upright, away from children.", bn: "সিল করে সোজা ও শিশুদের নাগালের বাইরে রাখুন।" },
+      { en: "Use clean equipment; avoid contamination of the product.", bn: "পরিষ্কার যন্ত্রপাতি ব্যবহার করুন; পণ্য দূষণ এড়ান।" },
     ],
-    dosage: { en: "Dilute and spray per TDS.", bn: "টিডিএস অনুযায়ী পাতলা করে স্প্রে করুন।" },
-    mlPerBag: 0,
-    method: [{ en: "Apply on prepared surface; allow to cure before traffic.", bn: "প্রস্তুত সারফেসে প্রয়োগ করুন; ট্রাফিকের আগে কিউর হতে দিন।" }],
-    safety: [{ en: "Avoid eye contact. Store sealed.", bn: "চোখে লাগবেন না। সিল করে রাখুন।" }],
     specs: [
-      { label: { en: "Form", bn: "ফর্ম" }, value: { en: "Liquid", bn: "লিকুইড" } },
+      { label: { en: "Form", bn: "ফর্ম" }, value: { en: "Liquid admixture", bn: "লিকুইড অ্যাডমিক্সচার" } },
+      { label: { en: "Type", bn: "ধরন" }, value: { en: "Bonding + waterproofing admixture", bn: "বন্ডিং + ওয়াটারপ্রুফিং অ্যাডমিক্সচার" } },
       { label: { en: "Packs", bn: "প্যাক" }, value: PACK_SPEC },
-    ],
-  },
-  {
-    slug: "oxilar-anti-dust",
-    sku: "OX-AD",
-    name: { en: "Oxilar Anti Dust", bn: "অক্সিলার অ্যান্টি ডাস্ট" },
-    category: "dust",
-    packs: ["1kg"],
-    image: "/media/stack.jpg",
-    short: {
-      en: "Powder dust-control additive for concrete and mortar surfaces.",
-      bn: "কংক্রিট ও মর্টার সারফেসের জন্য পাউডার ডাস্ট-কন্ট্রোল অ্যাডিটিভ।",
-    },
-    applications: [
-      { en: "Industrial floors, yards and dust-prone concrete surfaces", bn: "ইন্ডাস্ট্রিয়াল ফ্লোর, ইয়ার্ড ও ধুলাপ্রবণ কংক্রিট" },
-    ],
-    dosage: { en: "1 kg packs — dose per TDS and surface area.", bn: "১ কেজি প্যাক — টিডিএস ও সারফেস এরিয়া অনুযায়ী।" },
-    mlPerBag: 0,
-    method: [{ en: "Follow pack instructions for dry or wet application.", bn: "শুকনো বা ভেজা প্রয়োগের নির্দেশনা অনুসরণ করুন।" }],
-    safety: [{ en: "Use dust mask when handling powder.", bn: "গুঁড়া হ্যান্ডেল করার সময় মাস্ক ব্যবহার করুন।" }],
-    specs: [
-      { label: { en: "Form", bn: "ফর্ম" }, value: { en: "Powder", bn: "পাউডার" } },
-      { label: { en: "Packs", bn: "প্যাক" }, value: { en: "1 kg", bn: "১ কেজি" } },
+      { label: { en: "Colour tag", bn: "রঙের ট্যাগ" }, value: { en: "Blue barrel", bn: "নীল ব্যারেল" } },
     ],
   },
 ];
@@ -228,15 +182,24 @@ export const products: Product[] = [
 export const benefits: { title: Copy; body: Copy }[] = [
   {
     title: { en: "Independent manufacturer", bn: "স্বাধীন প্রস্তুতকারক" },
-    body: { en: "Established 6 September 2019. Construction chemicals made and supplied in Bangladesh.", bn: "৬ সেপ্টেম্বর ২০১৯ থেকে। বাংলাদেশে তৈরি ও সরবরাহ।" },
+    body: {
+      en: "Established 6 September 2019. Construction chemicals made and supplied in Bangladesh.",
+      bn: "৬ সেপ্টেম্বর ২০১৯ থেকে। বাংলাদেশে তৈরি ও সরবরাহ।",
+    },
   },
   {
     title: { en: "Dose and trial mix", bn: "ডোজ ও ট্রায়াল মিক্স" },
-    body: { en: "Published dosage ranges with site trial-mix guidance for local cement brands.", bn: "স্থানীয় সিমেন্ট ব্র্যান্ডের জন্য ট্রায়াল মিক্স নির্দেশনাসহ ডোজ রেঞ্জ।" },
+    body: {
+      en: "Published dosage ranges with site trial-mix guidance for local cement brands.",
+      bn: "স্থানীয় সিমেন্ট ব্র্যান্ডের জন্য ট্রায়াল মিক্স নির্দেশনাসহ ডোজ রেঞ্জ।",
+    },
   },
   {
-    title: { en: "Lab method references", bn: "ল্যাব মেথড রেফারেন্স" },
-    body: { en: "Working sheets referenced to BUET, CUET and BCSIR practices on the Resources page.", bn: "রিসোর্স পেজে BUET, CUET ও BCSIR রেফারেন্সড ওয়ার্কিং শিট।" },
+    title: { en: "Clear pack colour coding", bn: "স্পষ্ট প্যাক কালার কোডিং" },
+    body: {
+      en: "Yellow = Damp Guard · Green = Solid Bond · Blue = SB-250 — easy identification on busy sites.",
+      bn: "হলুদ = ড্যাম্প গার্ড · সবুজ = সলিড বন্ড · নীল = এসবি-২৫০ — ব্যস্ত সাইটে সহজে শনাক্ত।",
+    },
   },
 ];
 
@@ -247,47 +210,82 @@ export const sourcing: Copy = {
 
 export const strengthSeries: { label: Copy; value: number }[] = [
   { label: { en: "Control", bn: "কন্ট্রোল" }, value: 100 },
-  { label: { en: "With Super-100", bn: "সুপার-১০০ সহ" }, value: 118 },
+  { label: { en: "With Oxilar system", bn: "অক্সিলার সিস্টেম সহ" }, value: 118 },
 ];
 
 export const gallery: { src: string; alt: Copy }[] = [
-  { src: "/media/sm-damp-guard-front.jpg", alt: { en: "Damp Guard pack", bn: "ড্যাম্প গার্ড প্যাক" } },
-  { src: "/media/pail.jpg", alt: { en: "Oxilar pack", bn: "অক্সিলার প্যাক" } },
-  { src: "/media/stack.jpg", alt: { en: "Site stack", bn: "সাইট স্ট্যাক" } },
+  { src: "/media/damp-guard-front.jpg", alt: { en: "Damp Guard pack", bn: "ড্যাম্প গার্ড প্যাক" } },
+  { src: "/media/solid-bond-front.jpg", alt: { en: "Solid Bond pack", bn: "সলিড বন্ড প্যাক" } },
+  { src: "/media/oxilar-green-pail.jpg", alt: { en: "Oxilar pack", bn: "অক্সিলার প্যাক" } },
 ];
 
 export const processSteps: { step: string; title: Copy; body: Copy }[] = [
-  { step: "01", title: { en: "Specify system", bn: "সিস্টেম নির্ধারণ" }, body: { en: "Match product to exposure and structure type.", bn: "এক্সপোজার ও স্ট্রাকচার অনুযায়ী পণ্য মিলান।" } },
-  { step: "02", title: { en: "Trial mix", bn: "ট্রায়াল মিক্স" }, body: { en: "Confirm dose with site cement brand.", bn: "সাইটের সিমেন্ট ব্র্যান্ড দিয়ে ডোজ নিশ্চিত করুন।" } },
-  { step: "03", title: { en: "Apply", bn: "প্রয়োগ" }, body: { en: "Follow TDS and method notes.", bn: "টিডিএস ও মেথড নোট অনুসরণ করুন।" } },
-  { step: "04", title: { en: "Support", bn: "সাপোর্ট" }, body: { en: "Call or WhatsApp the technical desk.", bn: "টেকনিক্যাল ডেস্কে কল বা হোয়াটসঅ্যাপ করুন।" } },
+  {
+    step: "01",
+    title: { en: "Specify system", bn: "সিস্টেম নির্ধারণ" },
+    body: { en: "Match product to exposure and structure type.", bn: "এক্সপোজার ও স্ট্রাকচার অনুযায়ী পণ্য মিলান।" },
+  },
+  {
+    step: "02",
+    title: { en: "Trial mix", bn: "ট্রায়াল মিক্স" },
+    body: { en: "Confirm dose with site cement brand.", bn: "সাইটের সিমেন্ট ব্র্যান্ড দিয়ে ডোজ নিশ্চিত করুন।" },
+  },
+  {
+    step: "03",
+    title: { en: "Apply", bn: "প্রয়োগ" },
+    body: { en: "Follow TDS and method notes.", bn: "টিডিএস ও মেথড নোট অনুসরণ করুন।" },
+  },
+  {
+    step: "04",
+    title: { en: "Support", bn: "সাপোর্ট" },
+    body: { en: "Call or WhatsApp the technical desk.", bn: "টেকনিক্যাল ডেস্কে কল বা হোয়াটসঅ্যাপ করুন।" },
+  },
 ];
 
 export const stats: { value: string; label: Copy }[] = [
   { value: "2019", label: { en: "Established", bn: "প্রতিষ্ঠিত" } },
-  { value: "7+", label: { en: "Core systems", bn: "কোর সিস্টেম" } },
+  { value: "3", label: { en: "Core systems", bn: "কোর সিস্টেম" } },
   { value: "64", label: { en: "Districts covered", bn: "জেলা কভারেজ" } },
 ];
 
-export const companyProfile: {
-  founded: Copy;
-  focus: Copy;
-  office: Copy;
-  factory: Copy;
-} = {
+export const companyProfile = {
   founded: { en: "6 September 2019", bn: "৬ সেপ্টেম্বর ২০১৯" },
   focus: {
     en: "Independent manufacturer of construction chemicals, waterproofing systems and industrial raw materials.",
     bn: "কনস্ট্রাকশন কেমিক্যাল, ওয়াটারপ্রুফিং সিস্টেম ও ইন্ডাস্ট্রিয়াল কাঁচামালের স্বাধীন প্রস্তুতকারক।",
   },
   office: { en: "31/1 Babar Road, Mohammadpur, Dhanmondi, Dhaka", bn: "৩১/১ বাবার রোড, মোহাম্মদপুর, ধানমন্ডি, ঢাকা" },
-  factory: { en: "Kalampur, Dhamrai, Dhaka", bn: "কালামপুর, ধামরাই, ঢাকা" },
+  factory: { en: "Kalampur, Dhamrai", bn: "কালামপুর, ধামরাই" },
 };
 
 export const faqs: { q: Copy; a: Copy }[] = [
   {
-    q: { en: "What pack sizes are available?", bn: "কোন প্যাক সাইজ পাওয়া যায়?" },
-    a: { en: "Liquid systems: 1, 5, 10, 20 and 200 Liter. Powder: 1 kg and 25 kg where listed.", bn: "লিকুইড: ১, ৫, ১০, ২০ ও ২০০ লিটার। পাউডার: ১ কেজি ও ২৫ কেজি।" },
+    q: { en: "Which pack sizes are available?", bn: "কোন প্যাক সাইজ পাওয়া যায়?" },
+    a: {
+      en: "All three systems — Damp Guard, Solid Bond and SB-250 — are supplied in 1 L, 5 L, 10 L, 20 L and 200 L packs.",
+      bn: "তিনটি সিস্টেমই — ড্যাম্প গার্ড, সলিড বন্ড ও এসবি-২৫০ — ১, ৫, ১০, ২০ ও ২০০ লিটার প্যাকে সরবরাহ করা হয়।",
+    },
+  },
+  {
+    q: { en: "How do I tell the products apart on site?", bn: "সাইটে পণ্যগুলো কীভাবে আলাদা করব?" },
+    a: {
+      en: "Colour coding: Yellow drum = Damp Guard, Green drum = Solid Bond, Blue barrel = SB-250.",
+      bn: "কালার কোডিং: হলুদ ড্রাম = ড্যাম্প গার্ড, সবুজ ড্রাম = সলিড বন্ড, নীল ব্যারেল = এসবি-২৫০।",
+    },
+  },
+  {
+    q: { en: "Do you provide dosage guidance?", bn: "ডোজ গাইডেন্স দেওয়া হয়?" },
+    a: {
+      en: "Yes. Typical ranges are published on each product page. Always confirm with a site trial mix and the current TDS for your cement brand.",
+      bn: "হ্যাঁ। প্রতিটি পণ্য পেজে সাধারণ রেঞ্জ দেওয়া আছে। সাইট ট্রায়াল মিক্স ও টিডিএস দিয়ে নিশ্চিত করুন।",
+    },
+  },
+  {
+    q: { en: "How do I request a quotation?", bn: "কোটেশন কীভাবে চাইব?" },
+    a: {
+      en: "Use Add to RFQ on any product page, open the B2B portal, or WhatsApp / call the sales desk.",
+      bn: "যেকোনো পণ্য পেজে Add to RFQ ব্যবহার করুন, B2B পোর্টাল খুলুন, অথবা সেলস ডেস্কে হোয়াটসঅ্যাপ / কল করুন।",
+    },
   },
   {
     q: { en: "WhatsApp number?", bn: "হোয়াটসঅ্যাপ নম্বর?" },
@@ -299,19 +297,10 @@ export const faqs: { q: Copy; a: Copy }[] = [
   },
   {
     q: { en: "How do I apply for a job?", bn: "চাকরির জন্য কীভাবে আবেদন করব?" },
-    a: { en: "See Careers. Email CV to oxilarbangladesh@gmail.com or call 01960198313.", bn: "ক্যারিয়ার পেজ দেখুন। সিভি oxilarbangladesh@gmail.com-এ পাঠান অথবা ০১৯৬০১৯৮৩১৩-এ কল করুন।" },
-  },
-  {
-    q: { en: "Where is the factory?", bn: "কারখানা কোথায়?" },
-    a: { en: "Kalampur, Dhamrai, Dhaka. Office: Mohammadpur, Dhaka.", bn: "কালামপুর, ধামরাই, ঢাকা। অফিস: মোহাম্মদপুর, ঢাকা।" },
-  },
-  {
-    q: { en: "Are lab certificates provided?", bn: "ল্যাব সনদ দেওয়া হয় কি?" },
-    a: { en: "Resources page has working method sheets referenced to BUET, CUET and BCSIR practices — not signed certificates.", bn: "রিসোর্স পেজে BUET, CUET, BCSIR মেথড শিট আছে — স্বাক্ষরিত সনদ নয়।" },
-  },
-  {
-    q: { en: "How do I request RFQ?", bn: "আরএফকিউ কীভাবে চাইব?" },
-    a: { en: "Use Add to RFQ on product pages, or Contact / WhatsApp.", bn: "পণ্য পেজে Add to RFQ, অথবা কন্টাক্ট / হোয়াটসঅ্যাপ।" },
+    a: {
+      en: "See Careers. Email your CV to oxilarbangladesh@gmail.com or call 01960198313.",
+      bn: "ক্যারিয়ার পেজ দেখুন। সিভি oxilarbangladesh@gmail.com-এ পাঠান অথবা ০১৯৬০১৯৮৩১৩-এ কল করুন।",
+    },
   },
 ];
 
