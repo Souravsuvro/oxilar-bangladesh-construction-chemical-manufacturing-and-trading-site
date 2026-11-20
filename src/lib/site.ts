@@ -34,3 +34,4 @@ export function whatsappUrl(prefill: string) {
 export const WA_DEFAULT = whatsappUrl(
   "Hello Oxilar Bangladesh — I need product advice / RFQ for a project.",
 );
+ 
