@@ -124,7 +124,7 @@ function Home() {
             </ul>
           </div>
           <div className="relative overflow-hidden rounded-2xl ring-1 ring-white/10">
-            <img src="/media/banner-oxilar.jpg" alt="Oxilar construction chemicals" className="aspect-[4/3] w-full object-cover" />
+            <img src="/media/stack.jpg" alt="Oxilar construction chemicals" className="aspect-[4/3] w-full object-cover" />
           </div>
         </div>
       </section>
