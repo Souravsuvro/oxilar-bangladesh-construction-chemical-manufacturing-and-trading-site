@@ -78,7 +78,7 @@ function Page() {
       e.currentTarget.reset();
       return;
     }
-
+ 
     if (Date.now() - started.current < 4000) {
       setErr(bn ? "একটু অপেক্ষা করে আবার পাঠান।" : "Please wait a moment and try again.");
       return;
