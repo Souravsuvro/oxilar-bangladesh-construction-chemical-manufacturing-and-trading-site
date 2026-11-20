@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useRef, useState, type FormEvent } from "react"; 
 import { useI18n } from "@/lib/i18n";
-import { leadsConfigured, sendLead, trackLead } from "@/lib/leads";
+import { leadsConfigured, sendLead, trackLead } from "@/lib/leads"; 
 import { SITE } from "@/lib/site";
 
 const openings = [
