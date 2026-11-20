@@ -4,7 +4,7 @@ import { benefits, faqs, processSteps, products, sourcing } from "@/data/catalog
 import { useI18n } from "@/lib/i18n";
 import { CalculatorSuite } from "@/components/calculators/Calculators";
 import { TrustBlocks } from "@/components/home/TrustBlocks";
-import { WA_DEFAULT } from "@/lib/site";
+import { SITE, WA_DEFAULT } from "@/lib/site";
 
 const StrengthChart = lazy(() =>
   import("@/components/home/StrengthChart").then((m) => ({ default: m.StrengthChart })),
@@ -36,7 +36,7 @@ export const Route = createFileRoute("/")({
           "Independent manufacturer of BUET-referenced waterproofing, admixtures and epoxy systems. Factory Kalampur, Dhamrai. Global direct importer.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: "https://www.oxilarbd.com/og.jpg" },
+      { property: "og:image", content: `${SITE.web}/og.jpg` },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
@@ -49,7 +49,7 @@ const schema = {
     {
       "@type": ["Organization", "LocalBusiness", "Manufacturer"],
       name: "Oxilar Bangladesh",
-      url: "https://www.oxilarbd.com",
+      url: SITE.web,
       email: "oxilarbangladesh@gmail.com",
       telephone: "+8801826736886",
       foundingDate: "2019-09-06",
@@ -71,7 +71,7 @@ const schema = {
           availableLanguage: ["en", "bn"],
         },
       ],
-      sameAs: ["https://www.oxilarbd.com", "https://www.facebook.com/share/19MbCzTKzp/"],
+      sameAs: [SITE.web, "https://www.facebook.com/share/19MbCzTKzp/"],
     },
     {
       "@type": "FAQPage",
@@ -86,7 +86,7 @@ const schema = {
 
 function Home() {
   const { t, tx, lang } = useI18n();
-  const [pack, setPack] = useState<"all" | "5L" | "20L" | "200L">("all");
+  const [pack, setPack] = useState<"all" | "1L" | "5L" | "10L" | "20L" | "200L">("all");
   const shown = products.filter((p) => pack === "all" || p.packs.includes(pack));
   const [chart, setChart] = useState(false);
   useEffect(() => setChart(true), []);
@@ -191,7 +191,7 @@ function Home() {
         <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <h2 className="text-3xl font-semibold">{lang === "bn" ? "নির্বাচিত পণ্য" : "Featured products"}</h2>
           <div className="flex gap-2 overflow-auto">
-            {(["all", "5L", "20L", "200L"] as const).map((p) => (
+            {(["all", "1L", "5L", "10L", "20L", "200L"] as const).map((p) => (
               <button
                 key={p}
                 type="button"

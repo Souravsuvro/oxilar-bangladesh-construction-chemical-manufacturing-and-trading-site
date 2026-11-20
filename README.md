@@ -5,10 +5,11 @@ Independent manufacturer, marketer and supplier of high-performance construction
 - **Plant:** Kalampur, Dhamrai, Dhaka  
 - **Office:** 31/1 Babar Road, Mohammadpur, Dhanmondi, Dhaka  
 - **Email:** oxilarbangladesh@gmail.com  
-- **WhatsApp (Business):** +88 01826-736886  
-- **Voice hotline:** +88 01826-736886  
+- **WhatsApp (Business):** 01826736886
+- **Voice hotline:** 01826736886
+- **Dealership & HR:** 01960198313
 - **Facebook:** https://www.facebook.com/share/19MbCzTKzp/  
-- **Web:** https://www.oxilarbd.com  
+- **Web:** https://oxilarbd.com
 
 > Oxilar Bangladesh is **not** affiliated with Filament Group. Ignore any legacy brochure URLs pointing at filamentbd.com.
 
@@ -78,7 +79,7 @@ Prefer **source builds on Vercel** (do not commit stale `.vercel/output`).
 | `/resources` | TDS / lab |
 | `/projects` | Sectors / case blurbs |
 | `/b2b-portal` | Dealers |
-| `/careers` | Join Our Team + anti-spam form |
+| `/careers` | HR contact details, open roles + anti-spam form |
 | `/contact` | Maps, form, WhatsApp, Facebook |
 
 ### Calculator logic (estimates only)
@@ -95,12 +96,12 @@ Always confirm with **trial mix + current TDS**.
 
 | Product | Role | Typical packs |
 |---------|------|----------------|
-| **Super-100** | Multipurpose polymerised admixture | 1 / 4 / 10 / 20 L |
-| **Damp Guard-400** | Water reducing + waterproofing | 1 / 4 / 10 / 20 L |
-| **Pre Cast Premium** | Damp & waterproof polymer | 1 / 4 / 10 / 20 L |
-| **Solid Bond** | Water-reducing site admixture | 20 L |
+| **Super-100** | Multipurpose polymerised admixture | 1 / 5 / 10 / 20 / 200 L |
+| **Damp Guard-400** | Water reducing + waterproofing | 1 / 5 / 10 / 20 / 200 L |
+| **Pre Cast Premium** | Damp & waterproof polymer | 1 / 5 / 10 / 20 / 200 L |
+| **Solid Bond** | Water-reducing site admixture | 1 / 5 / 10 / 20 / 200 L |
 | **Rapid Bland** | High-strength powder for repairs | 1 kg / 25 kg |
-| **Befit Dust** | Liquid dust suppressant | 1 / 4 / 10 / 20 L |
+| **Befit Dust** | Liquid dust suppressant | 1 / 5 / 10 / 20 / 200 L |
 | **Anti Dust** | Powder dust control | 1 kg |
 
 **Brochure dosage (Super-100 guide):** 250–300 ml / 50 kg bag general; 300–400 ml aggressive / acid exposure.
@@ -129,20 +130,11 @@ Currently live:
 | `pail.jpg` | Damp Guard / Solid Bond style pails |
 | `stack.jpg` | Stacked packs / hero support |
 | `drum.jpg` | Plant / dust line |
+| `oxilar-product-pails.jpg` | Supplied branded pail stack |
+| `oxilar-product-pail-closeup.jpg` | Supplied branded pail close-up |
+| `oxilar-product-drums.jpg` | Supplied branded drums |
 
-### Optimized assets prepared offline (upload these next)
-
-From site photography + brochure (resize ~80% JPEG quality):
-
-| Suggested path | Content |
-|----------------|---------|
-| `public/media/damp-guard-studio.jpg` | Studio Damp Guard pail |
-| `public/media/solid-bond-studio.jpg` | Studio Solid Bond pail |
-| `public/media/damp-guard-stack-site.jpg` | Rooftop Damp Guard stack |
-| `public/media/solid-bond-stack-site.jpg` | Rooftop Solid Bond stack |
-| `public/media/banner-oxilar-benefits.jpg` | “For Better Future” benefits banner |
-
-After upload, point `products[].image` and `gallery` in `src/data/catalog.ts` at those paths, then redeploy.
+Product cards use the supplied photos in `src/data/catalog.ts`; the homepage featured cards share that catalog data. The pail-stack source photo visibly includes a legacy “4 Liter” label and should be replaced with updated packaging photography if that size is no longer sold.
 
 ---
 
@@ -164,18 +156,18 @@ Careers anti-spam: honeypot field + minimum form dwell time; bots are dropped si
 
 1. Push `main` (source only; keep `.vercel/` gitignored).  
 2. Vercel builds from GitHub.  
-3. Map `www.oxilarbd.com` in Vercel Domains (SSL automatic).  
-4. Verify: independent brand copy, WhatsApp **01826-736886**, `/careers`, no Filament mentions.
+3. Add `oxilarbd.com` in Vercel Project Settings → Domains and configure DNS exactly as Vercel instructs (SSL is provisioned automatically).
+4. Verify: independent brand copy, WhatsApp **01826736886**, `/careers`, no Filament mentions.
 
 ---
 
 ## Next to-do plan (prioritized)
 
 ### P0 — Conversion & truth
-1. **Activate Formspree** (`VITE_FORMSPREE_ID`) so contact, RFQ and careers hit `oxilarbangladesh@gmail.com`.  
-2. **Upload optimized pack photos** listed above; wire `catalog.ts` `image:` fields.  
-3. **GA4** real Measurement ID (or remove placeholder).  
-4. **Hard-refresh** production alias after each deploy; confirm WhatsApp opens Business account **01826-736886**.
+1. **Activate Formspree** (`VITE_FORMSPREE_ID`) so contact, RFQ and careers hit `oxilarbangladesh@gmail.com`.
+2. Replace the legacy “4 Liter” pail photo if that package size is no longer sold.
+3. **GA4** real Measurement ID (or remove placeholder).
+4. **Hard-refresh** production domain after each deploy; confirm WhatsApp opens Business account **01826736886**.
 
 ### P1 — Content & SEO
 5. Per-product **Product + Offer** JSON-LD polish on `$slug` pages.  
@@ -219,8 +211,8 @@ Careers anti-spam: honeypot field + minimum form dwell time; bots are dropped si
 
 ```
 Email:     oxilarbangladesh@gmail.com
-WhatsApp:  +88 01826-736886
-Call:      +88 0196-0198313
+WhatsApp:  01826736886
+Call:      01960198313
 Facebook:  https://www.facebook.com/share/19MbCzTKzp/
-Web:       https://www.oxilarbd.com
+Web:       https://oxilarbd.com
 ```

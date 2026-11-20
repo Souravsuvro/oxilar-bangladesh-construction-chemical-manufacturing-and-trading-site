@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { useI18n } from "@/lib/i18n";
 import { sendLead, trackLead } from "@/lib/leads";
-import { whatsappUrl } from "@/lib/site";
+import { SITE, whatsappUrl } from "@/lib/site";
 
 export const Route = createFileRoute("/b2b-portal")({
   head: () => ({
@@ -28,8 +28,8 @@ function Page() {
         </p>
         <p className="mt-2">
           {bn ? "যোগাযোগ নম্বর:" : "Contact Number:"}{" "}
-          <a className="font-semibold text-brand" href="tel:+8801960198313">
-            01960198313
+          <a className="font-semibold text-brand" href={`tel:${SITE.dealerPhoneTel}`}>
+            {SITE.dealerPhoneDisplay}
           </a>
         </p>
       </div>

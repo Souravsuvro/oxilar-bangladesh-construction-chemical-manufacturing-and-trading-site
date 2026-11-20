@@ -273,7 +273,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
             <a className="block min-h-12 py-2 hover:text-brand-soft" href={SITE.facebook} target="_blank" rel="noreferrer">
               Facebook page
             </a>
-            <p className="py-2 text-paper/70">www.oxilarbd.com</p>
+            <a className="block py-2 text-paper/70" href={SITE.web}>{SITE.web.replace("https://", "")}</a>
             <div className="mt-2 flex flex-wrap gap-2 text-xs">
               <Link to="/products" className="rounded-full bg-white/10 px-3 py-1.5 hover:bg-white/15">
                 {t("products")}

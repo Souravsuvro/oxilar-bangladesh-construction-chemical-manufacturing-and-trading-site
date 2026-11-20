@@ -50,7 +50,7 @@ export const products: Product[] = [
     name: { en: "Oxilar Super-100", bn: "অক্সিলার সুপার-১০০" },
     category: "admixture",
     packs: LIQUID,
-    image: "/media/stack.jpg",
+    image: "/media/oxilar-product-pails.jpg",
     short: {
       en: "Multipurpose polymerised concrete admixture. Protects against acid rain, reduces heat of hydration, improves workability and strength.",
       bn: "মাল্টিপারপাস পলিমারাইজড কংক্রিট অ্যাডমিক্সচার। অ্যাসিড বৃষ্টি থেকে রক্ষা, ওয়ার্ক্যাবিলিটি ও শক্তি বৃদ্ধি।",
@@ -79,7 +79,7 @@ export const products: Product[] = [
     name: { en: "Oxilar Damp Guard-400", bn: "অক্সিলার ড্যাম্প গার্ড-৪০০" },
     category: "waterproofing",
     packs: LIQUID,
-    image: "/media/sm-damp-guard-front.jpg",
+    image: "/media/oxilar-product-pail-closeup.jpg",
     short: {
       en: "Water-reducing and waterproofing liquid admixture — acid and salt resistance, higher strength, damp inactivation.",
       bn: "ওয়াটার-রিডিউসিং ও ওয়াটারপ্রুফিং লিকুইড — অ্যাসিড ও লবণ প্রতিরোধ, উচ্চ শক্তি।",
@@ -105,7 +105,7 @@ export const products: Product[] = [
     name: { en: "Oxilar Pre Cast Premium", bn: "অক্সিলার প্রি কাস্ট প্রিমিয়াম" },
     category: "waterproofing",
     packs: LIQUID,
-    image: "/media/stack.jpg",
+    image: "/media/oxilar-product-pails.jpg",
     short: {
       en: "Damp- and waterproof polymer admixture for precast and site concrete.",
       bn: "প্রিকাস্ট ও সাইট কংক্রিটের জন্য ড্যাম্প ও ওয়াটারপ্রুফ পলিমার অ্যাডমিক্সচার।",
@@ -131,7 +131,7 @@ export const products: Product[] = [
     name: { en: "Oxilar Solid Bond", bn: "অক্সিলার সলিড বন্ড" },
     category: "admixture",
     packs: LIQUID,
-    image: "/media/pail.jpg",
+    image: "/media/oxilar-product-pail-closeup.jpg",
     short: {
       en: "Water-reducing admixture in 1–200 L site packs — stronger bond and waterproof performance.",
       bn: "১–২০০ লিটার সাইট প্যাক ওয়াটার-রিডিউসিং অ্যাডমিক্সচার — শক্তিশালী বন্ধন ও ওয়াটারপ্রুফ পারফরম্যান্স।",
@@ -183,7 +183,7 @@ export const products: Product[] = [
     name: { en: "Oxilar Befit Dust", bn: "অক্সিলার বেফিট ডাস্ট" },
     category: "dust",
     packs: LIQUID,
-    image: "/media/drum.jpg",
+    image: "/media/oxilar-product-drums.jpg",
     short: {
       en: "Liquid dust suppressant for road bases and aggregates.",
       bn: "রাস্তার বেস ও অ্যাগ্রিগেটের জন্য লিকুইড ডাস্ট সাপ্রেসেন্ট।",
@@ -291,7 +291,7 @@ export const faqs: { q: Copy; a: Copy }[] = [
   },
   {
     q: { en: "WhatsApp number?", bn: "হোয়াটসঅ্যাপ নম্বর?" },
-    a: { en: "+88 01826-736886 (WhatsApp Business).", bn: "+৮৮ ০১৮২৬-৭৩৬৮৮৬ (হোয়াটসঅ্যাপ বিজনেস)।" },
+    a: { en: "01826736886 (WhatsApp Business).", bn: "০১৮২৬৭৩৬৮৮৬ (হোয়াটসঅ্যাপ বিজনেস)।" },
   },
   {
     q: { en: "Dealership contact?", bn: "ডিলারশিপ যোগাযোগ?" },

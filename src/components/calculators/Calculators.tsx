@@ -12,7 +12,7 @@ function printSummary(title: string, lines: string[]) {
   if (!w) return;
   const body = lines.map((l) => `<li>${l}</li>`).join("");
   w.document.write(
-    `<!doctype html><html><head><title>${title}</title><style>body{font-family:sans-serif;padding:40px;color:#0f172a}h1{color:#059669;font-size:22px}</style></head><body><h1>${title}</h1><p>Oxilar Bangladesh · Independent manufacturer · ${SITE.phoneDisplay} · www.oxilarbd.com</p><ul>${body}</ul><p>Estimates only. Confirm with a trial mix and the current TDS.</p></body></html>`,
+    `<!doctype html><html><head><title>${title}</title><style>body{font-family:sans-serif;padding:40px;color:#0f172a}h1{color:#059669;font-size:22px}</style></head><body><h1>${title}</h1><p>Oxilar Bangladesh · Independent manufacturer · ${SITE.phoneDisplay} · ${SITE.web}</p><ul>${body}</ul><p>Estimates only. Confirm with a trial mix and the current TDS.</p></body></html>`,
   );
   w.document.close();
   w.focus();
@@ -53,7 +53,7 @@ export function CalculatorSuite() {
           `Concrete volume ${m3.toFixed(2)} m³`,
           `Dose ${dose} L per m³`,
           `Admixture ${litres.toFixed(1)} L`,
-          `4L pails ${Math.ceil(litres / 4)} · 20L pails ${Math.ceil(litres / 20)} · 200L drums ${(litres / 200).toFixed(2)}`,
+          "Available liquid packs: 1 L · 5 L · 10 L · 20 L · 200 L",
         ],
       };
     }
@@ -66,7 +66,7 @@ export function CalculatorSuite() {
           `${bags} bags × ${ml} ml`,
           `Total ${(bags * ml).toLocaleString()} ml`,
           `Volume ${litres.toFixed(2)} L`,
-          `20L pails ${Math.ceil(litres / 20)} · drums ${(litres / 200).toFixed(2)}`,
+          "Available liquid packs: 1 L · 5 L · 10 L · 20 L · 200 L",
         ],
       };
     }
@@ -79,7 +79,7 @@ export function CalculatorSuite() {
         `${area} ft² = ${m2.toFixed(1)} m²`,
         `Film ${micron} micron (basis 0.40 L/m² at 400 micron)`,
         `Coating ${litres.toFixed(1)} L`,
-        `4L kits ${Math.ceil(litres / 4)} · 20L kits ${Math.ceil(litres / 20)}`,
+        "Available liquid packs: 1 L · 5 L · 10 L · 20 L · 200 L",
       ],
     };
   }, [mode, L, W, T, dose, bags, ml, area, micron]);
@@ -182,7 +182,7 @@ export function CalculatorSuite() {
               add({
                 sku: "CALC",
                 name: mode === "epoxy" ? "Oxilar Floor EP-400" : "Oxilar Super-100 / admixture",
-                pack: result.litres > 80 ? "drum" : "20L",
+                pack: result.litres > 80 ? "200L" : "20L",
                 qty: Math.max(1, Math.ceil(result.litres / (result.litres > 80 ? 200 : 20))),
                 note: result.lines.join(" · "),
               });

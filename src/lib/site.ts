@@ -7,18 +7,18 @@ export const SITE = {
   phoneDisplay: "+88 0182-6736886",
   phoneTel: "+8801826736886",
   /** WhatsApp Business account used by site CTAs. */
-  whatsappDisplay: "+88 01826-736886",
+  whatsappDisplay: "01826736886",
   whatsappE164: "8801826736886",
   /**
    * Dealership & HR voice line (per client correction).
    * Kept separate from WhatsApp Business number.
    */
-  dealerPhoneDisplay: "+88 0196-0198313",
+  dealerPhoneDisplay: "01960198313",
   dealerPhoneTel: "+8801960198313",
-  hrPhoneDisplay: "+88 0196-0198313",
+  hrPhoneDisplay: "01960198313",
   hrPhoneTel: "+8801960198313",
   facebook: "https://www.facebook.com/share/19MbCzTKzp/",
-  web: "https://www.oxilarbd.com",
+  web: "https://oxilarbd.com",
   office: "31/1 Babar Road, Mohammadpur, Dhanmondi, Dhaka",
   factory: "Kalampur, Dhamrai, Dhaka",
   sourcingLine: {
