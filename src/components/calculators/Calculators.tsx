@@ -53,7 +53,7 @@ export function CalculatorSuite() {
           `Concrete volume ${m3.toFixed(2)} m³`,
           `Dose ${dose} L per m³`,
           `Admixture ${litres.toFixed(1)} L`,
-          `4L pails ${Math.ceil(litres / 4)} · 20L pails ${Math.ceil(litres / 20)} · 200L drums ${(litres / 200).toFixed(2)}`,
+          `1L ${Math.ceil(litres)} · 5L ${Math.ceil(litres / 5)} · 10L ${Math.ceil(litres / 10)} · 20L ${Math.ceil(litres / 20)} · 200L ${(litres / 200).toFixed(2)}`,
         ],
       };
     }
@@ -66,7 +66,7 @@ export function CalculatorSuite() {
           `${bags} bags × ${ml} ml`,
           `Total ${(bags * ml).toLocaleString()} ml`,
           `Volume ${litres.toFixed(2)} L`,
-          `20L pails ${Math.ceil(litres / 20)} · drums ${(litres / 200).toFixed(2)}`,
+          `5L ${Math.ceil(litres / 5)} · 20L ${Math.ceil(litres / 20)} · 200L ${(litres / 200).toFixed(2)}`,
         ],
       };
     }
@@ -79,7 +79,7 @@ export function CalculatorSuite() {
         `${area} ft² = ${m2.toFixed(1)} m²`,
         `Film ${micron} micron (basis 0.40 L/m² at 400 micron)`,
         `Coating ${litres.toFixed(1)} L`,
-        `4L kits ${Math.ceil(litres / 4)} · 20L kits ${Math.ceil(litres / 20)}`,
+        `5L ${Math.ceil(litres / 5)} · 20L ${Math.ceil(litres / 20)}`,
       ],
     };
   }, [mode, L, W, T, dose, bags, ml, area, micron]);
@@ -181,8 +181,8 @@ export function CalculatorSuite() {
               trackEvent("calculator_rfq", { mode, litres: Math.round(result.litres) });
               add({
                 sku: "CALC",
-                name: mode === "epoxy" ? "Oxilar Floor EP-400" : "Oxilar Super-100 / admixture",
-                pack: result.litres > 80 ? "drum" : "20L",
+                name: mode === "epoxy" ? "Oxilar system" : "Oxilar Damp Guard / Solid Bond / SB-250",
+                pack: result.litres > 80 ? "200L" : "20L",
                 qty: Math.max(1, Math.ceil(result.litres / (result.litres > 80 ? 200 : 20))),
                 note: result.lines.join(" · "),
               });
