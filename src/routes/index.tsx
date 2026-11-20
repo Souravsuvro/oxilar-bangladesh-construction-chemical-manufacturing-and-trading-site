@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { lazy, Suspense, useEffect, useState } from "react";
-import { benefits, faqs, gallery, processSteps, products, sourcing, stats } from "@/data/catalog";
+import { benefits, faqs, processSteps, products, sourcing } from "@/data/catalog";
 import { useI18n } from "@/lib/i18n";
 import { CalculatorSuite } from "@/components/calculators/Calculators";
 import { TrustBlocks } from "@/components/home/TrustBlocks";
@@ -86,7 +86,7 @@ const schema = {
 
 function Home() {
   const { t, tx, lang } = useI18n();
-  const [pack, setPack] = useState<"all" | "4L" | "20L" | "drum">("all");
+  const [pack, setPack] = useState<"all" | "5L" | "20L" | "200L">("all");
   const shown = products.filter((p) => pack === "all" || p.packs.includes(pack));
   const [chart, setChart] = useState(false);
   useEffect(() => setChart(true), []);
@@ -134,19 +134,8 @@ function Home() {
       <section className="container-site py-14">
         <h2 className="text-3xl font-semibold">{lang === "bn" ? "কাঁচামালের উৎস" : "Raw material origins"}</h2>
         <p className="mt-2 max-w-2xl text-muted">
-          {lang === "bn"
-            ? "ইপক্সি, হার্ডেনার, সলভেন্ট ও অ্যাডমিক্সচার ছয়টি ট্রেড হাব থেকে সরাসরি আমদানি।"
-            : "Epoxy, hardener, solvents and admixture bases direct-imported from six trade hubs."}
+          {tx(sourcing)}
         </p>
-        <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {sourcing.map((s) => (
-            <article key={s.code} className="rounded-xl bg-card p-5 ring-1 ring-line">
-              <p className="text-xs font-semibold tracking-widest text-sky">{s.code}</p>
-              <h3 className="mt-1 text-xl font-semibold">{tx(s.country)}</h3>
-              <p className="mt-2 text-sm text-muted">{tx(s.items)}</p>
-            </article>
-          ))}
-        </div>
       </section>
 
       <section className="bg-card py-14">
@@ -202,7 +191,7 @@ function Home() {
         <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <h2 className="text-3xl font-semibold">{lang === "bn" ? "নির্বাচিত পণ্য" : "Featured products"}</h2>
           <div className="flex gap-2 overflow-auto">
-            {(["all", "4L", "20L", "drum"] as const).map((p) => (
+            {(["all", "5L", "20L", "200L"] as const).map((p) => (
               <button
                 key={p}
                 type="button"

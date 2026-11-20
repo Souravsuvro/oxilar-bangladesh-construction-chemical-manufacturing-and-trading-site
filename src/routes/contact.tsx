@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { useI18n } from "@/lib/i18n";
-import { leadsConfigured, sendLead, trackLead } from "@/lib/leads";
+import { sendLead, trackLead } from "@/lib/leads";
 import { SITE, whatsappUrl } from "@/lib/site";
 
 const WA = whatsappUrl(
@@ -32,14 +32,16 @@ function Page() {
 
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
+    setOk(false);
     setBusy(true);
     setErr("");
-    const fd = new FormData(e.currentTarget);
+    const fd = new FormData(form);
     if (String(fd.get("company_url") || "").trim()) {
       setBusy(false);
       setOk(true);
       setEmailed(true);
-      e.currentTarget.reset();
+      form.reset();
       return;
     }
     const name = String(fd.get("name") || "");
@@ -55,13 +57,14 @@ function Page() {
       at: new Date().toISOString(),
     });
     setBusy(false);
-    if (!result.ok && leadsConfigured()) {
+    if (!result.ok) {
       setErr(bn ? "ইমেইল পাঠানো যায়নি — হোয়াটসঅ্যাপ বা কল ব্যবহার করুন।" : "Could not reach inbox — use WhatsApp or call.");
+      return;
     }
     setEmailed(result.emailed);
     setOk(true);
     trackLead("contact_form", { emailed: result.emailed });
-    e.currentTarget.reset();
+    form.reset();
   };
 
   const q = encodeURIComponent("31/1 Babar Road Mohammadpur Dhaka");
@@ -139,8 +142,8 @@ function Page() {
                   ? "বার্তা ইনবক্সে পাঠানো হয়েছে। জরুরি হলে কল করুন।"
                   : "Message sent to our inbox. Call if urgent."
                 : bn
-                  ? "বার্তা এই ডিভাইসে সংরক্ষিত। ইনবক্স সংযোগ না থাকলে হোয়াটসঅ্যাপ বা কল ব্যবহার করুন।"
-                  : "Saved on this device. If inbox is not configured yet, use WhatsApp or call."}
+                  ? "ইনবক্স সংযুক্ত নয়। হোয়াটসঅ্যাপ বা কল ব্যবহার করুন।"
+                  : "Inbox is not configured. Please use WhatsApp or call."}
             </p>
           )}
           {err && <p className="mt-2 text-sm text-amber">{err}</p>}

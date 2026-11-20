@@ -69,13 +69,15 @@ function Page() {
 
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
+    setOk(false);
     setErr("");
-    const fd = new FormData(e.currentTarget);
+    const fd = new FormData(form);
 
     if (String(fd.get("company_url") || "").trim()) {
       setOk(true);
       setEmailed(true);
-      e.currentTarget.reset();
+      form.reset();
       return;
     }
  
@@ -88,23 +90,9 @@ function Page() {
     const phone = String(fd.get("phone") || "").trim();
     const email = String(fd.get("email") || "").trim();
     const cover = String(fd.get("cover") || "").trim();
-    const resume = fd.get("resume");
-    const resumeName =
-      resume && typeof resume === "object" && "name" in resume && (resume as File).name
-        ? (resume as File).name
-        : "";
 
     if (!name || !phone || !email || !cover) {
       setErr(bn ? "সব প্রয়োজনীয় ঘর পূরণ করুন।" : "Please complete all required fields.");
-      return;
-    }
-
-    if (resume && typeof resume === "object" && "size" in resume && (resume as File).size > 2_500_000) {
-      setErr(
-        bn
-          ? "রিজিউমি ২.৫ এমবির নিচে রাখুন, অথবা ইমেইলে পাঠান।"
-          : "Keep resume under 2.5 MB, or email it separately.",
-      );
       return;
     }
 
@@ -117,10 +105,7 @@ function Page() {
       email,
       position: role ? role.title.en : position,
       coverLetter: cover,
-      resumeName: resumeName || undefined,
-      detail: resumeName
-        ? `Applicant noted resume file: ${resumeName}. Please request the file by email if not attached via Formspree.`
-        : "No resume file uploaded — applicant may email CV separately.",
+      detail: "Applicant must email their resume separately.",
       at: new Date().toISOString(),
     });
     setBusy(false);
@@ -137,7 +122,7 @@ function Page() {
     setEmailed(result.emailed);
     setOk(true);
     trackLead("careers_application", { position, emailed: result.emailed });
-    e.currentTarget.reset();
+    form.reset();
     started.current = Date.now();
   };
 
@@ -284,14 +269,10 @@ function Page() {
             <textarea name="cover" required rows={5} className="mt-1 w-full rounded-md border border-line px-3 py-2 text-ink" placeholder={bn ? "আপনার অভিজ্ঞতা ও আগ্রহ লিখুন…" : "Briefly share experience and why Oxilar…"} />
           </label>
 
-          <label className="mt-3 block text-sm font-medium">
-            {bn ? "রিজিউমি (ঐচ্ছিক, PDF/DOC, সর্বোচ্চ ২.৫ এমবি)" : "Resume (optional, PDF/DOC, max 2.5 MB)"}
-            <input name="resume" type="file" accept=".pdf,.doc,.docx,application/pdf" className="mt-1 block w-full text-sm text-ink" />
-          </label>
-          <p className="mt-1 text-xs text-muted">
+          <p className="mt-3 text-xs text-muted">
             {bn
-              ? `নিরাপদ ডেলিভারির জন্য রিজিউমি ${SITE.email}-এও পাঠান।`
-              : `Also email your resume to ${SITE.email} for reliable delivery.`}
+              ? `রিজিউমি অবশ্যই ${SITE.email}-এ পাঠান।`
+              : `You must email your resume to ${SITE.email}; it is not attached to this form.`}
           </p>
 
           <button
@@ -309,8 +290,8 @@ function Page() {
                   ? `আবেদন গ্রহণ হয়েছে। রিজিউমি ${SITE.email}-এ পাঠাতে ভুলবেন না।`
                   : `Application received. Please also email your resume to ${SITE.email}.`
                 : bn
-                  ? `আবেদন সংরক্ষিত। ইনবক্স কনফিগার না থাকলে সরাসরি ইমেইল করুন: ${SITE.email}`
-                  : `Saved on this device. If inbox is not configured, email ${SITE.email} directly.`}
+                  ? `ইনবক্স সংযুক্ত নয়। সরাসরি ইমেইল করুন: ${SITE.email}`
+                  : `Inbox is not configured. Email ${SITE.email} directly.`}
             </p>
           )}
           {err && (
@@ -323,4 +304,3 @@ function Page() {
     </div>
   ); 
 }
-

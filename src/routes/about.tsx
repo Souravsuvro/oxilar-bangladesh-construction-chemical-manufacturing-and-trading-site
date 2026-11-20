@@ -47,20 +47,20 @@ function AboutPage() {
 
       <section className="mt-10 grid gap-8 lg:grid-cols-2">
         <div className="space-y-4 text-base leading-relaxed text-ink">
-          <p>{tx(p.about)}</p>
+          <p>{tx(p.focus)}</p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="rounded-xl bg-card p-5 ring-1 ring-line">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-brand">
               {lang === "bn" ? "আমাদের ভিশন" : "Our vision"}
             </h2>
-            <p className="mt-2 text-sm leading-relaxed text-ink">{tx(p.vision)}</p>
+            <p className="mt-2 text-sm leading-relaxed text-ink">{lang === "bn" ? "উন্নত ভবিষ্যতের জন্য নির্মাণ সমাধান।" : "Construction solutions for a better future."}</p>
           </div>
           <div className="rounded-xl bg-card p-5 ring-1 ring-line">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-brand">
               {lang === "bn" ? "আমাদের মিশন" : "Our mission"}
             </h2>
-            <p className="mt-2 text-sm leading-relaxed text-ink">{tx(p.mission)}</p>
+            <p className="mt-2 text-sm leading-relaxed text-ink">{tx(p.focus)}</p>
           </div>
         </div>
       </section>
@@ -89,20 +89,8 @@ function AboutPage() {
             {lang === "bn" ? "গ্লোবাল সোর্সিং" : "Global sourcing"}
           </h2>
           <p className="mt-2 text-sm text-muted">
-            {lang === "bn"
-              ? "নির্বাচিত কাঁচামাল ভারত, মালয়েশিয়া ও তাইওয়ান থেকে সরাসরি আমদানি।"
-              : "Selected raw materials direct-imported from India, Malaysia and Taiwan."}
+            {tx(sourcing)}
           </p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {sourcing.map((s) => (
-              <span
-                key={s.code}
-                className="rounded-full bg-paper px-3 py-1 text-xs font-medium text-ink ring-1 ring-line"
-              >
-                {tx(s.country)}
-              </span>
-            ))}
-          </div>
         </div>
       </section>
     </div>

@@ -91,6 +91,8 @@ function FormCard({
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setOk(false);
+    setWa("");
     const form = e.currentTarget;
     const fd = new FormData(form);
     if (String(fd.get("company_website") || "").trim()) {
@@ -161,8 +163,10 @@ function FormCard({
     setEmailed(result.emailed);
     setWa(result.emailed ? "" : whatsappUrl(waText));
     setOk(true);
-    trackLead(kind === "dealer" ? "dealer_form" : "project_form", { emailed: result.emailed });
-    form.reset();
+    if (result.emailed) {
+      trackLead(kind === "dealer" ? "dealer_form" : "project_form", { emailed: true });
+      form.reset();
+    }
   };
 
   return (
@@ -203,8 +207,8 @@ function FormCard({
             <>
               <p>
                 {bn
-                  ? "অনুরোধ এই ডিভাইসে সংরক্ষিত হয়েছে। হোয়াটসঅ্যাপেও পাঠান।"
-                  : "Request saved on this device. Please also send it on WhatsApp."}
+                  ? "অনুরোধ পাঠানো যায়নি। হোয়াটসঅ্যাপে পাঠান অথবা আবার চেষ্টা করুন।"
+                  : "Request was not sent. Send it on WhatsApp or try again."}
               </p>
               {wa && (
                 <a className="mt-2 inline-flex min-h-11 items-center font-semibold text-brand" href={wa} target="_blank" rel="noreferrer">
