@@ -50,7 +50,7 @@ export const products: Product[] = [
     name: { en: "Oxilar Super-100", bn: "অক্সিলার সুপার-১০০" },
     category: "admixture",
     packs: LIQUID,
-    image: "/media/oxilar-green-pail.jpg",
+    image: "/media/stack.jpg",
     short: {
       en: "Multipurpose polymerised concrete admixture. Protects against acid rain, reduces heat of hydration, improves workability and strength.",
       bn: "মাল্টিপারপাস পলিমারাইজড কংক্রিট অ্যাডমিক্সচার। অ্যাসিড বৃষ্টি থেকে রক্ষা, ওয়ার্ক্যাবিলিটি ও শক্তি বৃদ্ধি।",
@@ -79,7 +79,7 @@ export const products: Product[] = [
     name: { en: "Oxilar Damp Guard-400", bn: "অক্সিলার ড্যাম্প গার্ড-৪০০" },
     category: "waterproofing",
     packs: LIQUID,
-    image: "/media/damp-guard-front.jpg",
+    image: "/media/sm-damp-guard-front.jpg",
     short: {
       en: "Water-reducing and waterproofing liquid admixture — acid and salt resistance, higher strength, damp inactivation.",
       bn: "ওয়াটার-রিডিউসিং ও ওয়াটারপ্রুফিং লিকুইড — অ্যাসিড ও লবণ প্রতিরোধ, উচ্চ শক্তি।",
@@ -105,7 +105,7 @@ export const products: Product[] = [
     name: { en: "Oxilar Pre Cast Premium", bn: "অক্সিলার প্রি কাস্ট প্রিমিয়াম" },
     category: "waterproofing",
     packs: LIQUID,
-    image: "/media/damp-guard-400-20l.jpg",
+    image: "/media/stack.jpg",
     short: {
       en: "Damp- and waterproof polymer admixture for precast and site concrete.",
       bn: "প্রিকাস্ট ও সাইট কংক্রিটের জন্য ড্যাম্প ও ওয়াটারপ্রুফ পলিমার অ্যাডমিক্সচার।",
@@ -131,7 +131,7 @@ export const products: Product[] = [
     name: { en: "Oxilar Solid Bond", bn: "অক্সিলার সলিড বন্ড" },
     category: "admixture",
     packs: LIQUID,
-    image: "/media/solid-bond-front.jpg",
+    image: "/media/pail.jpg",
     short: {
       en: "Water-reducing admixture in 1–200 L site packs — stronger bond and waterproof performance.",
       bn: "১–২০০ লিটার সাইট প্যাক ওয়াটার-রিডিউসিং অ্যাডমিক্সচার — শক্তিশালী বন্ধন ও ওয়াটারপ্রুফ পারফরম্যান্স।",
@@ -251,9 +251,8 @@ export const strengthSeries: { label: Copy; value: number }[] = [
 ];
 
 export const gallery: { src: string; alt: Copy }[] = [
-  { src: "/media/damp-guard-front.jpg", alt: { en: "Damp Guard pack", bn: "ড্যাম্প গার্ড প্যাক" } },
-  { src: "/media/solid-bond-front.jpg", alt: { en: "Solid Bond pack", bn: "সলিড বন্ড প্যাক" } },
-  { src: "/media/oxilar-green-pail.jpg", alt: { en: "Oxilar pack", bn: "অক্সিলার প্যাক" } },
+  { src: "/media/sm-damp-guard-front.jpg", alt: { en: "Damp Guard pack", bn: "ড্যাম্প গার্ড প্যাক" } },
+  { src: "/media/pail.jpg", alt: { en: "Oxilar pack", bn: "অক্সিলার প্যাক" } },
   { src: "/media/stack.jpg", alt: { en: "Site stack", bn: "সাইট স্ট্যাক" } },
 ];
 

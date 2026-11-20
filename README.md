@@ -152,7 +152,7 @@ After upload, point `products[].image` and `gallery` in `src/data/catalog.ts` at
 |----------|---------|
 | `VITE_FORMSPREE_ID` | Formspree form id → inbox for contact, RFQ, careers |
 | `VITE_LEAD_ENDPOINT` | Optional full webhook URL (overrides Formspree) |
-| `VITE_GA4_ID` | Google Analytics 4 Measurement ID (load only if real) |
+| `VITE_GA_MEASUREMENT_ID` | Google Analytics 4 Measurement ID (load only if real) |
 
 Set in Vercel → Project → Settings → Environment Variables → Production + Preview → Redeploy.
 

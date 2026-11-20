@@ -70,6 +70,10 @@ export function RfqDrawer() {
     setBusy(false);
     setWaUrl(buildWhatsAppUrl(name, phone, snapshot));
     setEmailed(result.emailed);
+    if (!result.emailed) {
+      setAnnounce(bn ? "আরএফকিউ পাঠানো যায়নি। হোয়াটসঅ্যাপ ব্যবহার করুন।" : "RFQ was not sent. Use WhatsApp or try again.");
+      return;
+    }
     setSent(true);
     clear();
     setAnnounce(
@@ -137,25 +141,25 @@ export function RfqDrawer() {
               </div>
             </div>
           ))}
-          {sent && (
-            <StatusBanner tone="success" politeness="assertive">
+          {(sent || waUrl) && (
+            <StatusBanner tone={sent ? "success" : "error"} politeness="assertive">
               <p className="font-semibold">
                 {emailed
                   ? bn
                     ? "আরএফকিউ ইনবক্সে পাঠানো হয়েছে"
                     : "RFQ sent to our inbox"
                   : bn
-                    ? "আরএফকিউ সংরক্ষিত হয়েছে"
-                    : "RFQ saved on this device"}
+                    ? "আরএফকিউ পাঠানো যায়নি"
+                    : "RFQ was not sent"}
               </p>
               <p className="mt-2 font-normal">
                 {bn
-                  ? "দ্রুত সাড়া পেতে হোয়াটসঅ্যাপেও পাঠান — লাইনগুলো আগে থেকে ভরা থাকবে।"
-                  : "Also send on WhatsApp for a faster reply — lines stay pre-filled."}
+                  ? "হোয়াটসঅ্যাপে পাঠান — লাইনগুলো আগে থেকে ভরা থাকবে।"
+                  : "Send on WhatsApp — your lines are pre-filled."}
               </p>
               {waUrl && (
                 <a
-                  href={waUrl}
+                  href={sent ? waUrl : buildWhatsAppUrl(name, phone, lines)}
                   target="_blank"
                   rel="noreferrer"
                   className="mt-3 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-sky font-semibold text-paper"
