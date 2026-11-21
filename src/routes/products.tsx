@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { categories, packLabels, products, type Category, type Pack } from "@/data/catalog";
 import { useI18n } from "@/lib/i18n";
@@ -17,8 +17,13 @@ export const Route = createFileRoute("/products")({
       },
     ],
   }),
-  component: ProductsPage,
+  component: ProductsRoutes,
 });
+
+function ProductsRoutes() {
+  const path = useRouterState({ select: (state) => state.location.pathname });
+  return path === "/products" || path === "/products/" ? <ProductsPage /> : <Outlet />;
+}
 
 function ProductsPage() {
   const { tx, lang, t } = useI18n();

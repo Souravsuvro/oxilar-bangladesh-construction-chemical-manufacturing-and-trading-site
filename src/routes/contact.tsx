@@ -109,7 +109,7 @@ function Page() {
           <a className="block min-h-11 py-2 font-semibold text-brand" href={`tel:${SITE.phoneTel}`}>{SITE.phoneDisplay}</a>
           <a className="block min-h-11 py-2 font-semibold text-brand" href={WA} target="_blank" rel="noreferrer">WhatsApp {SITE.whatsappDisplay}</a>
           <a className="block min-h-11 py-2 font-semibold text-brand" href={`mailto:${SITE.email}`}>{SITE.email}</a>
-          <p className="py-2">www.oxilarbd.com</p>
+          <a className="block min-h-11 py-2" href={SITE.web}>{SITE.web.replace("https://", "")}</a>
           <p className="text-muted">{bn ? SITE.sourcingLine.bn : SITE.sourcingLine.en}</p>
         </div>
         <form onSubmit={submit} className="rounded-xl bg-card p-5 ring-1 ring-line">

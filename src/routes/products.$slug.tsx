@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { packLabels, products } from "@/data/catalog";
 import { useI18n } from "@/lib/i18n";
 import { useRfq } from "@/lib/rfq-store";
-import { whatsappUrl } from "@/lib/site";
+import { SITE, whatsappUrl } from "@/lib/site";
 import { useState } from "react";
 
 export const Route = createFileRoute("/products/$slug")({
@@ -23,14 +23,14 @@ export const Route = createFileRoute("/products/$slug")({
         { property: "og:type", content: "product" },
         {
           property: "og:image",
-          content: p ? `https://www.oxilarbd.com${p.image}` : "https://www.oxilarbd.com/og.jpg",
+          content: p ? `${SITE.web}${p.image}` : `${SITE.web}/og.jpg`,
         },
         {
           property: "og:url",
-          content: p ? `https://www.oxilarbd.com/products/${p.slug}` : "https://www.oxilarbd.com/products",
+          content: p ? `${SITE.web}/products/${p.slug}` : `${SITE.web}/products`,
         },
       ],
-      links: p ? [{ rel: "canonical", href: `https://www.oxilarbd.com/products/${p.slug}` }] : [],
+      links: p ? [{ rel: "canonical", href: `${SITE.web}/products/${p.slug}` }] : [],
     };
   },
   component: ProductDetail,
@@ -156,18 +156,18 @@ function ProductDetail() {
         "@type": "Product",
         name: p.name.en,
         sku: p.sku,
-        image: [`https://www.oxilarbd.com${p.image}`],
+        image: [`${SITE.web}${p.image}`],
         description: p.short.en,
         brand: { "@type": "Brand", name: "Oxilar Bangladesh" },
         manufacturer: {
           "@type": "Organization",
           name: "Oxilar Bangladesh",
-          url: "https://www.oxilarbd.com",
+          url: SITE.web,
         },
         category: p.category,
         offers: {
           "@type": "Offer",
-          url: `https://www.oxilarbd.com/products/${p.slug}`,
+          url: `${SITE.web}/products/${p.slug}`,
           availability: "https://schema.org/InStock",
           priceCurrency: "BDT",
           priceValidUntil: "2027-12-31",
@@ -197,13 +197,13 @@ function ProductDetail() {
       {
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: "https://www.oxilarbd.com/" },
-          { "@type": "ListItem", position: 2, name: "Products", item: "https://www.oxilarbd.com/products" },
+          { "@type": "ListItem", position: 1, name: "Home", item: `${SITE.web}/` },
+          { "@type": "ListItem", position: 2, name: "Products", item: `${SITE.web}/products` },
           {
             "@type": "ListItem",
             position: 3,
             name: p.name.en,
-            item: `https://www.oxilarbd.com/products/${p.slug}`,
+            item: `${SITE.web}/products/${p.slug}`,
           },
         ],
       },

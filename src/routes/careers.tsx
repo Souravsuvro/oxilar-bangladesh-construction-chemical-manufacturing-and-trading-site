@@ -164,8 +164,8 @@ function Page() {
           </li>
           <li>
             <span className="font-semibold">{bn ? "যোগাযোগ:" : "Contact:"}</span>{" "}
-            <a className="text-brand font-semibold" href="tel:+8801960198313">
-              01960198313
+            <a className="text-brand font-semibold" href={`tel:${SITE.hrPhoneTel}`}>
+              {SITE.hrPhoneDisplay}
             </a>
           </li>
         </ul>

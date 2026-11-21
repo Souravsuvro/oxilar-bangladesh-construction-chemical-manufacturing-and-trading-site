@@ -37,7 +37,7 @@ export const Route = createFileRoute("/")({
           "Independent manufacturer of waterproofing and admixture systems. Factory Kalampur, Dhamrai. Global direct importer.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: "https://www.oxilarbd.com/og.jpg" },
+      { property: "og:image", content: `${SITE.web}/og.jpg` },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
@@ -50,7 +50,7 @@ const schema = {
     {
       "@type": ["Organization", "LocalBusiness", "Manufacturer"],
       name: "Oxilar Bangladesh",
-      url: "https://www.oxilarbd.com",
+      url: SITE.web,
       email: SITE.email,
       telephone: SITE.phoneTel,
       foundingDate: "2019-09-06",

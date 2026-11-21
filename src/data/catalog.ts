@@ -287,4 +287,105 @@ export const faqs: { q: Copy; a: Copy }[] = [
       bn: "যেকোনো পণ্য পেজে Add to RFQ ব্যবহার করুন, B2B পোর্টাল খুলুন, অথবা সেলস ডেস্কে হোয়াটসঅ্যাপ / কল করুন।",
     },
   },
+  {
+    q: { en: "WhatsApp number?", bn: "হোয়াটসঅ্যাপ নম্বর?" },
+    a: { en: "01826736886 (WhatsApp Business).", bn: "০১৮২৬৭৩৬৮৮৬ (হোয়াটসঅ্যাপ বিজনেস)।" },
+  },
+  {
+    q: { en: "Dealership contact?", bn: "ডিলারশিপ যোগাযোগ?" },
+    a: { en: "Call 01960198313 or use the B2B portal.", bn: "০১৯৬০১৯৮৩১৩-এ কল করুন অথবা বিটুবি পোর্টাল ব্যবহার করুন।" },
+  },
+  {
+    q: { en: "How do I apply for a job?", bn: "চাকরির জন্য কীভাবে আবেদন করব?" },
+    a: {
+      en: "See Careers. Email your CV to oxilarbangladesh@gmail.com or call 01960198313.",
+      bn: "ক্যারিয়ার পেজ দেখুন। সিভি oxilarbangladesh@gmail.com-এ পাঠান অথবা ০১৯৬০১৯৮৩১৩-এ কল করুন।",
+    },
+  },
+];
+
+export const projectSectors: Copy[] = [
+  { en: "Residential & high-rise", bn: "আবাসিক ও হাই-রাইজ" },
+  { en: "Industrial floors", bn: "ইন্ডাস্ট্রিয়াল ফ্লোর" },
+  { en: "Water-retaining structures", bn: "ওয়াটার-রিটেইনিং স্ট্রাকচার" },
+  { en: "Roads & infrastructure", bn: "সড়ক ও অবকাঠামো" },
+];
+
+export const projects: { title: Copy; sector: Copy; summary: Copy }[] = [
+  {
+    title: { en: "Roof waterproofing programmes", bn: "ছাদ ওয়াটারপ্রুফিং" },
+    sector: { en: "Residential", bn: "আবাসিক" },
+    summary: {
+      en: "Damp Guard and Super-100 dosed systems for monsoon-exposed roofs.",
+      bn: "বর্ষাপ্রবণ ছাদে ড্যাম্প গার্ড ও সুপার-১০০ ডোজড সিস্টেম।",
+    },
+  },
+  {
+    title: { en: "Plant and yard dust control", bn: "প্ল্যান্ট ও ইয়ার্ড ডাস্ট কন্ট্রোল" },
+    sector: { en: "Industrial", bn: "ইন্ডাস্ট্রিয়াল" },
+    summary: {
+      en: "Befit Dust and Anti Dust for cleaner aggregates and floors.",
+      bn: "পরিষ্কার অ্যাগ্রিগেট ও ফ্লোরের জন্য বেফিট ডাস্ট ও অ্যান্টি ডাস্ট।",
+    },
+  },
+];
+
+export const quotes: { quote: Copy; by: Copy }[] = [
+  {
+    quote: {
+      en: "Dose, TDS and trial mix together — that is how site teams mix with confidence.",
+      bn: "ডোজ, টিডিএস ও ট্রায়াল একসাথে — এভাবেই সাইট টিম আত্মবিশ্বাসে মিক্স করে।",
+    },
+    by: { en: "Oxilar technical desk", bn: "অক্সিলার টেকনিক্যাল ডেস্ক" },
+  },
+];
+
+export const videos: { title: Copy; body: Copy; length: string }[] = [
+  {
+    title: { en: "Roof slurry method", bn: "ছাদের স্লারি পদ্ধতি" },
+    body: {
+      en: "SSD the slab, two cross coats, keep rain off 24 hours, then plaster.",
+      bn: "স্ল্যাব এসএসডি, দুই আড়াআড়ি কোট, ২৪ ঘণ্টা বৃষ্টি থেকে রক্ষা, তারপর প্লাস্টার।",
+    },
+    length: "Guide",
+  },
+];
+
+export const sheets: { id: string; kind: "TDS" | "SDS" | "Manual"; product: string; file: string }[] = [
+  { id: "tds-s100", kind: "TDS", product: "Oxilar Super-100", file: "/documents/tds-super-100.html" },
+  { id: "sds-s100", kind: "SDS", product: "Oxilar Super-100", file: "/documents/sds-super-100.html" },
+  { id: "manual-roof", kind: "Manual", product: "Roof slurry guide", file: "/documents/guide-roof.html" },
+];
+
+export const labs: { id: string; body: string; title: Copy; note: Copy; file: string }[] = [
+  {
+    id: "lab-buet",
+    body: "BUET",
+    title: { en: "BUET method reference", bn: "বুয়েট মেথড রেফারেন্স" },
+    note: {
+      en: "Working HTML sheet — not a signed BUET certificate.",
+      bn: "ওয়ার্কিং এইচটিএমএল শিট — স্বাক্ষরিত বুয়েট সনদ নয়।",
+    },
+    file: "/documents/lab-buet.html",
+  },
+  {
+    id: "lab-cuet",
+    body: "CUET",
+    title: { en: "CUET method reference", bn: "চুয়েট মেথড রেফারেন্স" },
+    note: {
+      en: "Working HTML sheet — not a signed CUET certificate.",
+      bn: "ওয়ার্কিং এইচটিএমএল শিট — স্বাক্ষরিত চুয়েট সনদ নয়।",
+    },
+    file: "/documents/lab-cuet.html",
+  },
+  {
+    id: "lab-bcsir",
+    body: "BCSIR",
+    title: { en: "BCSIR method reference", bn: "বিসিএসআইআর মেথড রেফারেন্স" },
+    note: {
+      en: "Working HTML sheet — not a signed BCSIR certificate.",
+      bn: "ওয়ার্কিং এইচটিএমএল শিট — স্বাক্ষরিত বিসিএসআইআর সনদ নয়।",
+    },
+    file: "/documents/lab-bcsir.html",
+  },
 ];

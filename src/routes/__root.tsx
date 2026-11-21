@@ -3,9 +3,10 @@ import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { LanguageProvider } from "@/lib/i18n";
 import { SiteChrome } from "@/components/layout/SiteChrome";
+import { SITE as SITE_INFO } from "@/lib/site";
 import appCss from "../styles.css?url";
 
-const SITE = "https://www.oxilarbd.com";
+const SITE_URL = SITE_INFO.web;
 const TITLE =
   "Oxilar Bangladesh | Construction Chemical Manufacturer & Global Raw Material Importer";
 const DESC =
@@ -33,8 +34,8 @@ export const Route = createRootRoute({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: SITE },
-      { property: "og:image", content: `${SITE}/og.jpg` },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:image", content: `${SITE_URL}/og.jpg` },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       { property: "og:locale", content: "en_BD" },
@@ -43,12 +44,12 @@ export const Route = createRootRoute({
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESC },
-      { name: "twitter:image", content: `${SITE}/og.jpg` },
+      { name: "twitter:image", content: `${SITE_URL}/og.jpg` },
       // Uncomment and set after Google Search Console verification:
       // { name: "google-site-verification", content: "YOUR_GSC_TOKEN" },
     ],
     links: [
-      { rel: "canonical", href: SITE },
+      { rel: "canonical", href: SITE_URL },
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       { rel: "stylesheet", href: appCss },
       { rel: "manifest", href: "/__grok/manifest.webmanifest" },
