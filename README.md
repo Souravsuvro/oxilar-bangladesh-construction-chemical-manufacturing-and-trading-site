@@ -19,7 +19,7 @@ Independent manufacturer, marketer and supplier of high-performance construction
 
 > Oxilar Bangladesh is **not** affiliated with Filament Group. Ignore any legacy brochure URLs pointing at filamentbd.com.
 
-Raw materials are **direct-imported from India, Malaysia and Taiwan**.
+Raw materials are **direct-imported from India, Malaysia and Taiwan**. 
 
 ---
 
