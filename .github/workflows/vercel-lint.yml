@@ -1,0 +1,47 @@
+name: Vercel deployment lint
+
+on:
+  repository_dispatch:
+    types: [vercel.deployment.ready]
+
+permissions:
+  actions: read
+  contents: read
+  statuses: write
+
+jobs:
+  lint:
+    if: github.event.client_payload.project.id == 'prj_gNyYQtAPxHQUMqvE1BhgyUz5X5c2'
+    runs-on: ubuntu-latest
+    steps:
+      - name: notify vercel
+        uses: vercel/repository-dispatch/actions/status@v1
+        with:
+          name: "Vercel - oxilar-bangladesh-staging: lint"
+
+      - name: Validate deployment commit
+        env:
+          DEPLOYMENT_SHA: ${{ github.event.client_payload.git.sha }}
+        run: |
+          if [[ ! "$DEPLOYMENT_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "Invalid or missing deployment commit SHA" >&2
+            exit 1
+          fi
+
+      - name: Check out deployment commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.client_payload.git.sha }}
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
