@@ -6,7 +6,6 @@ import { SiteChrome } from "@/components/layout/SiteChrome";
 import { SITE as SITE_INFO } from "@/lib/site";
 import appCss from "../styles.css?url";
 
-
 const SITE_URL = SITE_INFO.web;
 const TITLE =
   "Oxilar Bangladesh | Construction Chemical Manufacturer & Global Raw Material Importer";
