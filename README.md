@@ -9,7 +9,7 @@
 Independent manufacturer, marketer and supplier of high-performance construction chemicals, waterproofing systems and industrial materials. Established **6 September 2019**. Slogan: **For Better Future**.
 
 - **Plant:** Kalampur, Dhamrai, Dhaka  
-- **Office:** 31/1 Babar Road, Mohammadpur, Dhanmondi, Dhaka  
+- **Office:** 31/1 Babar Road, Mohammadpur, Dhanmondi, Dhaka 
 - **Email:** oxilarbangladesh@gmail.com  
 - **WhatsApp (Business):** 01826736886
 - **Voice hotline:** 01826736886
@@ -19,7 +19,7 @@ Independent manufacturer, marketer and supplier of high-performance construction
 
 > Oxilar Bangladesh is **not** affiliated with Filament Group. Ignore any legacy brochure URLs pointing at filamentbd.com.
 
-Raw materials are **direct-imported from India, Malaysia and Taiwan**.
+Raw materials are **direct-imported from India, Malaysia and Taiwan**. 
 
 ---
 
