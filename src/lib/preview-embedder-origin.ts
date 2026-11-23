@@ -9,7 +9,7 @@ export function isGrokEmbedderOrigin(origin: string): boolean {
   } catch {
     return false;
   }
-}
+} 
 
 export function isSandboxPreviewGuestHost(hostname: string): boolean {
   const host = hostname.toLowerCase();
