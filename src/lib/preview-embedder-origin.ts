@@ -55,3 +55,4 @@ export function resolveParentEmbedderOrigin(
   }
   return null;
 }
+
