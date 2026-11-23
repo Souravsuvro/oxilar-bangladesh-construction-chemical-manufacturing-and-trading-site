@@ -43,8 +43,9 @@ export function resolveParentEmbedderOrigin(
       if (url.protocol !== "https:" && url.protocol !== "http:") continue;
       if (isGrokEmbedderOrigin(url.origin)) return url.origin;
       if (
-        isSandboxPreviewGuestHost(guestHostname) ||
-        isRemintPreviewPair(guestHostname, url.hostname)
+        isRemintPreviewPair(guestHostname, url.hostname) &&
+        (url.hostname === "grok.com" ||
+          url.hostname.endsWith(".grok.com"))
       ) {
         return url.origin;
       }

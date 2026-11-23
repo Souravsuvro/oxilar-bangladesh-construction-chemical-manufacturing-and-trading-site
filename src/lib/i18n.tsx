@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components -- provider and its context hook are intentionally co-located */
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import type { Copy, Lang } from "@/data/catalog";
 

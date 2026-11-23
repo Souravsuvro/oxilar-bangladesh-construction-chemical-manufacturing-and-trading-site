@@ -329,6 +329,11 @@ export function siteHasCustomCard(site = {}) {
  * Otherwise empty — caller emits the og.grok.me placeholder.
  */
 export function resolveOgCardAsset(site = {}, cwd = process.cwd()) {
+  if (!cwd) {
+    return siteHasCustomCard(site) || String(site.image ?? "").trim()
+      ? String(site.image ?? "").trim() || "/og.jpg"
+      : "";
+  }
   return ogCardPublicPath(cwd) || (detectCustomOgCard(cwd, site) ? String(site.image ?? "").trim() || "/og.jpg" : "");
 }
 
@@ -414,15 +419,16 @@ function insertBeforeHeadClose(html, snippet) {
 }
 
 export function normalizeHeadContext(ctx = {}) {
-  const cwd = ctx.cwd ?? process.cwd();
-  // Middleware passes a baked `site`. Still consult the workspace so a
-  // public/og.jpg generated after that snapshot (or missed by a wrong cwd)
-  // wins over the og.grok.me placeholder. Vercel has no public/ to read, so
-  // a correct bake is unchanged.
-  const site = applyCustomCardFromFs(
-    ctx.site !== undefined ? ctx.site : snapshotOgIdentity(cwd).site,
-    cwd,
-  );
+  const cwd = ctx.cwd ?? "";
+  // Middleware passes a baked `site`. Dev/preview passes an explicit cwd.
+  // Library-style calls with neither keep a synthetic context isolated from
+  // whichever repository happens to own the test process.
+  let site = ctx.site !== undefined
+    ? ctx.site
+    : cwd
+      ? snapshotOgIdentity(cwd).site
+      : {};
+  site = cwd ? applyCustomCardFromFs(site, cwd) : site;
   const appName = resolveOgTitle(site, ctx.appName ?? DEFAULT_APP_NAME, ctx.host ?? "");
   return {
     appName,

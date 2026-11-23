@@ -1,5 +1,11 @@
 # Oxilar Bangladesh — Construction Chemicals Web App
 
+## Live links
+
+- **Production:** https://oxilarbd.com
+- **Vercel preview:** https://oxilar-bangladesh-staging-hbm5i9klj.vercel.app
+- **GitHub:** https://github.com/Souravsuvro/oxilar-bangladesh-construction-chemical-manufacturing-and-trading-site
+
 Independent manufacturer, marketer and supplier of high-performance construction chemicals, waterproofing systems and industrial materials. Established **6 September 2019**. Slogan: **For Better Future**.
 
 - **Plant:** Kalampur, Dhamrai, Dhaka  

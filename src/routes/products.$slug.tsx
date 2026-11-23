@@ -168,9 +168,7 @@ function ProductDetail() {
         offers: {
           "@type": "Offer",
           url: `${SITE.web}/products/${p.slug}`,
-          availability: "https://schema.org/InStock",
-          priceCurrency: "BDT",
-          priceValidUntil: "2027-12-31",
+          availability: "https://schema.org/PreOrder",
           seller: { "@type": "Organization", name: "Oxilar Bangladesh" },
           description: "Request quotation (RFQ). Pack sizes: " + p.packs.join(", "),
         },

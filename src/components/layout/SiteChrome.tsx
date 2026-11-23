@@ -109,7 +109,6 @@ export function SiteChrome({ children }: { children: ReactNode }) {
           </div>
           <div className="inline-flex rounded-full bg-ink-soft p-1" role="group" aria-label="Language">
             <button
-              ref={menuTriggerRef}
               type="button"
               className={cn("min-h-11 rounded-full px-3 text-xs font-semibold", lang === "en" ? "bg-brand text-paper" : "text-paper/70")}
               onClick={() => setLang("en")}
@@ -118,6 +117,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
               EN
             </button>
             <button
+              ref={menuTriggerRef}
               type="button"
               className={cn("min-h-11 rounded-full px-3 text-xs font-semibold", lang === "bn" ? "bg-brand text-paper" : "text-paper/70")}
               onClick={() => setLang("bn")}

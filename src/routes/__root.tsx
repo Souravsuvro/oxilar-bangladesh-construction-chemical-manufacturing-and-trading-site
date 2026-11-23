@@ -49,7 +49,6 @@ export const Route = createRootRoute({
       // { name: "google-site-verification", content: "YOUR_GSC_TOKEN" },
     ],
     links: [
-      { rel: "canonical", href: SITE_URL },
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       { rel: "stylesheet", href: appCss },
       { rel: "manifest", href: "/__grok/manifest.webmanifest" },
