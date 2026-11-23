@@ -9,7 +9,7 @@
 Independent manufacturer, marketer and supplier of high-performance construction chemicals, waterproofing systems and industrial materials. Established **6 September 2019**. Slogan: **For Better Future**.
 
 - **Plant:** Kalampur, Dhamrai, Dhaka  
-- **Office:** 31/1 Babar Road, Mohammadpur, Dhanmondi, Dhaka  
+- **Office:** 31/1 Babar Road, Mohammadpur, Dhanmondi, Dhaka
 - **Email:** oxilarbangladesh@gmail.com  
 - **WhatsApp (Business):** 01826736886
 - **Voice hotline:** 01826736886
