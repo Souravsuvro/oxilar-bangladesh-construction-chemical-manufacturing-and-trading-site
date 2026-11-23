@@ -416,4 +416,3 @@ function ProductDetail() {
     </article>
   );
 }
-
