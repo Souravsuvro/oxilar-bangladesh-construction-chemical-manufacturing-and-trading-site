@@ -414,3 +414,4 @@ test("browser-smoke file I/O only touches guarded paths", () => {
   const stats = [...src.matchAll(/statSync\(\s*([A-Za-z_$][\w$.]*)/g)].map((m) => m[1]);
   assert.deepEqual(stats, ["baselinePath"]);
 });
+
