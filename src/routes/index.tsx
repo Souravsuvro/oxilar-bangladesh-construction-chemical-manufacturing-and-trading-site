@@ -4,6 +4,7 @@ import { benefits, faqs, processSteps, products, sourcing } from "@/data/catalog
 import { useI18n } from "@/lib/i18n";
 import { CalculatorSuite } from "@/components/calculators/Calculators";
 import { TrustBlocks } from "@/components/home/TrustBlocks";
+import { LiveRegion } from "@/components/a11y/LiveRegion";
 import { WA_DEFAULT, SITE } from "@/lib/site";
 import type { Pack } from "@/data/catalog";
 
@@ -170,9 +171,9 @@ function Home() {
             <div className="overflow-hidden rounded-2xl border border-white/10 bg-slate-900/60 shadow-2xl shadow-black/40 ring-1 ring-white/5">
               <div className="grid grid-cols-3 gap-px bg-white/5 p-1">
                 {[
-                  { src: "/media/damp-guard-front.jpg", label: bn ? "ড্যাম্প গার্ড" : "Damp Guard", tag: bn ? "হলুদ" : "Yellow" },
-                  { src: "/media/solid-bond-front.jpg", label: bn ? "সলিড বন্ড" : "Solid Bond", tag: bn ? "সবুজ" : "Green" },
-                  { src: "/media/oxilar-green-pail.jpg", label: "SB-250", tag: bn ? "নীল" : "Blue" },
+                  { src: "/media/damp-guard-studio.jpg", label: bn ? "ড্যাম্প গার্ড" : "Damp Guard", tag: bn ? "হলুদ" : "Yellow" },
+                  { src: "/media/solid-bond-studio.jpg", label: bn ? "সলিড বন্ড" : "Solid Bond", tag: bn ? "সবুজ" : "Green" },
+                  { src: "/media/oxilar-green-pail-5-litre.jpg", label: "SB-250", tag: bn ? "নীল" : "Blue" },
                 ].map((item) => (
                   <div key={item.label} className="relative aspect-[3/4] overflow-hidden rounded-xl bg-slate-800">
                     <img
@@ -269,8 +270,8 @@ function Home() {
         </div>
       </section>
 
-      <section className="container-site py-14" aria-label="How we work">
-        <h2 className="text-3xl font-semibold text-ink">{bn ? "কীভাবে কাজ করি" : "How we work"}</h2>
+      <section className="container-site py-14" aria-labelledby="how-we-work-heading">
+        <h2 id="how-we-work-heading" className="text-3xl font-semibold text-ink">{bn ? "কীভাবে কাজ করি" : "How we work"}</h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {processSteps.map((s) => (
             <article key={s.step} className="relative rounded-2xl border border-line bg-card p-5">
@@ -318,10 +319,11 @@ function Home() {
               <button
                 key={p}
                 type="button"
+                aria-pressed={pack === p}
                 onClick={() => setPack(p)}
                 className={`min-h-11 shrink-0 rounded-full px-4 text-sm font-semibold transition ${
                   pack === p
-                    ? "bg-emerald-600 text-white shadow-sm"
+                    ? "bg-brand text-paper shadow-sm"
                     : "border border-line bg-white text-ink hover:border-emerald-300"
                 }`}
               >
@@ -330,6 +332,9 @@ function Home() {
             ))}
           </div>
         </div>
+        <LiveRegion
+          message={bn ? `${shown.length}টি পণ্য পাওয়া গেছে` : `${shown.length} product${shown.length === 1 ? "" : "s"} found`}
+        />
 
         <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {shown.map((p) => (

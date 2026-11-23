@@ -200,7 +200,7 @@ function FormCard({
         {busy ? (bn ? "পাঠানো হচ্ছে…" : "Sending…") : bn ? "জমা দিন" : "Submit"}
       </button>
       {ok && (
-        <div className="mt-3 text-sm text-brand-deep">
+        <div className="mt-3 text-sm text-brand-deep" role={emailed ? "status" : "alert"} aria-live={emailed ? "polite" : "assertive"}>
           {emailed ? (
             <p>{bn ? "টিম আপনার অনুরোধ পেয়েছে।" : "The team received your request."}</p>
           ) : (

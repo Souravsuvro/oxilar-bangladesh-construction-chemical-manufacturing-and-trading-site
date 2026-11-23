@@ -120,8 +120,8 @@ function Page() {
               <input name="company_url" tabIndex={-1} autoComplete="off" />
             </label>
           </div>
-          <label className="mt-3 block text-sm font-medium">{bn ? "নাম" : "Name"}<input name="name" required className="mt-1 h-12 w-full rounded-md border border-line px-3 text-ink" /></label>
-          <label className="mt-3 block text-sm font-medium">{bn ? "ফোন" : "Phone"}<input name="phone" required className="mt-1 h-12 w-full rounded-md border border-line px-3 text-ink" inputMode="tel" /></label>
+          <label className="mt-3 block text-sm font-medium">{bn ? "নাম" : "Name"}<input name="name" required autoComplete="name" className="mt-1 h-12 w-full rounded-md border border-line px-3 text-ink" /></label>
+          <label className="mt-3 block text-sm font-medium">{bn ? "ফোন" : "Phone"}<input name="phone" required type="tel" autoComplete="tel" className="mt-1 h-12 w-full rounded-md border border-line px-3 text-ink" inputMode="tel" /></label>
           <label className="mt-3 block text-sm font-medium">{bn ? "বিষয়" : "Topic"}
             <select name="topic" className="mt-1 h-12 w-full rounded-md border border-line px-3 text-ink">
               <option>{bn ? "সাধারণ" : "General"}</option>
@@ -136,7 +136,7 @@ function Page() {
             {busy ? (bn ? "পাঠানো হচ্ছে…" : "Sending…") : bn ? "পাঠান" : "Send"}
           </button>
           {ok && (
-            <p className="mt-3 text-sm text-brand-deep">
+            <p className="mt-3 text-sm text-brand-deep" role="status" aria-live="polite">
               {emailed
                 ? bn
                   ? "বার্তা ইনবক্সে পাঠানো হয়েছে। জরুরি হলে কল করুন।"
@@ -146,7 +146,7 @@ function Page() {
                   : "Inbox is not configured. Please use WhatsApp or call."}
             </p>
           )}
-          {err && <p className="mt-2 text-sm text-amber">{err}</p>}
+          {err && <p className="mt-2 text-sm text-amber" role="alert">{err}</p>}
         </form>
       </div>
     </div>

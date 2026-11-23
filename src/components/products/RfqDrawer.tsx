@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useRfq } from "@/lib/rfq-store";
 import { useI18n } from "@/lib/i18n";
 import { sendLead, trackLead } from "@/lib/leads";
@@ -34,6 +34,25 @@ export function RfqDrawer() {
   const [phone, setPhone] = useState("");
   const [waUrl, setWaUrl] = useState("");
   const [announce, setAnnounce] = useState("");
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const openerRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!open) {
+      if (dialog?.open) dialog.close();
+      return;
+    }
+    openerRef.current = document.activeElement as HTMLElement;
+    if (dialog && !dialog.open) {
+      dialog.showModal();
+      dialog.querySelector<HTMLButtonElement>("[data-rfq-close]")?.focus();
+    }
+    return () => {
+      if (dialog?.open) dialog.close();
+      openerRef.current?.focus();
+    };
+  }, [open]);
 
   useEffect(() => {
     if (!open) return;
@@ -89,21 +108,28 @@ export function RfqDrawer() {
   };
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex justify-end bg-ink/50"
-      role="dialog"
+    <dialog
+      ref={dialogRef}
+      className="rfq-dialog fixed inset-0 z-50 m-0 h-dvh w-full max-w-md border-0 bg-transparent p-0 md:ml-auto md:mr-0"
       aria-modal="true"
       aria-labelledby="rfq-title"
       aria-describedby="rfq-live"
+      onCancel={(event) => {
+        event.preventDefault();
+        setOpen(false);
+      }}
+      onClose={() => setOpen(false)}
+      onClick={(event) => {
+        if (event.target === event.currentTarget) setOpen(false);
+      }}
     >
-      <LiveRegion id="rfq-live" message={announce} politeness={sent ? "assertive" : "polite"} />
-      <button className="hidden flex-1 md:block" aria-label={bn ? "বন্ধ করুন" : "Close"} onClick={() => setOpen(false)} />
+      <LiveRegion id="rfq-live" message={announce} politeness="polite" />
       <div className="flex h-full w-full flex-col bg-card shadow-2xl md:max-w-md">
         <div className="flex items-center justify-between border-b border-line px-4 py-3">
           <h2 id="rfq-title" className="font-display text-lg font-semibold">
             {bn ? "আরএফকিউ বাস্কেট" : "RFQ basket"}
           </h2>
-          <button type="button" className="min-h-11 px-3 text-sm font-semibold text-brand" onClick={() => setOpen(false)}>
+          <button data-rfq-close type="button" className="min-h-11 px-3 text-sm font-semibold text-brand" onClick={() => setOpen(false)}>
             {bn ? "বন্ধ" : "Close"}
           </button>
         </div>
@@ -142,7 +168,7 @@ export function RfqDrawer() {
             </div>
           ))}
           {(sent || waUrl) && (
-            <StatusBanner tone={sent ? "success" : "error"} politeness="assertive">
+            <StatusBanner tone={sent ? "success" : "error"} politeness="polite">
               <p className="font-semibold">
                 {emailed
                   ? bn
@@ -178,7 +204,11 @@ export function RfqDrawer() {
         </div>
         {!sent && (
           <form onSubmit={submit} className="space-y-2 border-t border-line p-4" aria-busy={busy}>
+            <label className="block text-sm font-medium" htmlFor="rfq-name">
+              {bn ? "নাম / প্রকল্প" : "Name / project"}
+            </label>
             <input
+              id="rfq-name"
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -186,13 +216,18 @@ export function RfqDrawer() {
               className="h-12 w-full rounded-md border border-line px-3 text-ink"
               autoComplete="name"
             />
+            <label className="block text-sm font-medium" htmlFor="rfq-phone">
+              {bn ? "মোবাইল নম্বর" : "Mobile number"}
+            </label>
             <input
+              id="rfq-phone"
               required
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder={bn ? "মোবাইল নম্বর" : "Mobile number"}
               className="h-12 w-full rounded-md border border-line px-3 text-ink"
               inputMode="tel"
+              type="tel"
               autoComplete="tel"
             />
             <button
@@ -208,6 +243,6 @@ export function RfqDrawer() {
           </form>
         )}
       </div>
-    </div>
+      </dialog>
   );
 }

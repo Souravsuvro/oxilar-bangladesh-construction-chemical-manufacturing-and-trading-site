@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
+import { LiveRegion } from "@/components/a11y/LiveRegion";
 import { labs, sheets, videos } from "@/data/catalog";
 import { useI18n } from "@/lib/i18n";
 
@@ -29,13 +30,32 @@ function Page() {
         {bn ? "শিটগুলো ডেমো ডকুমেন্ট। মাঠে ব্যবহারের আগে স্বাক্ষরিত কপি নিন।" : "These sheets are demo documents. Take a signed copy before field use."}
       </p>
       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-        <input value={q} onChange={(e) => setQ(e.target.value)} className="h-12 flex-1 rounded-md border border-line px-3" placeholder={bn ? "পণ্য খুঁজুন" : "Search product"} />
+        <label className="flex-1 text-sm font-medium">
+          <span className="mb-1 block">{bn ? "পণ্য খুঁজুন" : "Search product"}</span>
+          <input
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+            className="h-12 w-full rounded-md border border-line px-3"
+            placeholder={bn ? "যেমন: ড্যাম্প গার্ড…" : "Example: Damp Guard…"}
+          />
+        </label>
         <div className="flex gap-2">
           {["All", "TDS", "SDS", "Manual"].map((k) => (
-            <button key={k} type="button" onClick={() => setKind(k)} className={`min-h-12 rounded-full px-4 text-sm font-semibold ${kind === k ? "bg-ink text-paper" : "bg-card ring-1 ring-line"}`}>{k}</button>
+            <button
+              key={k}
+              type="button"
+              aria-pressed={kind === k}
+              onClick={() => setKind(k)}
+              className={`min-h-12 self-end rounded-full px-4 text-sm font-semibold ${kind === k ? "bg-ink text-paper" : "bg-card ring-1 ring-line"}`}
+            >
+              {k}
+            </button>
           ))}
         </div>
       </div>
+      <LiveRegion
+        message={bn ? `${rows.length}টি শিট পাওয়া গেছে` : `${rows.length} sheet${rows.length === 1 ? "" : "s"} found`}
+      />
       <div className="mt-4 overflow-x-auto rounded-xl bg-card ring-1 ring-line">
         <table className="w-full min-w-[36rem] text-left text-sm">
           <thead className="bg-paper text-muted">

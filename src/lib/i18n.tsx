@@ -59,6 +59,9 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     const saved = localStorage.getItem("ox-lang");
     if (saved === "bn" || saved === "en") setLangState(saved);
   }, []);
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
   const setLang = (l: Lang) => {
     setLangState(l);
     localStorage.setItem("ox-lang", l);

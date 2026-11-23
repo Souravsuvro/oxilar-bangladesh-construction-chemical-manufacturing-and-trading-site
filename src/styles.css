@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand: #059669;
+  --color-brand: #047857;
   --color-brand-deep: #047857;
   --color-brand-soft: #d1fae5;
   --color-ink: #0f172a;
   --color-ink-soft: #1e293b;
   --color-paper: #f4f7f5;
   --color-card: #ffffff;
-  --color-line: #e2e8f0;
-  --color-muted: #64748b;
-  --color-sky: #0284c7;
+  --color-line: #94a3b8;
+  --color-muted: #475569;
+  --color-sky: #0369a1;
   --color-sky-soft: #e0f2fe;
-  --color-amber: #f59e0b;
+  --color-amber: #92400e;
   --color-amber-soft: #fef3c7;
   --font-sans: "IBM Plex Sans", "Noto Sans Bengali", system-ui, sans-serif;
   --font-display: "Sora", "IBM Plex Sans", system-ui, sans-serif;
@@ -65,6 +65,11 @@
   html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+.rfq-dialog::backdrop {
+  background: rgb(15 23 42 / 50%);
 }

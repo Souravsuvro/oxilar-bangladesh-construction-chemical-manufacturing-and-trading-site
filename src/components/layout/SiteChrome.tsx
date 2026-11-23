@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { ArrowUp, Menu, Phone, X, MessageCircle, ClipboardList, Mail, Check, Facebook } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
@@ -29,6 +29,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
   const { t, lang, setLang } = useI18n();
   const path = useRouterState({ select: (s) => s.location.pathname });
   const [open, setOpen] = useState(false);
+  const menuTriggerRef = useRef<HTMLButtonElement>(null);
   const [showTop, setShowTop] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
   const lines = useRfq((s) => s.lines);
@@ -41,9 +42,12 @@ export function SiteChrome({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    setOpen(false);
+    if (open) {
+      setOpen(false);
+      menuTriggerRef.current?.focus();
+    }
     window.scrollTo({ top: 0, behavior: "instant" in window ? ("instant" as ScrollBehavior) : "auto" });
-  }, [path]);
+  }, [path]); // eslint-disable-line react-hooks/exhaustive-deps -- close menu on route navigation
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -54,11 +58,14 @@ export function SiteChrome({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape" && open) {
+        setOpen(false);
+        menuTriggerRef.current?.focus();
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  }, [open]);
 
   useEffect(() => {
     const onScroll = () => setShowTop(window.scrollY > 480);
@@ -102,6 +109,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
           </div>
           <div className="inline-flex rounded-full bg-ink-soft p-1" role="group" aria-label="Language">
             <button
+              ref={menuTriggerRef}
               type="button"
               className={cn("min-h-11 rounded-full px-3 text-xs font-semibold", lang === "en" ? "bg-brand text-paper" : "text-paper/70")}
               onClick={() => setLang("en")}
@@ -187,7 +195,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
           </div>
         </div>
         {open && (
-          <div id="mobile-nav" className="border-t border-line bg-card xl:hidden" role="dialog" aria-label="Mobile menu">
+          <nav id="mobile-nav" className="border-t border-line bg-card xl:hidden" aria-label={lang === "bn" ? "মোবাইল মেনু" : "Mobile menu"}>
             <div className="container-site grid gap-1 py-3">
               {nav.map((item) => (
                 <Link
@@ -215,8 +223,8 @@ export function SiteChrome({ children }: { children: ReactNode }) {
               >
                 {t("rfq")} {count > 0 ? `(${count})` : ""}
               </button>
-            </div>
-          </div>
+              </div>
+            </nav>
         )}
       </header>
 

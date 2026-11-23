@@ -117,7 +117,24 @@ export function CalculatorSuite() {
             type="button"
             role="tab"
             aria-selected={mode === id}
+            aria-controls={`calculator-panel-${id}`}
+            id={`calculator-tab-${id}`}
+            tabIndex={mode === id ? 0 : -1}
             onClick={() => setMode(id)}
+            onKeyDown={(event) => {
+              const modes: Mode[] = ["volume", "bags", "epoxy"];
+              const current = modes.indexOf(id);
+              let next = current;
+              if (event.key === "ArrowRight" || event.key === "ArrowDown") next = (current + 1) % modes.length;
+              if (event.key === "ArrowLeft" || event.key === "ArrowUp") next = (current - 1 + modes.length) % modes.length;
+              if (event.key === "Home") next = 0;
+              if (event.key === "End") next = modes.length - 1;
+              if (next !== current) {
+                event.preventDefault();
+                setMode(modes[next]);
+                document.getElementById(`calculator-tab-${modes[next]}`)?.focus();
+              }
+            }}
             className={cn(
               "min-h-12 shrink-0 rounded-full px-4 text-sm font-semibold lg:rounded-xl lg:text-left",
               mode === id ? "bg-ink text-paper" : "bg-card text-ink ring-1 ring-line",
@@ -127,7 +144,12 @@ export function CalculatorSuite() {
           </button>
         ))}
       </div>
-      <div className="rounded-xl bg-card p-4 text-ink ring-1 ring-line sm:p-6">
+      <div
+        id={`calculator-panel-${mode}`}
+        role="tabpanel"
+        aria-labelledby={`calculator-tab-${mode}`}
+        className="rounded-xl bg-card p-4 text-ink ring-1 ring-line sm:p-6"
+      >
         <div className="grid gap-4 sm:grid-cols-2">
           {mode === "volume" && (
             <>

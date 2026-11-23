@@ -61,6 +61,7 @@ function Page() {
   const { lang, tx } = useI18n();
   const bn = lang === "bn";
   const started = useRef(Date.now());
+  const formRef = useRef<HTMLFormElement>(null);
   const [busy, setBusy] = useState(false);
   const [ok, setOk] = useState(false);
   const [emailed, setEmailed] = useState(false);
@@ -93,6 +94,13 @@ function Page() {
 
     if (!name || !phone || !email || !cover) {
       setErr(bn ? "সব প্রয়োজনীয় ঘর পূরণ করুন।" : "Please complete all required fields.");
+      const firstInvalid = Array.from(form.elements).find(
+        (element): element is HTMLInputElement | HTMLTextAreaElement =>
+          (element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement) &&
+          element.required &&
+          !element.value.trim(),
+      );
+      firstInvalid?.focus();
       return;
     }
 
@@ -187,7 +195,9 @@ function Page() {
                 className="mt-4 min-h-11 rounded-full bg-ink px-4 text-sm font-semibold text-paper"
                 onClick={() => {
                   setPosition(job.id);
-                  document.getElementById("apply-form")?.scrollIntoView({ behavior: "smooth" });
+                  const form = document.getElementById("apply-form");
+                  form?.scrollIntoView({ behavior: "smooth", block: "start" });
+                  window.requestAnimationFrame(() => formRef.current?.querySelector<HTMLSelectElement>("select")?.focus());
                 }}
               >
                 {bn ? "এই পদে আবেদন" : "Apply for this role"}
@@ -220,6 +230,7 @@ function Page() {
         </div>
 
         <form
+          ref={formRef}
           id="apply-form"
           onSubmit={submit}
           className="rounded-xl bg-card p-5 ring-1 ring-line sm:p-6"

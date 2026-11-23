@@ -7,13 +7,13 @@
       "status": 200,
       "title": "Oxilar Bangladesh | Construction Chemical Manufacturer & Global Raw Material Importer",
       "hasCanvas": false,
-      "bodyTextLen": 3738,
-      "bodyTextHash": "14c74ca8cc031d1a3a605136cb951b1dc6b9fca5a3ed098e628e9f49e3e900bc",
-      "bodyTextPrefix": "+88 0196-0198313 oxilarbangladesh@gmail.com Office · Mohammadpur",
+      "bodyTextLen": 6504,
+      "bodyTextHash": "3eb48ab04e45a606ea3e238984721e127defe1b46eaf9631eb63f7f9b9d15103",
+      "bodyTextPrefix": "Skip to main content +88 0182-6736886 oxilarbangladesh@gmail.com",
       "horizontalOverflow": false,
       "consoleErrors": [],
       "pageErrors": [],
-      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+      "screenshot": "/Users/souravsarkersuvra/Documents/GitHub/abm-leather-trade-grok-ai-used-project/copilot-worktrees/oxilar-bangladesh-construction-chemical-manufacturing-and-trading-site/souravsuvro-automatic-fortnight/screenshots/app-builder-preview.png"
     },
     "mobile": {
       "width": 390,
@@ -21,16 +21,18 @@
       "status": 200,
       "title": "Oxilar Bangladesh | Construction Chemical Manufacturer & Global Raw Material Importer",
       "hasCanvas": false,
-      "bodyTextLen": 3671,
-      "bodyTextHash": "f306cd5146a8d773df8a06127ac7cc252d237da7889628422063f3b58b6c4ef8",
-      "bodyTextPrefix": "+88 0196-0198313 oxilarbangladesh@gmail.com EN বাংলা Oxilar BANG",
+      "bodyTextLen": 6384,
+      "bodyTextHash": "5e9d2708d027a7e29503df1bc333bdd79ca9488748b9114926742a9855b38556",
+      "bodyTextPrefix": "Skip to main content +88 0182-6736886 oxilarbangladesh@gmail.com",
       "horizontalOverflow": false,
       "consoleErrors": [],
       "pageErrors": [],
-      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+      "screenshot": "/Users/souravsarkersuvra/Documents/GitHub/abm-leather-trade-grok-ai-used-project/copilot-worktrees/oxilar-bangladesh-construction-chemical-manufacturing-and-trading-site/souravsuvro-automatic-fortnight/screenshots/app-builder-preview-mobile.png"
     }
   },
-  "brandWarnings": [],
+  "brandWarnings": [
+    "BRAND NOTE: no custom public/og.jpg — the platform will serve the og.grok.me placeholder. Custom cards are the default for games of every kind (DOM board/word games included), whimsical apps, creative tools, and brand-forward pages — only plain utilities (converters, CRUD trackers, admin dashboards) keep the placeholder. If this app is not a plain utility, finish the brand-asset pass per /workspace/.grok/skills/og/SKILL.md."
+  ],
   "authWarnings": [],
-  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+  "verdictFile": "/Users/souravsarkersuvra/Documents/GitHub/abm-leather-trade-grok-ai-used-project/copilot-worktrees/oxilar-bangladesh-construction-chemical-manufacturing-and-trading-site/souravsuvro-automatic-fortnight/screenshots/app-builder-preview.json"
 }
