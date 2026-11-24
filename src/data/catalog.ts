@@ -48,8 +48,8 @@ export const products: Product[] = [
     name: { en: "Oxilar Damp Guard", bn: "অক্সিলার ড্যাম্প গার্ড" },
     category: "waterproofing",
     packs: LIQUID,
-    image: "/media/damp-guard-studio.jpg",
-    gallery: ["/media/damp-guard-studio.jpg", "/media/damp-guard-studio-backside.jpg", "/media/damp-guard-studio.jpg"],
+    image: "/media/damp-guard-front.jpg",
+    gallery: ["/media/damp-guard-front.jpg", "/media/damp-guard-studio-backside.jpg", "/media/damp-guard-front.jpg"],
     colorTag: { en: "Yellow Drum", bn: "হলুদ ড্রাম" },
     short: {
       en: "Water-reducing and waterproofing liquid admixture for every type of casting. Acid and salt resistance, higher strength, and lasting inactivation of damp and salts.",
@@ -93,8 +93,8 @@ export const products: Product[] = [
     name: { en: "Oxilar Solid Bond", bn: "অক্সিলার সলিড বন্ড" },
     category: "admixture",
     packs: LIQUID,
-    image: "/media/solid-bond-studio.jpg",
-    gallery: ["/media/solid-bond-studio.jpg", "/media/solid-bond-studio-backside.jpg", "/media/oxilar-green-pail-5-litre.jpg"],
+    image: "/media/solid-bond-front.jpg",
+    gallery: ["/media/solid-bond-front.jpg", "/media/solid-bond-studio-backside.jpg", "/media/oxilar-green-pail.jpg"],
     colorTag: { en: "Green Drum", bn: "সবুজ ড্রাম" },
     short: {
       en: "Water-reducing admixture for stronger bond and waterproof performance in structural pours. Site packs from 1 L to 200 L.",
@@ -138,8 +138,8 @@ export const products: Product[] = [
     name: { en: "Oxilar SB-250", bn: "অক্সিলার এসবি-২৫০" },
     category: "admixture",
     packs: LIQUID,
-    image: "/media/oxilar-green-pail-5-litre.jpg",
-    gallery: ["/media/oxilar-green-pail-5-litre.jpg", "/media/oxilar-green-pail-backside.jpg"],
+    image: "/media/oxilar-green-pail.jpg",
+    gallery: ["/media/oxilar-green-pail.jpg", "/media/oxilar-green-pail-backside.jpg"],
     colorTag: { en: "Blue Barrel", bn: "নীল ব্যারেল" },
     short: {
       en: "High-performance bonding and waterproofing admixture in blue-barrel identification. Designed for structural and water-retaining concrete across 1–200 L packs.",
@@ -214,9 +214,9 @@ export const strengthSeries: { label: Copy; value: number }[] = [
 ];
 
 export const gallery: { src: string; alt: Copy }[] = [
-  { src: "/media/damp-guard-studio.jpg", alt: { en: "Damp Guard pack", bn: "ড্যাম্প গার্ড প্যাক" } },
-  { src: "/media/solid-bond-studio.jpg", alt: { en: "Solid Bond pack", bn: "সলিড বন্ড প্যাক" } },
-  { src: "/media/oxilar-green-pail-5-litre.jpg", alt: { en: "Oxilar pack", bn: "অক্সিলার প্যাক" } },
+  { src: "/media/damp-guard-front.jpg", alt: { en: "Damp Guard pack", bn: "ড্যাম্প গার্ড প্যাক" } },
+  { src: "/media/solid-bond-front.jpg", alt: { en: "Solid Bond pack", bn: "সলিড বন্ড প্যাক" } },
+  { src: "/media/oxilar-green-pail.jpg", alt: { en: "Oxilar pack", bn: "অক্সিলার প্যাক" } },
 ];
 
 export const processSteps: { step: string; title: Copy; body: Copy }[] = [

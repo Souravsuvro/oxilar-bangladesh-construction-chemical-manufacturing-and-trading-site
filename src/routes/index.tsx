@@ -171,9 +171,9 @@ function Home() {
             <div className="overflow-hidden rounded-2xl border border-white/10 bg-slate-900/60 shadow-2xl shadow-black/40 ring-1 ring-white/5">
               <div className="grid grid-cols-3 gap-px bg-white/5 p-1">
                 {[
-                  { src: "/media/damp-guard-studio.jpg", label: bn ? "ড্যাম্প গার্ড" : "Damp Guard", tag: bn ? "হলুদ" : "Yellow" },
-                  { src: "/media/solid-bond-studio.jpg", label: bn ? "সলিড বন্ড" : "Solid Bond", tag: bn ? "সবুজ" : "Green" },
-                  { src: "/media/oxilar-green-pail-5-litre.jpg", label: "SB-250", tag: bn ? "নীল" : "Blue" },
+                  { src: "/media/damp-guard-front.jpg", label: bn ? "ড্যাম্প গার্ড" : "Damp Guard", tag: bn ? "হলুদ" : "Yellow" },
+                  { src: "/media/solid-bond-front.jpg", label: bn ? "সলিড বন্ড" : "Solid Bond", tag: bn ? "সবুজ" : "Green" },
+                  { src: "/media/oxilar-green-pail.jpg", label: "SB-250", tag: bn ? "নীল" : "Blue" },
                 ].map((item) => (
                   <div key={item.label} className="relative aspect-[3/4] overflow-hidden rounded-xl bg-slate-800">
                     <img
