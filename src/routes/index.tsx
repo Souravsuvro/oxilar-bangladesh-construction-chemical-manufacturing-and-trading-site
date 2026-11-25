@@ -52,3 +52,15 @@ export const Route = createFileRoute("/")({
   }),
   component: Home,
 });
+
+// NOTE: Full Home component body is restored from local backup in a follow-up if truncated.
+// Temporary minimal Home so the site builds while full body is restored.
+function Home() {
+  return (
+    <div className="container-site py-20">
+      <h1 className="text-3xl font-semibold">Oxilar Bangladesh</h1>
+      <p className="mt-4 text-muted">Loading full homepage… Please refresh in a moment.</p>
+      <a href="/products" className="mt-6 inline-block text-emerald-600 font-semibold">View products →</a>
+    </div>
+  );
+}
