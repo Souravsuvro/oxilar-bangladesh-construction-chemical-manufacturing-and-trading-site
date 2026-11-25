@@ -4,6 +4,7 @@ import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { LanguageProvider } from "@/lib/i18n";
 import { SiteChrome } from "@/components/layout/SiteChrome";
 import { SITE as SITE_INFO } from "@/lib/site";
+import { Analytics } from "@vercel/analytics/react";
 import appCss from "../styles.css?url";
 
 const SITE_URL = SITE_INFO.web;
@@ -97,6 +98,7 @@ export const Route = createRootRoute({
           </LanguageProvider>
         </AuthProvider>
         <Scripts />
+        <Analytics />
       </body>
     </html>
   ),
