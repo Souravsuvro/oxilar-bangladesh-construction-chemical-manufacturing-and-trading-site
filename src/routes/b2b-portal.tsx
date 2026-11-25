@@ -7,8 +7,12 @@ import { SITE, whatsappUrl } from "@/lib/site";
 export const Route = createFileRoute("/b2b-portal")({
   head: () => ({
     meta: [
-      { title: "Dealer & Project Procurement | Oxilar Bangladesh" },
-      { name: "description", content: "Apply for Oxilar dealership or request a bulk quotation for ready-mix plants and contractors." },
+      { title: "Dealership & Bulk Supply | Construction Chemicals BD | Oxilar" },
+      {
+        name: "description",
+        content:
+          "Apply for Oxilar dealership or request bulk drum supply for ready-mix plants and mega-projects. Wholesale tiers, sales kits, and site engineering support across Bangladesh.",
+      },
     ],
   }),
   component: Page,
@@ -19,7 +23,9 @@ function Page() {
   const bn = lang === "bn";
   return (
     <div className="container-site py-10">
-      <h1 className="text-4xl font-semibold">{bn ? "ডিলার ও প্রকল্প পোর্টাল" : "Dealer and project portal"}</h1>
+      <h1 className="text-4xl font-semibold">
+        {bn ? "ডিলারশিপ ও বাল্ক সাপ্লাই পোর্টাল" : "Dealership and bulk procurement portal"}
+      </h1>
       <div className="mt-4 rounded-xl bg-mist/70 p-4 text-sm text-ink ring-1 ring-line">
         <p className="font-semibold">
           {bn
