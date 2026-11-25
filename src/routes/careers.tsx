@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useRef, useState, type FormEvent } from "react"; 
+import { useRef, useState, type FormEvent } from "react";
 import { useI18n } from "@/lib/i18n";
-import { leadsConfigured, sendLead, trackLead } from "@/lib/leads"; 
+import { leadsConfigured, sendLead, trackLead } from "@/lib/leads";
 import { SITE } from "@/lib/site";
 
 const openings = [
@@ -10,8 +10,8 @@ const openings = [
     title: { en: "Sales Executive — Dhaka", bn: "সেলস এক্সিকিউটিভ — ঢাকা" },
     type: { en: "Full-time · Field + office", bn: "ফুল-টাইম · ফিল্ড + অফিস" },
     body: {
-      en: "Grow dealer and project accounts for Super-100, Damp Guard and Solid Bond. Civil or commercial sales experience preferred.",
-      bn: "সুপার-১০০, ড্যাম্প গার্ড ও সলিড বন্ডের ডিলার ও প্রকল্প অ্যাকাউন্ট বাড়ান। সিভিল/কমার্শিয়াল সেলস অভিজ্ঞতা অগ্রাধিকার।",
+      en: "Grow dealer and project accounts for Damp Guard, Solid Bond and SB-250. Civil or commercial sales experience preferred.",
+      bn: "ড্যাম্প গার্ড, সলিড বন্ড ও এসবি-২৫০-এর ডিলার ও প্রকল্প অ্যাকাউন্ট বাড়ান। সিভিল/কমার্শিয়াল সেলস অভিজ্ঞতা অগ্রাধিকার।",
     },
   },
   {
@@ -46,11 +46,11 @@ const openings = [
 export const Route = createFileRoute("/careers")({
   head: () => ({
     meta: [
-      { title: "Join Our Team | Careers at Oxilar Bangladesh" },
+      { title: "Careers at Oxilar Bangladesh | Sales, Technical & Production Jobs" },
       {
         name: "description",
         content:
-          "Open roles at Oxilar Bangladesh — sales, technical service, production and office. Apply with cover letter. Email applications to oxilarbangladesh@gmail.com.",
+          "Join Oxilar Bangladesh — roles in sales, technical service, production and HR. Independent construction chemicals manufacturer. Email CV to oxilarbangladesh@gmail.com or call 01960198313.",
       },
     ],
   }),
@@ -81,7 +81,7 @@ function Page() {
       form.reset();
       return;
     }
- 
+
     if (Date.now() - started.current < 4000) {
       setErr(bn ? "একটু অপেক্ষা করে আবার পাঠান।" : "Please wait a moment and try again.");
       return;
@@ -141,7 +141,7 @@ function Page() {
           {bn ? "ক্যারিয়ার" : "Careers"}
         </p>
         <h1 className="mt-2 text-4xl font-semibold text-ink">
-          {bn ? "আমাদের টিমে যোগ দিন" : "Join our team"}
+          {bn ? "অক্সিলার বাংলাদেশে ক্যারিয়ার" : "Careers at Oxilar Bangladesh"}
         </h1>
         <p className="mt-3 text-muted">
           {bn
@@ -153,7 +153,6 @@ function Page() {
         </p>
       </header>
 
-      {/* HR Department section - new requirement */}
       <section className="mt-10 rounded-xl bg-card p-6 ring-1 ring-line">
         <h2 className="text-2xl font-semibold text-ink">
           {bn ? "ক্যারিয়ার সুযোগ — এইচআর বিভাগ" : "Career Opportunities – HR Department"}
