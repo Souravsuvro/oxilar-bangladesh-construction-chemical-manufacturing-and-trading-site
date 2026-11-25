@@ -9,11 +9,11 @@ const PACK_FILTERS: (Pack | "all")[] = ["all", "1L", "5L", "10L", "20L", "200L"]
 export const Route = createFileRoute("/products")({
   head: () => ({
     meta: [
-      { title: "Damp Guard · Solid Bond · SB-250 | Oxilar Bangladesh" },
+      { title: "Damp Guard, Solid Bond & SB-250 | Construction Chemicals BD" },
       {
         name: "description",
         content:
-          "Authentic Oxilar Bangladesh construction chemicals: Damp Guard (yellow), Solid Bond (green), SB-250 (blue). Packs 1L, 5L, 10L, 20L and 200L. RFQ for Bangladesh projects.",
+          "Browse Oxilar’s three authentic systems — Damp Guard, Solid Bond and SB-250. Filter by 1L, 5L, 10L, 20L or 200L packs. Request RFQ for Bangladesh project sites.",
       },
     ],
   }),
@@ -55,7 +55,9 @@ function ProductsPage() {
   return (
     <div className="container-site py-10">
       <header className="max-w-3xl">
-        <h1 className="text-4xl font-semibold text-ink">{bn ? "পণ্য ও প্যাক" : "Products and packs"}</h1>
+        <h1 className="text-4xl font-semibold text-ink">
+          {bn ? "কনস্ট্রাকশন কেমিক্যাল ও প্যাক সাইজ" : "Construction chemicals and pack sizes"}
+        </h1>
         <p className="mt-2 text-muted">
           {bn
             ? "শুধু অক্সিলারের আসল তিনটি সিস্টেম — ড্যাম্প গার্ড, সলিড বন্ড ও এসবি-২৫০। সাইজ ফিল্টার করে দেখুন।"
@@ -110,11 +112,7 @@ function ProductsPage() {
             ))}
           </div>
           {filtered && (
-            <button
-              type="button"
-              onClick={clearFilters}
-              className="mt-2 min-h-11 w-full rounded-lg text-sm font-semibold text-emerald-700 hover:underline"
-            >
+            <button type="button" onClick={clearFilters} className="mt-2 min-h-11 w-full rounded-lg text-sm font-semibold text-emerald-700 hover:underline">
               {bn ? "ফিল্টার মুছুন" : "Clear filters"}
             </button>
           )}
@@ -126,51 +124,27 @@ function ProductsPage() {
           </p>
           <div className="grid gap-5 md:grid-cols-2">
             {list.map((p) => (
-              <article
-                key={p.slug}
-                className="flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition hover:border-emerald-200 hover:shadow-md"
-              >
+              <article key={p.slug} className="flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition hover:border-emerald-200 hover:shadow-md">
                 <Link to="/products/$slug" params={{ slug: p.slug }} className="relative block bg-[#F8FAFC]">
-                  <img
-                    src={p.image}
-                    alt={tx(p.name)}
-                    className="h-48 w-full object-contain object-center p-4"
-                    loading="lazy"
-                  />
+                  <img src={p.image} alt={tx(p.name)} className="h-48 w-full object-contain object-center p-4" loading="lazy" />
                   {p.colorTag && (
-                    <span className="absolute left-3 top-3 rounded-full bg-ink/90 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
-                      {tx(p.colorTag)}
-                    </span>
+                    <span className="absolute left-3 top-3 rounded-full bg-ink/90 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">{tx(p.colorTag)}</span>
                   )}
                 </Link>
                 <div className="flex flex-1 flex-col p-5">
                   <div className="flex items-center gap-2">
-                    <span className="rounded bg-slate-100 px-2 py-0.5 font-mono text-[11px] font-semibold text-slate-600">
-                      {p.sku}
-                    </span>
+                    <span className="rounded bg-slate-100 px-2 py-0.5 font-mono text-[11px] font-semibold text-slate-600">{p.sku}</span>
                     <span className="text-[11px] font-semibold uppercase tracking-wide text-emerald-700">
-                      {p.category === "waterproofing"
-                        ? bn
-                          ? "ওয়াটারপ্রুফিং"
-                          : "Waterproofing"
-                        : bn
-                          ? "অ্যাডমিক্সচার"
-                          : "Admixture"}
+                      {p.category === "waterproofing" ? (bn ? "ওয়াটারপ্রুফিং" : "Waterproofing") : bn ? "অ্যাডমিক্সচার" : "Admixture"}
                     </span>
                   </div>
                   <Link to="/products/$slug" params={{ slug: p.slug }}>
                     <h2 className="mt-2 text-xl font-semibold text-ink hover:text-emerald-700">{tx(p.name)}</h2>
                   </Link>
                   <p className="mt-1 flex-1 text-sm text-muted">{tx(p.short)}</p>
-                  <p className="mt-2 font-mono text-xs text-slate-500">
-                    ~{p.mlPerBag} ml / 50 kg · {p.packs.map((pk) => tx(packLabels[pk])).join(" · ")}
-                  </p>
+                  <p className="mt-2 font-mono text-xs text-slate-500">~{p.mlPerBag} ml / 50 kg · {p.packs.map((pk) => tx(packLabels[pk])).join(" · ")}</p>
                   <div className="mt-4 flex gap-2">
-                    <Link
-                      to="/products/$slug"
-                      params={{ slug: p.slug }}
-                      className="inline-flex min-h-11 flex-1 items-center justify-center rounded-full bg-ink px-3 text-sm font-semibold text-paper"
-                    >
+                    <Link to="/products/$slug" params={{ slug: p.slug }} className="inline-flex min-h-11 flex-1 items-center justify-center rounded-full bg-ink px-3 text-sm font-semibold text-paper">
                       {bn ? "বিস্তারিত পৃষ্ঠা" : "Product page"}
                     </Link>
                     <button
@@ -192,11 +166,7 @@ function ProductsPage() {
           {list.length === 0 && (
             <div className="rounded-2xl border border-line bg-white p-8 text-center">
               <p className="font-semibold text-ink">{bn ? "কোনো মিল নেই" : "No products match"}</p>
-              <button
-                type="button"
-                onClick={clearFilters}
-                className="mt-4 inline-flex min-h-11 items-center rounded-full bg-emerald-600 px-5 text-sm font-semibold text-white"
-              >
+              <button type="button" onClick={clearFilters} className="mt-4 inline-flex min-h-11 items-center rounded-full bg-emerald-600 px-5 text-sm font-semibold text-white">
                 {bn ? "সব পণ্য দেখুন" : "Show all products"}
               </button>
             </div>
