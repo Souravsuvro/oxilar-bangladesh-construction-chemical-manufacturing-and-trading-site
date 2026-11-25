@@ -10,7 +10,8 @@ const SITE_URL = SITE_INFO.web;
 const TITLE =
   "Oxilar Bangladesh | Construction Chemical Manufacturer & Global Raw Material Importer";
 const DESC =
-  "Independent manufacturer of BUET-referenced construction chemicals in Bangladesh. Roof waterproofing, concrete admixtures, epoxy flooring and industrial systems. Factory: Kalampur, Dhamrai. Established 6 September 2019. Request RFQ or WhatsApp for same-day project support.";
+  "Independent manufacturer (est. 2019) of construction chemicals for Bangladesh’s climate: Damp Guard, Solid Bond & SB-250 in 1–200 L packs. Factory Kalampur, Dhamrai. BUET · CUET · BCSIR referenced. Request RFQ or WhatsApp for project support.";
+const OG_IMAGE = `${SITE_URL}/og.jpg`;
 
 /** Set VITE_GA_MEASUREMENT_ID in Vercel (e.g. G-XXXXXXXX). Placeholder IDs are ignored. */
 const GA_ID = (typeof import.meta !== "undefined" && import.meta.env?.VITE_GA_MEASUREMENT_ID) || "";
@@ -25,28 +26,38 @@ export const Route = createRootRoute({
       { name: "description", content: DESC },
       { name: "theme-color", content: "#059669" },
       { name: "author", content: "Oxilar Bangladesh" },
-      { name: "robots", content: "index, follow, max-image-preview:large" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1" },
       {
         name: "keywords",
         content:
-          "Construction chemical company in Bangladesh, Best roof waterproofing chemical BD, Concrete admixture manufacturer Dhaka, Epoxy flooring supplier Bangladesh, BUET tested construction chemicals, Salinity damp proofing chemical, Oxilar Super-100 dosage per bag of cement, Oxilar Bangladesh Dhamrai, RFQ construction chemicals BD",
+          "Construction chemical company in Bangladesh, Damp Guard, Solid Bond, SB-250, Concrete admixture manufacturer Dhaka, Roof waterproofing chemical BD, BUET referenced construction chemicals, Oxilar Bangladesh Dhamrai, RFQ construction chemicals BD",
       },
+      // Open Graph — required for Facebook, Messenger, LinkedIn, WhatsApp previews
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
       { property: "og:url", content: SITE_URL },
-      { property: "og:image", content: `${SITE_URL}/og.jpg` },
+      { property: "og:image", content: OG_IMAGE },
+      { property: "og:image:secure_url", content: OG_IMAGE },
+      { property: "og:image:type", content: "image/jpeg" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
+      {
+        property: "og:image:alt",
+        content: "Oxilar Bangladesh — Damp Guard, Solid Bond and SB-250 construction chemicals",
+      },
       { property: "og:locale", content: "en_BD" },
       { property: "og:locale:alternate", content: "bn_BD" },
       { property: "og:site_name", content: "Oxilar Bangladesh" },
+      // Twitter / X
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESC },
-      { name: "twitter:image", content: `${SITE_URL}/og.jpg` },
-      // Uncomment and set after Google Search Console verification:
-      // { name: "google-site-verification", content: "YOUR_GSC_TOKEN" },
+      { name: "twitter:image", content: OG_IMAGE },
+      {
+        name: "twitter:image:alt",
+        content: "Oxilar Bangladesh product packs — Damp Guard, Solid Bond, SB-250",
+      },
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
@@ -60,6 +71,7 @@ export const Route = createRootRoute({
         href: "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;600;700&family=Sora:wght@500;600;700&display=swap",
       },
       { rel: "sitemap", type: "application/xml", href: "/sitemap.xml" },
+      { rel: "canonical", href: SITE_URL },
     ],
     scripts: GA_ACTIVE
       ? [
