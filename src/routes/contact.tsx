@@ -11,11 +11,11 @@ const WA = whatsappUrl(
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact Oxilar Bangladesh | Dhanmondi office & Dhamrai factory" },
+      { title: "Contact Oxilar Bangladesh | WhatsApp, Phone & Dhamrai Factory" },
       {
         name: "description",
         content:
-          `Call ${SITE.phoneDisplay}, WhatsApp ${SITE.whatsappDisplay}, or email ${SITE.email}. Office: Mohammadpur. Factory: Kalampur, Dhamrai. RFQ and site support.`,
+          `Call ${SITE.phoneDisplay}, WhatsApp ${SITE.whatsappDisplay}, or email ${SITE.email}. Office Mohammadpur · Factory Kalampur, Dhamrai. RFQ, dealer enquiries and site support.`,
       },
     ],
   }),
@@ -71,7 +71,9 @@ function Page() {
   const q2 = encodeURIComponent("Kalampur Dhamrai Dhaka");
   return (
     <div className="container-site py-10">
-      <h1 className="text-4xl font-semibold">{bn ? "যোগাযোগ" : "Contact"}</h1>
+      <h1 className="text-4xl font-semibold">
+        {bn ? "অক্সিলার বাংলাদেশে যোগাযোগ করুন" : "Contact Oxilar Bangladesh"}
+      </h1>
       <p className="mt-2 max-w-2xl text-muted">
         {bn
           ? "প্রকল্প, ডিলারশিপ বা সাইট পরিদর্শনের জন্য কল, হোয়াটসঅ্যাপ বা ফর্ম ব্যবহার করুন।"
