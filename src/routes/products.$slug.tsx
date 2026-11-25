@@ -10,10 +10,13 @@ export const Route = createFileRoute("/products/$slug")({
   pendingComponent: ProductDetailSkeleton,
   head: ({ params }) => {
     const p = products.find((x) => x.slug === params.slug);
-    const title = p ? `${p.name.en} | Oxilar Bangladesh` : "Product | Oxilar Bangladesh";
-    const desc =
-      p?.short.en ??
-      "Oxilar Bangladesh construction chemical — dosage, packs and RFQ for Bangladesh projects.";
+    const packLine = p ? "1L, 5L, 10L, 20L & 200L packs" : "";
+    const title = p
+      ? `${p.name.en} | ${p.category === "waterproofing" ? "Waterproofing Admixture" : "Concrete Admixture"} | Oxilar Bangladesh`
+      : "Product | Oxilar Bangladesh";
+    const desc = p
+      ? `${p.short.en} Available in ${packLine}. Typical dose ~${p.mlPerBag} ml per 50 kg cement bag. Request RFQ or WhatsApp for Bangladesh projects.`
+      : "Oxilar Bangladesh construction chemical — dosage, packs and RFQ for Bangladesh projects.";
     return {
       meta: [
         { title },
@@ -29,6 +32,9 @@ export const Route = createFileRoute("/products/$slug")({
           property: "og:url",
           content: p ? `${SITE.web}/products/${p.slug}` : `${SITE.web}/products`,
         },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: desc },
       ],
       links: p ? [{ rel: "canonical", href: `${SITE.web}/products/${p.slug}` }] : [],
     };
