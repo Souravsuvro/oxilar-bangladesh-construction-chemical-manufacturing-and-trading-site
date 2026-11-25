@@ -7,8 +7,12 @@ import { useI18n } from "@/lib/i18n";
 export const Route = createFileRoute("/resources")({
   head: () => ({
     meta: [
-      { title: "TDS, SDS & Lab Reports | Oxilar Bangladesh" },
-      { name: "description", content: "Technical data sheets, safety sheets and BUET, CUET, BCSIR reference reports for Oxilar products." },
+      { title: "TDS, SDS & Lab Reports | BUET CUET BCSIR | Oxilar Bangladesh" },
+      {
+        name: "description",
+        content:
+          "Technical data sheets, safety data sheets and lab references for Damp Guard, Solid Bond and SB-250. BUET, CUET and BCSIR programme notes for site engineers.",
+      },
     ],
   }),
   component: Page,
@@ -25,7 +29,9 @@ function Page() {
   const bn = lang === "bn";
   return (
     <div className="container-site py-10">
-      <h1 className="text-4xl font-semibold">{bn ? "টিডিএস, এসডিএস ও ল্যাব" : "TDS, SDS and lab"}</h1>
+      <h1 className="text-4xl font-semibold">
+        {bn ? "টিডিএস, এসডিএস ও ল্যাব রিপোর্ট" : "Technical data, safety sheets and lab reports"}
+      </h1>
       <p className="mt-2 max-w-2xl text-muted">
         {bn ? "শিটগুলো ডেমো ডকুমেন্ট। মাঠে ব্যবহারের আগে স্বাক্ষরিত কপি নিন।" : "These sheets are demo documents. Take a signed copy before field use."}
       </p>
