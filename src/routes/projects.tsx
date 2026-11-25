@@ -7,8 +7,12 @@ import { useI18n } from "@/lib/i18n";
 export const Route = createFileRoute("/projects")({
   head: () => ({
     meta: [
-      { title: "Project References | Oxilar Bangladesh" },
-      { name: "description", content: "Waterproofing, epoxy floor and ready-mix references using Oxilar systems in Bangladesh." },
+      { title: "Project References | Waterproofing & Admixtures | Oxilar BD" },
+      {
+        name: "description",
+        content:
+          "Selected waterproofing, concrete admixture and industrial references using Oxilar systems across Bangladesh. Supply and application context for civil engineers.",
+      },
     ],
   }),
   component: Page,
@@ -22,7 +26,9 @@ function Page() {
   const bn = lang === "bn";
   return (
     <div className="container-site py-10">
-      <h1 className="text-4xl font-semibold">{bn ? "প্রকল্প রেফারেন্স" : "Project references"}</h1>
+      <h1 className="text-4xl font-semibold">
+        {bn ? "বাংলাদেশজুড়ে প্রকল্প রেফারেন্স" : "Project references across Bangladesh"}
+      </h1>
       <p className="mt-2 max-w-2xl text-muted">
         {bn ? "নিচের কাজগুলো সিস্টেমের ধরন দেখায়। ছবি সাপ্লাই ও অ্যাপ্লিকেশন রেফারেন্স, একই দেয়ালের আগে-পরে নয়।" : "These jobs show system type. Photos are supply and application references, not a single wall before and after."}
       </p>
