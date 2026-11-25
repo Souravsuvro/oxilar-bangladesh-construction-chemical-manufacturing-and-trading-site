@@ -3,10 +3,6 @@ import { products } from "@/data/catalog";
 import { useI18n } from "@/lib/i18n";
 import { SITE, whatsappUrl } from "@/lib/site";
 
-/**
- * Application / solutions hubs — competitor pattern (ABC Chemical category SEO)
- * without inventing products. Each solution maps to real Oxilar SKUs.
- */
 const solutions = [
   {
     id: "roof-waterproofing",
@@ -19,7 +15,7 @@ const solutions = [
       en: "Integral water-reducing and waterproofing admixtures dosed into the mix — denser concrete and inactive damp/salts when used per TDS and trial mix.",
       bn: "মিক্সে ইন্টিগ্রাল ওয়াটার-রিডিউসিং ও ওয়াটারপ্রুফিং অ্যাডমিক্সচার — টিডিএস ও ট্রায়াল অনুযায়ী ঘন কংক্রিট ও নিষ্ক্রিয় ড্যাম্প/লবণ।",
     },
-    productSlugs: ["oxilar-damp-guard-400", "oxilar-pre-cast-premium", "oxilar-super-100"],
+    productSlugs: ["oxilar-damp-guard", "oxilar-solid-bond", "oxilar-sb-250"],
     keywords: "Best roof waterproofing chemical BD, tank waterproofing admixture Bangladesh",
   },
   {
@@ -33,7 +29,7 @@ const solutions = [
       en: "Polymerised systems that improve cohesion and help keep damp and salts permanently inactive in Bangladesh conditions.",
       bn: "পলিমারাইজড সিস্টেম যা সংহতি বাড়ায় এবং বাংলাদেশের পরিবেশে ড্যাম্প ও লবণ স্থায়ীভাবে নিষ্ক্রিয় রাখতে সাহায্য করে।",
     },
-    productSlugs: ["oxilar-damp-guard-400", "oxilar-super-100", "oxilar-solid-bond"],
+    productSlugs: ["oxilar-damp-guard", "oxilar-solid-bond"],
     keywords: "Salinity damp proofing chemical Bangladesh, damp proof admixture Dhaka",
   },
   {
@@ -44,39 +40,25 @@ const solutions = [
       bn: "স্ট্রাকচারাল পোরে ওয়ার্ক্যাবিলিটি, হাইড্রেশন তাপ, আগাম শক্তি ও সিমেন্ট সাশ্রয়।",
     },
     approach: {
-      en: "Multipurpose polymerised Super-100 and Solid Bond — dose 250–300 ml per bag typical; 300–400 ml aggressive exposure. Confirm with trial mix.",
-      bn: "মাল্টিপারপাস সুপার-১০০ ও সলিড বন্ড — সাধারণত প্রতি ব্যাগে ২৫০–৩০০ মিলি; অ্যাগ্রেসিভে ৩০০–৪০০ মিলি।",
+      en: "Multipurpose polymerised Damp Guard and Solid Bond — dose 250–300 ml per bag typical; 300–400 ml aggressive exposure. Confirm with trial mix.",
+      bn: "মাল্টিপারপাস ড্যাম্প গার্ড ও সলিড বন্ড — সাধারণত প্রতি ব্যাগে ২৫০–৩০০ মিলি; অ্যাগ্রেসিভে ৩০০–৪০০ মিলি।",
     },
-    productSlugs: ["oxilar-super-100", "oxilar-solid-bond", "oxilar-pre-cast-premium"],
-    keywords: "Concrete admixture manufacturer Dhaka, Super-100 dosage per bag of cement",
+    productSlugs: ["oxilar-damp-guard", "oxilar-solid-bond", "oxilar-sb-250"],
+    keywords: "Concrete admixture manufacturer Dhaka, Damp Guard dosage per bag of cement",
   },
   {
     id: "repairs-joints",
-    title: { en: "Leak sealing, joints & repairs", bn: "লিকেজ সিলিং, জয়েন্ট ও রিপেয়ার" },
+    title: { en: "Leak sealing, joints & structural bonding", bn: "লিকেজ সিলিং, জয়েন্ট ও স্ট্রাকচারাল বন্ডিং" },
     problem: {
       en: "Active leaks, construction joints and bonding new work to old concrete.",
       bn: "সক্রিয় লিকেজ, কনস্ট্রাকশন জয়েন্ট ও পুরাতন কংক্রিটের সাথে নতুন কাজের বন্ধন।",
     },
     approach: {
-      en: "Rapid Bland high-strength powder blended with cement for fast set and strong bond — leaks, anchors and structural repairs.",
-      bn: "র‍্যাপিড ব্ল্যান্ড উচ্চ-শক্তি পাউডার — দ্রুত সেট ও শক্ত বন্ধন।",
+      en: "High-performance bonding and waterproofing admixtures (SB-250, Solid Bond) for joints, repairs and water-retaining structures — always per TDS and trial.",
+      bn: "জয়েন্ট, রিপেয়ার ও ওয়াটার-রিটেইনিং স্ট্রাকচারের জন্য এসবি-২৫০ ও সলিড বন্ড — টিডিএস ও ট্রায়াল অনুযায়ী।",
     },
-    productSlugs: ["oxilar-rapid-bland", "oxilar-super-100"],
-    keywords: "Concrete repair chemical Bangladesh, leak stop admixture BD",
-  },
-  {
-    id: "dust-control",
-    title: { en: "Dust control for roads & yards", bn: "রাস্তা ও ইয়ার্ড ডাস্ট কন্ট্রোল" },
-    problem: {
-      en: "Fine dust on haul roads, aggregate yards and industrial floors.",
-      bn: "হল রোড, অ্যাগ্রিগেট ইয়ার্ড ও ইন্ডাস্ট্রিয়াল ফ্লোরে সূক্ষ্ম ধুলা।",
-    },
-    approach: {
-      en: "Befit Dust liquid suppressant for bases; Anti Dust powder for concrete and mortar surfaces.",
-      bn: "বেফিট ডাস্ট লিকুইড সাপ্রেসেন্ট; অ্যান্টি ডাস্ট পাউডার কংক্রিট/মর্টার সারফেসের জন্য।",
-    },
-    productSlugs: ["oxilar-befit-dust", "oxilar-anti-dust"],
-    keywords: "Dust suppressant chemical Bangladesh, industrial floor dust control",
+    productSlugs: ["oxilar-sb-250", "oxilar-solid-bond"],
+    keywords: "Concrete repair chemical Bangladesh, bonding admixture BD",
   },
 ] as const;
 
@@ -84,12 +66,12 @@ export const Route = createFileRoute("/solutions")({
   head: () => ({
     meta: [
       {
-        title: "Construction Chemical Solutions Bangladesh | Roof, Salinity, RMC | Oxilar",
+        title: "Waterproofing & Admixture Solutions Bangladesh | Oxilar",
       },
       {
         name: "description",
         content:
-          "Application-led construction chemical solutions for Bangladesh: roof waterproofing, salinity & damp proofing, concrete admixtures for RMC, leak repairs and dust control. Oxilar Bangladesh — independent manufacturer.",
+          "Application-led solutions for roof waterproofing, salinity and damp, RMC admixtures and leak control. Match each problem to Damp Guard, Solid Bond or SB-250 from Oxilar Bangladesh.",
       },
       {
         name: "keywords",
@@ -117,7 +99,9 @@ function Page() {
           {bn ? "সলিউশন" : "Solutions"}
         </p>
         <h1 className="mt-2 text-4xl font-semibold text-ink">
-          {bn ? "প্রয়োগভিত্তিক কনস্ট্রাকশন কেমিক্যাল সলিউশন" : "Application-led construction chemical solutions"}
+          {bn
+            ? "ওয়াটারপ্রুফিং ও অ্যাডমিক্সচার সলিউশন — বাংলাদেশ"
+            : "Waterproofing and admixture solutions for Bangladesh"}
         </h1>
         <p className="mt-3 text-muted">
           {bn
